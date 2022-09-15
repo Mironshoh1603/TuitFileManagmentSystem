@@ -1,5 +1,5 @@
-const User = require('../models/userModel');
-const catchErrorAsync = require('../utility/catchErrorLittle');
+const User = require('../models/user');
+const catchErrorAsync = require('../utility/catchErrorAsync');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utility/appError');
 const bcrypt = require('bcryptjs');
@@ -27,34 +27,32 @@ const saveTokenCookie = (res, token) => {
   res.cookie('jwt', token, cookieOptions);
 };
 
-const signup = async (req, res, next) => {
-  try {
-    const newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      photo: req.body.photo,
-      passwordConfirm: req.body.passwordConfirm,
-      passwordChangedDate: req.body.passwordChangedDate,
-    });
-    const token = createToken(newUser._id);
-    saveTokenCookie(res, token);
+// const signup = async (req, res, next) => {
+//   try {
+//     const newUser = await User.create({
+//       name: req.body.name,
+//       email: req.body.email,
+//       username: req.body.username,
+//       password: req.body.password,
+//       photo: req.body.photo,
+//       passwordConfirm: req.body.passwordConfirm,
+//       passwordChangedDate: req.body.passwordChangedDate,
+//     });
+//     const token = createToken(newUser._id);
+//     saveTokenCookie(res, token);
 
-    const url = 'http://localhost:8000/me';
-    await new Email(newUser, url).sendWellcome();
-
-    res.status(200).json({
-      status: 'success',
-      token: token,
-      data: newUser,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      err: err,
-    });
-  }
-};
+//     res.status(200).json({
+//       status: 'success',
+//       token: token,
+//       data: newUser,
+//     });
+//   } catch (err) {
+//     res.status(404).json({
+//       status: 'fail',
+//       err: err.message,
+//     });
+//   }
+// };
 
 const login = async (req, res, next) => {
   try {
@@ -339,7 +337,7 @@ const logout = (req, res, next) => {
 };
 
 module.exports = {
-  signup,
+  // signup,
   login,
   protect,
   role,

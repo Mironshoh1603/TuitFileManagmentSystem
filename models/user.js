@@ -13,9 +13,10 @@ const userSchema = new mongoose.Schema({
     minlength: 1,
     trim: true,
   },
-  usernmae: {
+  username: {
     type: String,
     required: [true, 'Siz usernameni kiritishni unutdingiz!'],
+    unique: [true, 'Siz oldin foydalanilgan username kiritdingiz'],
   },
   email: {
     type: String,
