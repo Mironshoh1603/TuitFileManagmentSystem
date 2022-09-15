@@ -42,6 +42,7 @@ const upload = multer({
 const uploadImageUser = upload.single('photo');
 
 const resizeImage = catchErrorAsync(async (req, res, next) => {
+  console.log(req.file);
   if (!req.file) {
     return next();
   }

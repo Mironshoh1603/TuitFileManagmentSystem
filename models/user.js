@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Name kiritishingiz shart!'],
     maxlength: 64,
-    minlength: 1,
+    minlength: 3,
     trim: true,
   },
   username: {

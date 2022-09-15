@@ -103,7 +103,6 @@ const login = async (req, res, next) => {
 };
 
 const protect = async (req, res, next) => {
-  console.log('eererre' + req.cookies.jwt);
   // 1) Token bor yuqligini headerdan tekshirish
   let token;
   if (
