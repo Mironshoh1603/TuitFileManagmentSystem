@@ -10,11 +10,11 @@ process.on('unhandledRejection', (err) => {
 });
 
 // Unhandled Excpections
-process.on('uncaughtException', (err) => {
-  console.log('UNHANDLED Excpections 💥');
-  console.log(err.name, err.message);
-  process.exit(1);
-});
+// process.on('uncaughtException', (err) => {
+//   console.log('UNHANDLED Excpections 💥');
+//   console.log(err.name, err.message);
+//   process.exit(1);
+// });
 
 require('./config/db');
 

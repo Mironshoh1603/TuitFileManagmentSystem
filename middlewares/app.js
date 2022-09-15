@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const userRouter = require('../routes/userRoutes');
 const subjectRouter = require('../routes/subject');
+const fileRouter = require('../routes/file');
 const AppError = require('../utility/appError');
 const ErrorController = require('../controllers/errorController');
 const rateLimit = require('express-rate-limit');
@@ -68,6 +69,7 @@ app.use('/api', limit);
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/subjects', subjectRouter);
+app.use('/api/v1/files', fileRouter);
 
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));
