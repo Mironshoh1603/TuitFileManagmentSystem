@@ -14,7 +14,7 @@ router
   .post(
     authController.protect,
     authController.role(['admin', 'teacher']),
-    FileController.uploadFile,
+    FileController.uploadFiles,
     FileController.middleware,
     FileController.addFile
   );
@@ -29,7 +29,7 @@ router
   .patch(
     authController.protect,
     authController.role(['admin', 'teacher']),
-    FileController.uploadFile,
+    FileController.uploadFiles,
     FileController.updateFile
   )
   .delete(

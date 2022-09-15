@@ -20,6 +20,9 @@ const fileSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'users',
   },
+  key: {
+    type: String,
+  },
 });
 
 const file = mongoose.model('files', fileSchema);

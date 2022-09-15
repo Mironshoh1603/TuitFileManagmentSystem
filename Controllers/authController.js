@@ -3,10 +3,7 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utility/appError');
 const bcrypt = require('bcryptjs');
-const mail = require('../utility/mail');
 const crypto = require('crypto');
-
-const Email = require('../utility/mail.js');
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -26,7 +23,6 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 const saveTokenCookie = (res, token) => {
   res.cookie('jwt', token, cookieOptions);
 };
-
 
 const login = async (req, res, next) => {
   try {
@@ -170,10 +166,6 @@ const role = (roles) => {
     next();
   });
 };
-
-
-
-
 
 const updatePassword = catchErrorAsync(async (req, res, next) => {
   // 1) Get user info or model

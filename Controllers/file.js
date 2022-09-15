@@ -1,5 +1,9 @@
 const File = require('../models/file');
 const catchErrorAsync = require('../utility/catchErrorAsync');
+const fs = require('fs');
+const util = require('util');
+const unlinkFile = util.promisify(fs.unlink);
+const { uploadFile, getFileStream } = require('../utility/s3');
 const {
   getAll,
   addOne,
@@ -24,35 +28,11 @@ const multerStorage = multer.diskStorage({
 
 // const multerStorage = multer.memoryStorage();
 
-const filterFile = (req, file, cb) => {
-  // console.log(file, 'sksnvkjen');
-  req.file = file;
-  console.log(req.file, 'vevev');
-
-  if (
-    ['zip', 'rar', 'pdf', 'doc', 'docx', 'xls', 'xlsx'].includes(
-      file.originalname.split('.').slice(-1)[0]
-    )
-  ) {
-    cb(null, true);
-  } else {
-    cb(
-      new AppError(
-        "You must upload only 'zip', 'rar', 'pdf', 'doc', 'docx', 'xls', 'xlsx' formats or Your files is letter than 100mb",
-        400
-      ),
-      false
-    );
-  }
-};
-
 const upload = multer({
-  storage: multerStorage,
-  fileFilter: filterFile,
-  limits: { fileSize: 1000000 },
+  dest: 'public/files/',
 });
 
-const uploadFile = upload.single('file');
+const uploadFiles = upload.single('file');
 
 const getAllFiles = getAll(File);
 const addFile = addOne(File);
@@ -60,12 +40,28 @@ const getFileById = getOne(File);
 const updateFile = updateOne(File);
 const deleteFile = deleteOne(File);
 
-const middleware = (req, res, next) => {
+const getFileFromBucket = (req, res, next) => {
+  const key = req.params.key;
+  const readStream = getFileStream(key);
+
+  readStream.pipe(res);
+};
+
+const middleware = catchErrorAsync(async (req, res, next) => {
   req.body.size = req.file.size;
   req.body.file = req.file.filename;
-  console.log(req.file, 'manabu');
+  const file = req.file;
+  console.log(file);
+
+  // apply filter
+  // resize
+
+  const result = await uploadFile(file);
+  await unlinkFile(file.path);
+  console.log(result);
+  req.body.key = result.Key;
   next();
-};
+});
 
 module.exports = {
   getAllFiles,
@@ -74,5 +70,6 @@ module.exports = {
   updateFile,
   deleteFile,
   middleware,
-  uploadFile,
+  uploadFiles,
+  getFileFromBucket
 };

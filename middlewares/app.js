@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const userRouter = require('../routes/userRoutes');
 const subjectRouter = require('../routes/subject');
 const fileRouter = require('../routes/file');
+const bucketRouter = require('../routes/bucket');
 const AppError = require('../utility/appError');
 const ErrorController = require('../controllers/errorController');
 const rateLimit = require('express-rate-limit');
@@ -40,7 +41,6 @@ app.use((req, res, next) => {
   console.log('Hello from Middelware');
   next();
 });
-
 // app.use((req, res, next) => {
 //   req.time = '12.04.2022';
 //   next();
@@ -70,6 +70,7 @@ app.use('/api', limit);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/subjects', subjectRouter);
 app.use('/api/v1/files', fileRouter);
+app.use('/api/v1/buckets', bucketRouter);
 
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));
