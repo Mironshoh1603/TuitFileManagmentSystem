@@ -1,0 +1,81 @@
+extends base
+mixin overview_box(icon,label,text)
+  .overview-box__detail
+    svg.overview-box__icon
+      use(xlink:href=`/img/icons.svg#${icon}`)
+    span.overview-box__label=label
+    span.overview-box__text=text
+block content 
+    section.section-header
+        .header__hero
+            .header__hero-overlay &nbsp;
+            img.header__hero-img(src=`/img/tours/${tour.imageCover}`, alt='Tour 5')
+
+        .heading-box
+            h1.heading-primary
+                span=tour.name
+            .heading-box__group
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-clock')
+                    span.heading-box__text=tour.duration+ " days"
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-map-pin')
+                    span.heading-box__text=`${tour.startLocation.description}`              
+
+    section.section-description
+        .overview-box
+            div
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Quick facts
+                    +overview_box("icon-calendar","Next date",tour.startDates[0].toLocaleString("en-US",{month:"long",year:"numeric"}))
+                    +overview_box("icon-trending-up","Difficulty","Medium")
+                    +overview_box("icon-user","Participants","10 people")
+                    +overview_box("icon-star","Rating","4.9 / 5")
+        
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Your tour guides
+                    each guide in tour.guides
+                        .overview-box__detail
+                            img.overview-box__img(src=`/img/users/${guide.photo}`, alt=`${guide.name}`)
+                            span.overview-box__label=guide.role
+                            span.overview-box__text=guide.name
+            
+        .description-box
+            h2.heading-secondary.ma-bt-lg=`About ${tour.name}`
+            p.description__text=tour.description
+
+    section.section-pictures
+        each image,key in tour.images
+            .picture-box
+                img.picture-box__img.picture-box__img--1(src=`/img/tours/${image}`, alt=`${tour.name}+${-key}`)
+
+    section.section-map
+        #map
+
+    section.section-reviews
+        .reviews
+            each review in reviews
+                .reviews__card
+                    .reviews__avatar
+                        img.reviews__avatar-img(src=`/img/users/${review.user.photo}`, alt='Jim Brown')
+                        h6.reviews__user= review.user.name
+                    p.reviews__text= review.review
+                    .reviews__rating
+                        - let n =0
+                        while n<review.rating
+                            svg.reviews__star.reviews__star--active
+                                use(xlink:href='/img/icons.svg#icon-star')
+                            -n++
+                
+    section.section-cta
+        .cta
+            .cta__img.cta__img--logo
+                img(src='/img/logo-white.png', alt='Natours logo')
+                img.cta__img.cta__img--1(src=`/img/tours/${tour.images[0]}`, alt='')
+                img.cta__img.cta__img--2(src=`/img/tours/${tour.images[1]}`, alt='')
+            .cta__content
+                h2.heading-secondary What are you waiting for?
+                p.cta__text 10 days. 1 adventure. Infinite memories. Make it yours today!
+                button.btn.btn--green.span-all-rows Book tour now!
