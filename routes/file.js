@@ -7,8 +7,7 @@ const router = express.Router();
 router
   .route('/')
   .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
+
     FileController.getAllFiles
   )
   .post(
@@ -22,8 +21,7 @@ router
 router
   .route('/:id')
   .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
+
     FileController.getFileById
   )
   .patch(

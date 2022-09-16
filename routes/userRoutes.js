@@ -22,11 +22,7 @@ router
 
 router
   .route('/')
-  .get(
-    authController.protect,
-    authController.role(['admin']),
-    userController.getAllUsers
-  )
+  .get(userController.getAllUsers)
   .post(
     authController.protect,
     authController.role(['admin']),
@@ -34,11 +30,7 @@ router
   );
 router
   .route('/:id')
-  .get(
-    authController.protect,
-    authController.role(['admin']),
-    userController.getUserById
-  )
+  .get(userController.getUserById)
   .patch(
     authController.protect,
     authController.role(['admin']),

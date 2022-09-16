@@ -7,8 +7,7 @@ const router = express.Router();
 router
   .route('/')
   .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
+
     subjectController.getAllSubjects
   )
   .post(
@@ -23,8 +22,7 @@ router
 router
   .route('/:id')
   .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
+
     subjectController.getSubjectById
   )
   .patch(
