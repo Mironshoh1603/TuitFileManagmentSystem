@@ -61,10 +61,10 @@ const userSchema = new mongoose.Schema({
   phoneNumber: {
     type: String,
   },
-  subjectId: {
+  subjects: [{
     type: mongoose.Schema.ObjectId,
     refs: 'subjects',
-  },
+  }],
   resetTokenHash: String,
   resetTokenVaqti: Date,
   active: {
