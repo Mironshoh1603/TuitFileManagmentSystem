@@ -27,7 +27,9 @@ const AppError = require('../utility/appError');
 const multerStorage = multer.memoryStorage();
 
 const filterImage = (req, file, cb) => {
+  console.log(file, 'Manabu ekan');
   if (file.mimetype.startsWith('image')) {
+    req.file = file;
     cb(null, true);
   } else {
     cb(new AppError('You must upload only image format', 400), false);
@@ -42,7 +44,7 @@ const upload = multer({
 const uploadImageUser = upload.single('photo');
 
 const resizeImage = catchErrorAsync(async (req, res, next) => {
-  console.log(req.file);
+  console.log(req.file, 'men');
   if (!req.file) {
     return next();
   }

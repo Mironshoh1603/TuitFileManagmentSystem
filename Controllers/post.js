@@ -1,4 +1,4 @@
-const Subject = require('../models/subject');
+const Post = require('../models/Post');
 const catchErrorAsync = require('../utility/catchErrorAsync');
 const {
   getAll,
@@ -16,7 +16,7 @@ const AppError = require('../utility/appError');
 
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {
-//     cb(null, 'public/img/Subjects/');
+//     cb(null, 'public/img/Posts/');
 //   },
 //   filename: (req, file, cb) => {
 
@@ -38,42 +38,41 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: filterImage,
 });
-const uploadImageSubject = upload.single('photo');
+
+const uploadImagePost = upload.single('photo');
 
 const resizeImage = catchErrorAsync(async (req, res, next) => {
-  console.log(req.file, 'manabuyam');
   if (!req.file) {
     return next();
   }
   const ext = req.file.mimetype.split('/')[1];
-  req.file.filename = `Subject-${req.user.id}-${Date.now()}.${ext}`;
+  req.file.filename = `Post-${req.user.id}-${Date.now()}.${ext}`;
   await sharp(req.file.buffer)
-    .resize(1000, 1000)
+    .resize(600, 600)
     .toFormat('jpeg')
-    .toFile(`${__dirname}/../public/img/subjects/${req.file.filename}`);
+    .toFile(`${__dirname}/../public/img/posts/${req.file.filename}`);
   req.body.photo = req.file.filename;
+
   next();
 });
 
 const options = {
-  path: 'files',
-};
-const options2 = {
-  path: 'teachers',
+  path: 'teacherId',
+  select: 'name',
 };
 
-const getAllSubjects = getAll(Subject, options, options2);
-const addSubject = addOne(Subject);
-const getSubjectById = getOne(Subject, options, options2);
-const updateSubject = updateOne(Subject);
-const deleteSubject = deleteOne(Subject);
+const getAllPosts = getAll(Post, options);
+const addPost = addOne(Post);
+const getPostById = getOne(Post, options);
+const updatePost = updateOne(Post);
+const deletePost = deleteOne(Post);
 
 module.exports = {
-  getAllSubjects,
-  addSubject,
-  getSubjectById,
-  updateSubject,
-  deleteSubject,
+  getAllPosts,
+  addPost,
+  getPostById,
+  updatePost,
+  deletePost,
   resizeImage,
-  uploadImageSubject,
+  uploadImagePost,
 };

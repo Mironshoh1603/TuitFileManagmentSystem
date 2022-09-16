@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const userRouter = require('../routes/userRoutes');
 const subjectRouter = require('../routes/subject');
 const fileRouter = require('../routes/file');
+const postRouter = require('../routes/post');
 const bucketRouter = require('../routes/bucket');
 const AppError = require('../utility/appError');
 const ErrorController = require('../controllers/errorController');
@@ -71,6 +72,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/subjects', subjectRouter);
 app.use('/api/v1/files', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
+app.use('/api/v1/posts', postRouter);
 
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));
