@@ -3,10 +3,8 @@ const mongoose = require('mongoose');
 const fileSchema = new mongoose.Schema({
   file: {
     type: String,
-    required: [true, 'File nomi berilishi shart!'],
-    trim: true,
-    maxlength: 64,
-    minlength: 3,
+    required: [true, 'Fileni berilishi shart!'],
+    select: false,
   },
   size: {
     type: String,
@@ -22,6 +20,13 @@ const fileSchema = new mongoose.Schema({
   },
   key: {
     type: String,
+  },
+  name: {
+    type: String,
+    required: [true, 'File nomi berilishi shart!'],
+    trim: true,
+    maxlength: 64,
+    minlength: 3,
   },
 });
 

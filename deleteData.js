@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
 
-const userModel = require('./models/user');
+const File = require('./models/file');
 
 const dotenv = require('dotenv');
 
@@ -19,12 +19,10 @@ mongoose
     console.log(`ERROR: ${err}`);
   });
 
-
-
 const deleteData = async () => {
   try {
     // await tourModel.deleteMany();
-    await userModel.deleteMany();
+    await File.deleteMany();
     // await reviewModel.deleteMany();
     console.log('Top toza');
   } catch (err) {

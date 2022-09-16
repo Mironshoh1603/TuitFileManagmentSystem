@@ -25,11 +25,35 @@ const multerStorage = multer.diskStorage({
     cb(null, `${req.user.id}_${file.originalname}`);
   },
 });
+const filterFile = (req, file, cb) => {
+  // console.log(file, 'sksnvkjen');
+  req.file = file;
+  console.log(req.file, 'vevev');
+
+  if (
+    ['zip', 'rar', 'pdf', 'doc', 'docx', 'xls', 'xlsx'].includes(
+      file.originalname.split('.').slice(-1)[0]
+    )
+  ) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError(
+        "You must upload only 'zip', 'rar', 'pdf', 'doc', 'docx', 'xls', 'xlsx' formats or Your files is letter than 100mb",
+        400
+      ),
+      false
+    );
+  }
+};
 
 // const multerStorage = multer.memoryStorage();
 
 const upload = multer({
   dest: 'public/files/',
+  storage: multerStorage,
+  fileFilter: filterFile,
+  limits: { fileSize: 100000000 },
 });
 
 const uploadFiles = upload.single('file');
@@ -71,5 +95,5 @@ module.exports = {
   deleteFile,
   middleware,
   uploadFiles,
-  getFileFromBucket
+  getFileFromBucket,
 };
