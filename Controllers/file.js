@@ -73,6 +73,25 @@ const getFileById = getOne(File, options, options2);
 const updateFile = updateOne(File);
 const deleteFile = deleteOne(File);
 
+const fileSearch = catchErrorAsync(async (req, res, next) => {
+  console.log(req.body, 'dsfsf');
+  let data = await File.find({
+    name: { $regex: `${req.body.search}`, $options: 'i' },
+  }).limit(5);
+  if (!data[0]) {
+    res.status(200).json({
+      status: 'Succes',
+      message: 'no data',
+    });
+    return;
+  }
+  res.status(200).json({
+    status: 'Succes',
+    result: data.length,
+    data: data,
+  });
+});
+
 const getFileFromBucket = (req, res, next) => {
   const key = req.params.key;
   const readStream = getFileStream(key);
@@ -105,4 +124,5 @@ module.exports = {
   middleware,
   uploadFiles,
   getFileFromBucket,
+  fileSearch,
 };

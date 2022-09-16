@@ -26,7 +26,7 @@ const deleteData = async () => {
     // await reviewModel.deleteMany();
     console.log('Top toza');
   } catch (err) {
-    console.log('Kir');
+    console.log('tozalanmadi');
   }
 };
 deleteData();

@@ -15,6 +15,7 @@ const hpp = require('hpp');
 const path = require('path');
 const pug = require('pug');
 const { urlencoded } = require('express');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -24,6 +25,8 @@ app.use(cookieParser());
 
 app.use(express.json({ limit: '10kb' }));
 app.use(urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -36,12 +39,8 @@ app.use(hpp());
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
-app.use((req, res, next) => {
-  console.log('Hello from Middelware');
-  next();
-});
 // app.use((req, res, next) => {
 //   req.time = '12.04.2022';
 //   next();
