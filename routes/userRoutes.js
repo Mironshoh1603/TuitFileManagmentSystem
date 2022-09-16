@@ -42,4 +42,6 @@ router
     userController.deleteUser
   );
 
+  router.route('/search').post(userController.userSearch);
+
 module.exports = router;

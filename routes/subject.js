@@ -6,10 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(
-
-    subjectController.getAllSubjects
-  )
+  .get(subjectController.getAllSubjects)
   .post(
     authController.protect,
     authController.role(['admin', 'teacher']),
@@ -21,10 +18,7 @@ router
 
 router
   .route('/:id')
-  .get(
-
-    subjectController.getSubjectById
-  )
+  .get(subjectController.getSubjectById)
   .patch(
     authController.protect,
     authController.role(['admin', 'teacher']),
@@ -37,5 +31,7 @@ router
     authController.role(['admin', 'teacher']),
     subjectController.deleteSubject
   );
+
+router.route('/search').post(subjectController.subjectSearch);
 
 module.exports = router;

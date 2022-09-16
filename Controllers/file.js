@@ -74,9 +74,8 @@ const updateFile = updateOne(File);
 const deleteFile = deleteOne(File);
 
 const fileSearch = catchErrorAsync(async (req, res, next) => {
-  console.log(req.body, 'dsfsf');
   let data = await File.find({
-    name: { $regex: `${req.body.search}`, $options: 'i' },
+    name: { $regex: `${req.query.search}`, $options: 'i' },
   }).limit(5);
   if (!data[0]) {
     res.status(200).json({

@@ -104,6 +104,24 @@ const updateMe = catchErrorAsync(async (req, res, next) => {
   });
 });
 
+const userSearch = catchErrorAsync(async (req, res, next) => {
+  let data = await User.find({
+    name: { $regex: `${req.query.search}`, $options: 'i' },
+  }).limit(5);
+  if (!data[0]) {
+    res.status(200).json({
+      status: 'Succes',
+      message: 'no data',
+    });
+    return;
+  }
+  res.status(200).json({
+    status: 'Succes',
+    result: data.length,
+    data: data,
+  });
+});
+
 module.exports = {
   getAllUsers,
   addUser,
@@ -113,4 +131,5 @@ module.exports = {
   resizeImage,
   uploadImageUser,
   updateMe,
+  userSearch,
 };

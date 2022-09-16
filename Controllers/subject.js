@@ -68,8 +68,27 @@ const getSubjectById = getOne(Subject, options, options2);
 const updateSubject = updateOne(Subject);
 const deleteSubject = deleteOne(Subject);
 
+const subjectSearch = catchErrorAsync(async (req, res, next) => {
+  let data = await Subject.find({
+    name: { $regex: `${req.query.search}`, $options: 'i' },
+  }).limit(5);
+  if (!data[0]) {
+    res.status(200).json({
+      status: 'Succes',
+      message: 'no data',
+    });
+    return;
+  }
+  res.status(200).json({
+    status: 'Succes',
+    result: data.length,
+    data: data,
+  });
+});
+
 module.exports = {
   getAllSubjects,
+  subjectSearch,
   addSubject,
   getSubjectById,
   updateSubject,
