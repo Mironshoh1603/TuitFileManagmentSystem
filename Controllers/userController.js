@@ -56,9 +56,18 @@ const resizeImage = catchErrorAsync(async (req, res, next) => {
   next();
 });
 
-const getAllUsers = getAll(User);
+const options = {
+  path: 'subjects',
+  select: '-_id',
+};
+
+const options2 = {
+  path: 'files',
+};
+
+const getAllUsers = getAll(User, options, options2);
 const addUser = addOne(User);
-const getUserById = getOne(User);
+const getUserById = getOne(User, options, options2);
 const updateUser = updateOne(User);
 const deleteUser = deleteOne(User);
 

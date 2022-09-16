@@ -5,74 +5,88 @@ const bcrypt = require('bcryptjs');
 
 // 1.name, 2.email, 3.photo, 4.password, 5.passwordConfirm
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Name kiritishingiz shart!'],
-    maxlength: 64,
-    minlength: 3,
-    trim: true,
-  },
-  username: {
-    type: String,
-    required: [true, 'Siz usernameni kiritishni unutdingiz!'],
-    unique: [true, 'Siz oldin foydalanilgan username kiritdingiz'],
-  },
-  email: {
-    type: String,
-    required: [true, 'Email kiritishingiz shart!'],
-    unique: [true, 'Siz oldin foydalanilgan email kiritdingiz'],
-    lowercase: true,
-    validate: [validator.isEmail, 'Tugri email kiriting!'],
-  },
-  photo: {
-    type: String,
-    default: 'default.jpeg',
-  },
-  role: {
-    type: String,
-    enum: ['teacher', 'admin'],
-    default: 'teacher',
-  },
-
-  password: {
-    type: String,
-    required: [true, 'Siz passwordni kiritishingiz shart'],
-    // validate: [
-    //   validator.isStrongPassword,
-    //   'Siz kuchliroq parolni kiritishingiz kerak',
-    // ],
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Siz passwordni kiritishingiz shart'],
-    validate: {
-      validator: function (val) {
-        return val === this.password;
-      },
-      message: 'Siz bir xil password kiriting',
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Name kiritishingiz shart!'],
+      maxlength: 64,
+      minlength: 3,
+      trim: true,
     },
+    username: {
+      type: String,
+      required: [true, 'Siz usernameni kiritishni unutdingiz!'],
+      unique: [true, 'Siz oldin foydalanilgan username kiritdingiz'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email kiritishingiz shart!'],
+      unique: [true, 'Siz oldin foydalanilgan email kiritdingiz'],
+      lowercase: true,
+      validate: [validator.isEmail, 'Tugri email kiriting!'],
+    },
+    photo: {
+      type: String,
+      default: 'default.jpeg',
+    },
+    role: {
+      type: String,
+      enum: ['teacher', 'admin'],
+      default: 'teacher',
+    },
+
+    password: {
+      type: String,
+      required: [true, 'Siz passwordni kiritishingiz shart'],
+      // validate: [
+      //   validator.isStrongPassword,
+      //   'Siz kuchliroq parolni kiritishingiz kerak',
+      // ],
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Siz passwordni kiritishingiz shart'],
+      validate: {
+        validator: function (val) {
+          return val === this.password;
+        },
+        message: 'Siz bir xil password kiriting',
+      },
+    },
+    passwordChangedDate: {
+      type: Date,
+      default: null,
+    },
+    phoneNumber: {
+      type: String,
+    },
+    subjects: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'subjects',
+      },
+    ],
+    resetTokenHash: String,
+    resetTokenVaqti: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
+    // files: [
+    //   {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'files',
+    //   },
+    // ],
   },
-  passwordChangedDate: {
-    type: Date,
-    default: null,
-  },
-  phoneNumber: {
-    type: String,
-  },
-  subjects: [{
-    type: mongoose.Schema.ObjectId,
-    refs: 'subjects',
-  }],
-  resetTokenHash: String,
-  resetTokenVaqti: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
@@ -87,6 +101,11 @@ userSchema.pre('save', async function (next) {
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
+});
+userSchema.virtual('files', {
+  ref: 'files',
+  localField: '_id',
+  foreignField: 'teacherId',
 });
 
 userSchema.methods.hashTokenMethod = function () {

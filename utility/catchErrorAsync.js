@@ -1,4 +1,4 @@
-const AppError = require("./appError");
+const AppError = require('./appError');
 
 const catchErrorAsync = (funksiya) => {
   const catchFunc = (req, res, next) => {

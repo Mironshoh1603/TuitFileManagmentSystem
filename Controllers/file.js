@@ -47,6 +47,15 @@ const filterFile = (req, file, cb) => {
   }
 };
 
+const options = {
+  path: 'subjectId',
+  select: 'name',
+};
+
+const options2 = {
+  path: 'teacherId',
+  select: 'name photo',
+};
 // const multerStorage = multer.memoryStorage();
 
 const upload = multer({
@@ -58,9 +67,9 @@ const upload = multer({
 
 const uploadFiles = upload.single('file');
 
-const getAllFiles = getAll(File);
+const getAllFiles = getAll(File, options, options2);
 const addFile = addOne(File);
-const getFileById = getOne(File);
+const getFileById = getOne(File, options, options2);
 const updateFile = updateOne(File);
 const deleteFile = deleteOne(File);
 

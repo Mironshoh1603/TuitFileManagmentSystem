@@ -51,19 +51,25 @@ const addOne = (Model) => {
 };
 
 const getOne = (Model, options, options2) => {
-  return catchErrorAsync(async (req, res, next) => {
-    let data;
-    if (options2) {
-      data = await Model.findById(req.params.id)
-        .populate(options)
-        .populate(options2);
-    } else if (options) {
-      data = await Model.findById(req.params.id).populate(options);
-    } else {
-      data = await Model.findById(req.params.id);
+  return async (req, res, next) => {
+    try {
+      let data;
+      console.log(options, 'option');
+      if (options2) {
+        data = await Model.findById(req.params.id)
+          .populate(options)
+          .populate(options2);
+      } else if (options) {
+        data = await Model.findById(req.params.id).populate(options);
+        console.log('data:', data);
+      } else {
+        data = await Model.findById(req.params.id);
+      }
+      responseFunction(res, 200, data);
+    } catch (err) {
+      console.log(err);
     }
-    responseFunction(res, 200, data);
-  });
+  };
 };
 
 const getAll = (Model, options, options2) => {
