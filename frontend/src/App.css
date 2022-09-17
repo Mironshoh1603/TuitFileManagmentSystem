@@ -1,32 +1,11 @@
 body {
-   background: #ccc;
 }
 .cl {
-   width: 85%;
+   width: 80%;
    margin: 0 auto;
-   margin-top: 100px;
-}
-.cart {
-   width: 30%;
-
-   margin-top: 10px;
-
-   border-radius: 5px;
-   background-color: white;
-   padding: 10px;
-   margin-left: 20px;
-   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-.container_card {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   
+   margin-top: 50px;
 }
 
-.footercha {
-   margin-top: 16.9% !important;
-}
 .slick-slide > div {
    margin: 0 10px;
 }
@@ -36,12 +15,12 @@ body {
 
 .card {
    border: 1px solid #fff;
-   background: black;
+   background: #f7fafc;
    border-radius: 8px;
    overflow: hidden;
 
    height: 400px;
-   color: #fff;
+   color: black;
    cursor: pointer;
 }
 
@@ -50,11 +29,30 @@ body {
    margin: 20px;
 }
 
+.area {
+   height: 200px;
+   width: 40% !important;
+
+   margin-left: 150px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.head {
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   width: 40%;
+   padding: 20px;
+   margin-left: 30px;
+}
+.container_area {
+   width: 90%;
+   height: fit-content;
+   margin-bottom: 20px;
+   display: flex;
+}
 .card-top > img {
    width: 100%;
    height: 200px;
    object-fit: cover;
-   background: black;
+   background: rgb(215, 210, 210);
 }
 
 .card-bottom {
@@ -72,4 +70,16 @@ body {
    left: 0;
    right: 0;
    height: 2px;
+}
+.container_card {
+   margin-top: 100px;
+   margin-bottom: 50px;
+   display: flex;
+   margin-left: 130px;
+}
+.cart {
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   width: 40%;
+   padding: 20px;
+   margin-left: 20px;
 }

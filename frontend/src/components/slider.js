@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import {dataDigitalBestSeller } from "./data"
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 function Sliders() {
    const [defaultImage, setDefaultImage] = useState({});
    const settings = {
       dots: true,
-      infinite: false,
+      infinite: true,
+      autoplay:true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 3,
