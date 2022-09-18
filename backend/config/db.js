@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const DB = process.env.DATABASE.replace('<password>', process.env.PASSWORD);
+const DB = async () => {
+  try {
+    await mongoose.connect(process.env.DATABASE);
+    console.log('db ulandi');
+  } catch (error) {
+    console.log('mongo ulanmadi');
+  }
+};
 
-mongoose
-  .connect(DB, {})
-  .then(() => {
-    console.log('DB connected');
-  })
-  .catch((err) => {
-    console.log(`ERROR: ${err}`);
-  });
+module.exports = DB;

@@ -7,7 +7,7 @@ import {
    Stack,
    Collapse,
    Icon,
-  //  Link,
+   //  Link,
    Popover,
    PopoverTrigger,
    PopoverContent,
@@ -16,11 +16,15 @@ import {
    useDisclosure,
    Container,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function WithSubnavigation() {
    const { isOpen, onToggle } = useDisclosure();
+   const { user } = useSelector((state) => ({ ...state.auth }));
 
    return (
       <Box>
@@ -73,7 +77,11 @@ export default function WithSubnavigation() {
                      bg: "pink.300",
                   }}
                >
-                  <Link to="login"> Sign In</Link>
+                  {user?.token ? (
+                     <Link to="dashboard"> Dashboard</Link>
+                  ) : (
+                     <Link to="login"> Sign In</Link>
+                  )}
                </Button>
             </Stack>
          </Flex>

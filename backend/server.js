@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './.env' });
 const app = require('./middlewares/app');
-
+const DB = require('./config/db');
 // Unhandeled Rejection
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTION 💥');
@@ -16,7 +16,7 @@ process.on('unhandledRejection', (err) => {
 //   process.exit(1);
 // });
 
-require('./config/db');
+DB();
 
 app.listen(+process.env.PORT, process.env.SERVER_URL, () => {
   console.log(`Server running on port...`);

@@ -1,4 +1,6 @@
 import React, { ReactNode } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   IconButton,
   Avatar,
@@ -53,6 +55,10 @@ export default function SidebarWithHeader({
   children: ReactNode,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  console.log(user);
+
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent

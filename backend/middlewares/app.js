@@ -12,6 +12,7 @@ const sanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const cors = require('cors');
 const pug = require('pug');
 const { urlencoded } = require('express');
 const cookieParser = require('cookie-parser');
@@ -20,6 +21,7 @@ const app = express();
 
 app.use(helmet());
 app.use(cookieParser());
+app.use(cors());
 
 app.use(express.json({ limit: '10kb' }));
 app.use(urlencoded({ extended: true }));
