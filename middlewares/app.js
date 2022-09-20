@@ -5,6 +5,7 @@ const subjectRouter = require('../routes/subject');
 const fileRouter = require('../routes/file');
 const postRouter = require('../routes/post');
 const bucketRouter = require('../routes/bucket');
+const viewRoute = require('./../routes/view_route');
 const AppError = require('../utility/appError');
 const ErrorController = require('../controllers/errorController');
 const rateLimit = require('express-rate-limit');
@@ -29,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 
 app.use(sanitize());
 
@@ -37,8 +38,8 @@ app.use(xss());
 
 app.use(hpp());
 
-app.use(express.static(path.join(__dirname, '/public')));
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use(morgan('tiny'));
 
 // app.use((req, res, next) => {
@@ -46,13 +47,13 @@ app.use(morgan('tiny'));
 //   next();
 // });
 
-const limit = rateLimit({
-  max: 100,
-  windowMs: 1 * 60 * 60 * 1000,
-  message: 'Too many requests from this IP, Please try again later',
-});
+// const limit = rateLimit({
+//   max: 100,
+//   windowMs: 1 * 60 * 60 * 1000,
+//   message: 'Too many requests from this IP, Please try again later',
+// });
 
-app.use('/api', limit);
+// app.use('/api', limit);
 
 // app.get('/', (req, res) => {
 //   res.status(200).json({
@@ -72,7 +73,7 @@ app.use('/api/v1/subjects', subjectRouter);
 app.use('/api/v1/files', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
 app.use('/api/v1/posts', postRouter);
-
+app.use('/', viewRoute);
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));
 });
