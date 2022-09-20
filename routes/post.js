@@ -1,37 +1,41 @@
 const express = require('express');
-const subjectController = require('../controllers/subject');
+const PostController = require('../controllers/post');
 const authController = require('../controllers/authController');
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(subjectController.getAllSubjects)
+  .get(
+
+    PostController.getAllPosts
+  )
   .post(
     authController.protect,
     authController.role(['admin', 'teacher']),
-    subjectController.uploadImageSubject,
-
-    subjectController.resizeImage,
-    subjectController.addSubject
+    PostController.uploadImagePost,
+    PostController.resizeImage,
+    PostController.addPost
   );
 
 router
   .route('/:id')
-  .get(subjectController.getSubjectById)
+  .get(
+    authController.protect,
+    authController.role(['admin', 'teacher']),
+    PostController.getPostById
+  )
   .patch(
     authController.protect,
     authController.role(['admin', 'teacher']),
-    subjectController.uploadImageSubject,
-    subjectController.resizeImage,
-    subjectController.updateSubject
+    PostController.uploadImagePost,
+    PostController.resizeImage,
+    PostController.updatePost
   )
   .delete(
     authController.protect,
     authController.role(['admin', 'teacher']),
-    subjectController.deleteSubject
+    PostController.deletePost
   );
-
-router.route('/search').post(subjectController.subjectSearch);
 
 module.exports = router;

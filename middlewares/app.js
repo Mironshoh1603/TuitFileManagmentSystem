@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const userRouter = require('../routes/userRoutes');
 const subjectRouter = require('../routes/subject');
 const fileRouter = require('../routes/file');
+const postRouter = require('../routes/post');
 const bucketRouter = require('../routes/bucket');
 const AppError = require('../utility/appError');
 const ErrorController = require('../controllers/errorController');
@@ -14,6 +15,7 @@ const hpp = require('hpp');
 const path = require('path');
 const pug = require('pug');
 const { urlencoded } = require('express');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -23,6 +25,8 @@ app.use(cookieParser());
 
 app.use(express.json({ limit: '10kb' }));
 app.use(urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -35,12 +39,8 @@ app.use(hpp());
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
-app.use((req, res, next) => {
-  console.log('Hello from Middelware');
-  next();
-});
 // app.use((req, res, next) => {
 //   req.time = '12.04.2022';
 //   next();
@@ -71,6 +71,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/subjects', subjectRouter);
 app.use('/api/v1/files', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
+app.use('/api/v1/posts', postRouter);
 
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));

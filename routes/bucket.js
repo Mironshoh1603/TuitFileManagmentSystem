@@ -5,8 +5,6 @@ const authController = require('../controllers/authController');
 router
   .route('/:key')
   .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
     FileController.getFileFromBucket
   );
 

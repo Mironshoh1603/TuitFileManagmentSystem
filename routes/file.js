@@ -6,11 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
-    FileController.getAllFiles
-  )
+  .get(FileController.getAllFiles)
   .post(
     authController.protect,
     authController.role(['admin', 'teacher']),
@@ -21,11 +17,7 @@ router
 
 router
   .route('/:id')
-  .get(
-    authController.protect,
-    authController.role(['admin', 'teacher']),
-    FileController.getFileById
-  )
+  .get(FileController.getFileById)
   .patch(
     authController.protect,
     authController.role(['admin', 'teacher']),
@@ -37,5 +29,6 @@ router
     authController.role(['admin', 'teacher']),
     FileController.deleteFile
   );
+router.route('/search').post(FileController.fileSearch);
 
 module.exports = router;
