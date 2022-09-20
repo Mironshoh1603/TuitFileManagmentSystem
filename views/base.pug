@@ -18,4 +18,15 @@ html(lang="en")
     body 
         include __header 
         block content 
-        include __footer    
+        include __footer  
+        .arrow#preloader 
+            a.back-to-top.d-flex.align-items-center.justify-content-center(href="#") 
+                svg.bi.bi-arrow-up(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewbox='0 0 16 16')
+                    path(fill-rule='evenodd' d='M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z')
+        script(src='/assets/vendor/purecounter/purecounter_vanilla.js')
+        script(src='/assets/vendor/aos/aos.js')
+        script(src='/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
+        script(src='/assets/vendor/swiper/swiper-bundle.min.js')
+        script(src='/assets/vendor/php-email-form/validate.js')
+        script(src='/assets/js/main.js')
+        
