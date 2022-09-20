@@ -1,6 +1,6 @@
 const home = async (req, res, next) => {
   try {
-    res.render('base');
+    res.render('home');
   } catch (error) {
     console.log(error);
   }
