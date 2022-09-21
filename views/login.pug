@@ -1,0 +1,21 @@
+extends base
+block content 
+      section.vh-100(style='background-color: #f0f0f0;')
+        .container.py-5.h-100
+          .row.d-flex.justify-content-center.align-items-center.h-100
+            .col-12.col-md-8.col-lg-6.col-xl-5
+              .card.shadow-2-strong(style='border-radius: 1rem;')
+                .card-body.p-5.text-center
+                  h3.mb-5 Sign in
+                  .form-outline.mb-4
+                    label.form-label(for='typeEmailX-2') Email
+                    input.form-control#email.form-control-lg(type='email')
+                  .form-outline.mb-4.justify-content-start
+                    label.form-label(for='typePasswordX-2') Password
+                    input#password.form-control.form-control-lg(type='password')
+                  // Checkbox
+                  .form-check.d-flex.justify-content-start.mb-4
+                    input#form1Example3.form-check-input(type='checkbox' value='')
+                    label.form-check-label(for='form1Example3')  Remember password 
+                  button.btn.btn-primary.btn-lg.btn-login.btn-block(type='submit') Login
+      script(src="/assets/js/login.js")

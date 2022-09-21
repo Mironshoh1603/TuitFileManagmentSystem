@@ -21,7 +21,14 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
-app.use(helmet());
+app.use(
+helmet(
+  {
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  }
+  )
+);
 app.use(cookieParser());
 
 app.use(express.json({ limit: '10kb' }));

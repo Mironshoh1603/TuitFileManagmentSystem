@@ -1,0 +1,34 @@
+extends base
+block content 
+  main#main(data-aos='fade-in')
+    // ======= Breadcrumbs =======
+    .breadcrumbs
+      .container
+        h2 Trainers
+        p
+          | Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium.
+    // End Breadcrumbs
+    // ======= Trainers Section =======
+    section#trainers.trainers
+      .container(data-aos='fade-up')
+        .row(data-aos='zoom-in' data-aos-delay='100')
+          each teacher,index in teachers
+            .col-lg-4.col-md-6.d-flex.align-items-stretch
+              .member
+                img.img-fluid(src=`img/users/${teacher.photo}` alt='')
+                .member-content
+                  h4=teacher.name 
+                  span=newArr[index]
+                  p=`${teacher.summary}`||"Men bu o'quv yurtida bir necha yillardan buyon ishlayman . Menga o'quvchi yoshlarning ilmga bo'lgan qiziqishlari juda yoqadi!"
+                  .social
+                    a(href='')
+                      i.bi.bi-twitter
+                    a(href='')
+                      i.bi.bi-facebook
+                    a(href='')
+                      i.bi.bi-instagram
+                    a(href='')
+                      i.bi.bi-linkedin
+    // End Trainers Section
+  // End #main
+    
