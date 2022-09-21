@@ -1,0 +1,132 @@
+extends base
+block content
+    .container-fluid.pt-4.px-4
+      .row.g-4
+        .col-sm-6.col-xl-3
+          .bg-light.rounded.d-flex.align-items-center.justify-content-between.p-4
+            i.fa.fa-sharp.fa-solid.fa-graduation-cap.fa-3x.text-primary
+            .ms-3
+              p.mb-2 O&apos;quvchilar soni
+              h6.mb-0 1234
+        .col-sm-6.col-xl-3
+          .bg-light.rounded.d-flex.align-items-center.justify-content-between.p-4
+            i.fa.fa-solid.fa-user.fa-3x.text-primary
+            .ms-3
+              p.mb-2 O&apos;qituvchilar soni
+              h6.mb-0 $1234
+        .col-sm-6.col-xl-3
+          .bg-light.rounded.d-flex.align-items-center.justify-content-between.p-4
+            i.fa.fa-solid.fa-address-book.fa-3x.text-primary
+            .ms-3
+              p.mb-2 Mavzular soni
+              h6.mb-0 $1234
+        .col-sm-6.col-xl-3
+          .bg-light.rounded.d-flex.align-items-center.justify-content-between.p-4
+            i.fa.fa-solid.fa-book.fa-3x.text-primary
+            .ms-3
+              p.mb-2 Kitoblar soni
+              h6.mb-0 $1234
+    // Sale & Revenue End
+    // Sales Chart Start
+    .container-fluid.pt-4.px-4
+      .row.g-4
+        .col-sm-12.col-xl-6
+          .bg-light.text-center.rounded.p-4
+            .d-flex.align-items-center.justify-content-between.mb-4
+              h6.mb-0 Worldwide Sales
+              a(href='') Show All
+            canvas#worldwide-sales
+        .col-sm-12.col-xl-6
+          .bg-light.text-center.rounded.p-4
+            .d-flex.align-items-center.justify-content-between.mb-4
+              h6.mb-0 Salse &amp; Revenue
+              a(href='') Show All
+            canvas#salse-revenue
+    // Sales Chart End
+    // Widgets Start
+    .container-fluid.pt-4.px-4
+      .row.g-4
+        .col-sm-12.col-md-6.col-xl-4
+          .h-100.bg-light.rounded.p-4
+            .d-flex.align-items-center.justify-content-between.mb-2
+              h6.mb-0 Messages
+              a(href='') Show All
+            .d-flex.align-items-center.border-bottom.py-3
+              img.rounded-circle.flex-shrink-0(src='img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .w-100.ms-3
+                .d-flex.w-100.justify-content-between
+                  h6.mb-0 Jhon Doe
+                  small 15 minutes ago
+                span Short message goes here...
+            .d-flex.align-items-center.border-bottom.py-3
+              img.rounded-circle.flex-shrink-0(src='img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .w-100.ms-3
+                .d-flex.w-100.justify-content-between
+                  h6.mb-0 Jhon Doe
+                  small 15 minutes ago
+                span Short message goes here...
+            .d-flex.align-items-center.border-bottom.py-3
+              img.rounded-circle.flex-shrink-0(src='img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .w-100.ms-3
+                .d-flex.w-100.justify-content-between
+                  h6.mb-0 Jhon Doe
+                  small 15 minutes ago
+                span Short message goes here...
+            .d-flex.align-items-center.pt-3
+              img.rounded-circle.flex-shrink-0(src='img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .w-100.ms-3
+                .d-flex.w-100.justify-content-between
+                  h6.mb-0 Jhon Doe
+                  small 15 minutes ago
+                span Short message goes here...
+        .col-sm-12.col-md-6.col-xl-4
+          .h-100.bg-light.rounded.p-4
+            .d-flex.align-items-center.justify-content-between.mb-4
+              h6.mb-0 Calender
+              a(href='') Show All
+            #calender
+        .col-sm-12.col-md-6.col-xl-4
+          .h-100.bg-light.rounded.p-4
+            .d-flex.align-items-center.justify-content-between.mb-4
+              h6.mb-0 To Do List
+              a(href='') Show All
+            .d-flex.mb-2
+              input.form-control.bg-transparent(type='text' placeholder='Enter task')
+              button.btn.btn-primary.ms-2(type='button') Add
+            .d-flex.align-items-center.border-bottom.py-2
+              input.form-check-input.m-0(type='checkbox')
+              .w-100.ms-3
+                .d-flex.w-100.align-items-center.justify-content-between
+                  span Short task goes here...
+                  button.btn.btn-sm
+                    i.fa.fa-times
+            .d-flex.align-items-center.border-bottom.py-2
+              input.form-check-input.m-0(type='checkbox')
+              .w-100.ms-3
+                .d-flex.w-100.align-items-center.justify-content-between
+                  span Short task goes here...
+                  button.btn.btn-sm
+                    i.fa.fa-times
+            .d-flex.align-items-center.border-bottom.py-2
+              input.form-check-input.m-0(type='checkbox' checked='')
+              .w-100.ms-3
+                .d-flex.w-100.align-items-center.justify-content-between
+                  span
+                    del Short task goes here...
+                  button.btn.btn-sm.text-primary
+                    i.fa.fa-times
+            .d-flex.align-items-center.border-bottom.py-2
+              input.form-check-input.m-0(type='checkbox')
+              .w-100.ms-3
+                .d-flex.w-100.align-items-center.justify-content-between
+                  span Short task goes here...
+                  button.btn.btn-sm
+                    i.fa.fa-times
+            .d-flex.align-items-center.pt-2
+              input.form-check-input.m-0(type='checkbox')
+              .w-100.ms-3
+                .d-flex.w-100.align-items-center.justify-content-between
+                  span Short task goes here...
+                  button.btn.btn-sm
+                    i.fa.fa-times
+    // Widgets End

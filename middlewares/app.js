@@ -6,6 +6,7 @@ const fileRouter = require('../routes/file');
 const postRouter = require('../routes/post');
 const bucketRouter = require('../routes/bucket');
 const viewRoute = require('./../routes/view_route');
+const adminRouter = require('./../routes/adminRouter');
 const AppError = require('../utility/appError');
 const ErrorController = require('../controllers/errorController');
 const rateLimit = require('express-rate-limit');
@@ -22,12 +23,10 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(
-helmet(
-  {
+  helmet({
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
-  }
-  )
+  })
 );
 app.use(cookieParser());
 
@@ -81,6 +80,7 @@ app.use('/api/v1/files', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/', viewRoute);
+app.use('/admin', adminRouter);
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));
 });
