@@ -26,6 +26,7 @@ router
   .post(
     authController.protect,
     authController.role(['admin']),
+    userController.middleware,
     userController.addUser
   );
 router
@@ -42,6 +43,6 @@ router
     userController.deleteUser
   );
 
-  router.route('/search').post(userController.userSearch);
+router.route('/search').post(userController.userSearch);
 
 module.exports = router;

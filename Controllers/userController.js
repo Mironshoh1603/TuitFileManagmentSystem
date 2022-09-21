@@ -67,6 +67,26 @@ const options2 = {
   path: 'files',
 };
 
+const middleware = catchErrorAsync(async (req, res, next) => {
+  console.log(req.body, 'Manabu bodyni ichi');
+  next();
+});
+
+const exampleAddUser = async (req, res, next) => {
+  try {
+    const user = await User.create(req.body);
+    res.status(200).json({
+      status: 'Succes',
+      data: user,
+    });
+  } catch (err) {
+    console.log('erdkvod', err);
+    res.status(404).json({
+      status: 'Fail',
+      message: err.message,
+    });
+  }
+};
 const getAllUsers = getAll(User, options, options2);
 const addUser = addOne(User);
 const getUserById = getOne(User, options, options2);
@@ -132,4 +152,6 @@ module.exports = {
   uploadImageUser,
   updateMe,
   userSearch,
+  middleware,
+  exampleAddUser
 };

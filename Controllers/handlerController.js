@@ -44,7 +44,8 @@ const updateOne = (Model) => {
 };
 
 const addOne = (Model) => {
-  return catchErrorAsync(async (req, res) => {
+  return catchErrorAsync(async (req, res, next) => {
+    console.log(req.body, 'skndkjd');
     const data = await Model.create(req.body);
     responseFunction(res, 201, data);
   });

@@ -19,8 +19,16 @@ const pug = require('pug');
 const { urlencoded } = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
+app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log(req.body, 'Body ekan');
+  next();
+});
 
 app.use(
   helmet({
@@ -28,12 +36,8 @@ app.use(
     crossOriginEmbedderPolicy: false,
   })
 );
-app.use(cookieParser());
 
-app.use(express.json({ limit: '10kb' }));
-app.use(urlencoded({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../views'));
@@ -74,12 +78,13 @@ app.use(morgan('tiny'));
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
 
-app.use('/api/v1/users', userRouter);
+// app.use(app.router);
+app.use('/', viewRoute);
 app.use('/api/v1/subjects', subjectRouter);
 app.use('/api/v1/files', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
 app.use('/api/v1/posts', postRouter);
-app.use('/', viewRoute);
+app.use('/api/v1/users', userRouter);
 app.use('/admin', adminRouter);
 app.all('*', function (req, res, next) {
   next(new AppError(`this url has not found: ${req.originalUrl}`, 404));
@@ -88,22 +93,3 @@ app.all('*', function (req, res, next) {
 app.use(ErrorController);
 
 module.exports = app;
-
-// Overview of Error handling
-
-// 1)Operation errors
-//
-// 1. Xato url berish
-// 2. Inputga kiritilayotgan xato malumot
-// 3. Serverga tugri ulanolmaslik (Sekin internet)
-// 4. Database ulanolmaslik
-// 5....
-
-// 2)Programming Errors
-//
-// 1. property ni uqiyotganda undefined bulishi
-// 2. await dan foydalanish async siz
-// 3. req.body ni ishlatish req.query urniga
-// 4....
-
-// Global Error handling middleware

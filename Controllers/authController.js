@@ -79,6 +79,7 @@ const login = async (req, res, next) => {
 
 const protect = async (req, res, next) => {
   // 1) Token bor yuqligini headerdan tekshirish
+  console.log(req.body, 'body protect');
   let token;
   if (
     req.headers.authorization &&
