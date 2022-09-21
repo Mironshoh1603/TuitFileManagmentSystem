@@ -1,11 +1,10 @@
 const axios = require('axios');
 const catchErrorAsync = require('../utility/catchErrorAsync');
-const axios1 = require('axios').default;
 
 const home = async (req, res, next) => {
   try {
     const books = await (
-      await axios1.get('http://127.0.0.1:8000/api/v1/files/')
+      await axios.get('http://127.0.0.1:8000/api/v1/files/')
     ).data.data;
     const { data } = await axios('http://localhost:8000/api/v1/users/');
     const teachers = data.data.filter((word) => word.role === 'teacher');
@@ -16,7 +15,7 @@ const home = async (req, res, next) => {
     });
     console.log(newArr, 'mana subjects');
     const mavzular = await (
-      await axios1.get('http://localhost:8000/api/v1/subjects/')
+      await axios.get('http://localhost:8000/api/v1/subjects/')
     ).data.data;
     console.log(books.length);
     res.render('client/home', {
@@ -25,6 +24,57 @@ const home = async (req, res, next) => {
       mavzular,
       newArr,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const salom = async (req, res, next) => {
+  try {
+    const { data } = await axios.get('http://localhost:8000/api/v1/subjects');
+    // console.log(data.data.map((val) => val.teachers));
+    const kalla = data.data;
+
+    console.log('kallllllllllll', { kalla });
+
+    const arra = kalla.map((val) => {
+      return { num: val.teachers.length };
+    });
+    const files = kalla.map((val) => {
+      return { num: val.files.length };
+    });
+
+    console.log('tttt', arra);
+
+    res.render('client/topics', { kalla, arra, files });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const books = async (req, res, next) => {
+  try {
+    const book = await axios.get(`http://localhost:8000/api/v1/files`);
+    const file = book.data.data.map((val) => {
+      return { name: val.key };
+    });
+    const size = book.data.data.map((val) => {
+      return { name: val.size };
+    });
+    console.log('bu sizeeeeee', size);
+    console.log(
+      'buu boookkk',
+      book.data.data.map((val) => {
+        return { name: val };
+      })
+    );
+
+    const och = book.data.data.map((val) => {
+      return {
+        name: `http://localhost:8000/api/v1/buckets/${val.key}`,
+      };
+    });
+    console.log('occccccccccc', och);
+    res.render('client/books', { file, size, och });
   } catch (error) {
     console.log(error);
   }
@@ -64,10 +114,11 @@ const contact = async (req, res, next) => {
   }
 };
 module.exports = {
-  home,
   teacherRender,
   loginRender,
   aboutRender,
   home,
   contact,
+  salom,
+  books,
 };
