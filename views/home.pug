@@ -1,0 +1,89 @@
+extends base
+
+block content 
+    section#hero.d-flex.justify-content-center.align-items-center
+        .container.position-relative(data-aos='zoom-in',data-aos-delay='100')
+            h1 
+                |   Learning Today 
+                br
+                |   Leading Tomorrow
+            h2 We strive to educate you
+            a.btn-get-started(href='courses.html') Get Started
+    main#main
+        section#about.about
+            .container(data-aos='fade-up')
+                .row
+                    .col-lg-6.order-1.order-lg-2(data-aos='fade-left' data-aos-delay='100')
+                        img.img-fluid(src='assets/img/about.jpg' alt='')
+                    .col-lg-6.pt-4.pt-lg-0.order-2.order-lg-1.content
+                        h3
+                            | Voluptatem dignissimos provident quasi corporis voluptates sit
+                            | assumenda.
+                        p.fst-italic
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            | eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        ul
+                            li
+                                i.bi.bi-check-circle
+                                |  Ullamco laboris nisi ut
+                                |                   aliquip ex ea commodo consequat.
+                            li
+                                i.bi.bi-check-circle
+                                |  Duis aute irure dolor in
+                                |                   reprehenderit in voluptate velit.
+                            li
+                                i.bi.bi-check-circle
+                                |  Ullamco laboris nisi ut
+                                |                   aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                |                   reprehenderit in voluptate trideta storacalaperda mastiro
+                                |                   dolore eu fugiat nulla pariatur.
+                        p
+                            | Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                            | aute irure dolor in reprehenderit in voluptate
+        section#counts.counts.section-bg
+            .container
+                .row.counters
+                    .col-lg-3.col-6.text-center
+                        span.purecounter(data-purecounter-start='0' data-purecounter-end=`${teachers.length}` data-purecounter-duration='1')
+                        p O'qituvchilar
+                    .col-lg-3.col-6.text-center
+                        span.purecounter(data-purecounter-start='0' data-purecounter-end='64' data-purecounter-duration='1')
+                        p Talabalar
+                    .col-lg-3.col-6.text-center
+                        span.purecounter(data-purecounter-start='0' data-purecounter-end=`${mavzular.length}` data-purecounter-duration='1')
+                        p Mavzular
+                    .col-lg-3.col-6.text-center
+                        span.purecounter(data-purecounter-start='0' data-purecounter-end=`${books.length}` data-purecounter-duration='1')
+                        p Kitoblar
+        section#features.features
+            .container(data-aos='fade-up')
+                p.h1.py-3 Bizning kitoblar
+                .row.gy-3(data-aos='zoom-in' data-aos-delay='100')
+                   each book in books
+                    .col-lg-3.col-md-4
+                        .icon-box
+                            i.bi.bi-book(style='color: #7dd56f')
+                            h3
+                                a(href='')= book.name
+        section#trainers.trainers.text-center
+            .container(data-aos='fade-up')
+                .row(data-aos='zoom-in' data-aos-delay='100')
+                  each teacher,index in teachers.splice(0,3)
+                    .col-lg-4.col-md-6.d-flex.align-items-stretch
+                        .member
+                            img.img-fluid(src=`/img/users/${teacher.photo}` alt='')
+                            .member-content
+                                h4= teacher.name
+                                span= newArr[index]
+                                p= teacher.summary|| "Men shu fandan dars beraman. Hammasi zor.Okay. Lorem ipsum dolor set"
+                                .social
+                                    a(href='')
+                                        i.bi.bi-twitter
+                                    a(href='')
+                                        i.bi.bi-facebook
+                                    a(href='')
+                                        i.bi.bi-instagram
+                                    a(href='')
+                                        i.bi.bi-linkedin
+            a.btn.btn-success.btn-lg.justify-self-center(style='width: 20%',href="/teachers")
+                | Ko&apos;proq...
