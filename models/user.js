@@ -62,6 +62,11 @@ const userSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
     },
+    summary: {
+      type: String,
+      default:
+        "Men bu o'quv yurtida bir necha yillardan buyon ishlayman . Menga o'quvchi yoshlarning ilmga bo'lgan qiziqishlari juda yoqadi!",
+    },
     subjects: [
       {
         type: mongoose.Schema.ObjectId,

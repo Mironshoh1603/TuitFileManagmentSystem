@@ -1,0 +1,74 @@
+extends base
+block content
+          main#main
+            // ======= Breadcrumbs =======
+            .breadcrumbs(data-aos='fade-in')
+              .container
+                h2 About Us
+                p
+                  | Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium.
+            // End Breadcrumbs
+            // ======= About Section =======
+            section#about.about
+              .container(data-aos='fade-up')
+                .row
+                  .col-lg-6.order-1.order-lg-2(data-aos='fade-left' data-aos-delay='100')
+                    img.img-fluid(src='assets/img/about.jpg' alt='')
+                  .col-lg-6.pt-4.pt-lg-0.order-2.order-lg-1.content
+                    h3 Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.
+                    p.fst-italic
+                      | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                      | magna aliqua.
+                    ul
+                      li
+                        i.bi.bi-check-circle
+                        |  Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      li
+                        i.bi.bi-check-circle
+                        |  Duis aute irure dolor in reprehenderit in voluptate velit.
+                      li
+                        i.bi.bi-check-circle
+                        |  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.
+                    p
+                      | Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            // End About Section
+            // ======= Counts Section =======
+            section#counts.counts.section-bg
+              .container
+                .row.counters
+                  .col-lg-3.col-6.text-center
+                    span.purecounter(data-purecounter-start='0' data-purecounter-end='1232' data-purecounter-duration='1')
+                    p Students
+                  .col-lg-3.col-6.text-center
+                    span.purecounter(data-purecounter-start='0' data-purecounter-end='64' data-purecounter-duration='1')
+                    p Courses
+                  .col-lg-3.col-6.text-center
+                    span.purecounter(data-purecounter-start='0' data-purecounter-end='42' data-purecounter-duration='1')
+                    p Events
+                  .col-lg-3.col-6.text-center
+                    span.purecounter(data-purecounter-start='0' data-purecounter-end='15' data-purecounter-duration='1')
+                    p Trainers
+            // End Counts Section
+            // ======= Testimonials Section =======
+            section#testimonials.testimonials
+              .container(data-aos='fade-up')
+                .section-title
+                  h2 Testimonials
+                  p What are they saying
+                .testimonials-slider.swiper(data-aos='fade-up' data-aos-delay='100')
+                  .swiper-wrapper
+                    each post in data
+                      .swiper-slide
+                        .testimonial-wrap
+                          .testimonial-item
+                            img.testimonial-img(src=`/img/posts/${post.photo}` alt='')
+                            h3=post.title
+                            h4=post.teacherId.name
+                            p
+                              i.bx.bxs-quote-alt-left.quote-icon-left
+                              p=post.text
+                              i.bx.bxs-quote-alt-right.quote-icon-right
+                    // End testimonial item
+                  .swiper-pagination
+            // End Testimonials Section
+          // End #main
