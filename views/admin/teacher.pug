@@ -1,95 +1,98 @@
-.container-fluid.pt-4.px-4
-    .row.g-4.create
-        .col-12
-            .h-100.bg-light.rounded.p-4
-                form.row(action='')
-                    h3.text-secondary O&apos;qituvchi qo&apos;shish
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                        label.form-label(for='') Name
-                        input.form-control(type='text')
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                        label.form-label(for='') Username
-                        input.form-control(type='text')
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                        label.form-label(for='') Email
-                        input.form-control(type='text')
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                        label.form-label(for='') Rasm Yuklash
-                        input#formFile.form-control(type='file')
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                        label.form-label(for='') Password
-                        input.form-control(type='password')
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                        label.form-label(for='') PasswordConfirm
-                        input.form-control(type='password')
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    select.form-select.mb-3(aria-label='Default select example')
-                        option(selected='') O&apos;qituvchi username kiritilsin
-                        option(value='1') One
-                        option(value='2') Two
-                        option(value='3') Three
-                    .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
-                        button.btn.btn-primary(s='') Add teacher
-    .row.g-4.edit
-        .col-12
-        .h-100.bg-light.rounded.p-4
-            form.row(action='')
-                h3.text-secondary O&apos;qituvchi edit qilish
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    label.form-label(for='') Name
-                    input.form-control(type='text' value='Okay')
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    label.form-label(for='') Username
-                    input.form-control(type='text' value='okay')
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    label.form-label(for='') Email
-                    input.form-control(type='text' value='okay')
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    label.form-label(for='') Rasm Yuklash
-                    input#formFile.form-control(type='file' value='okay')
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    label.form-label(for='') Password
-                    input.form-control(type='password' value='okay')
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    label.form-label(for='') PasswordConfirm
-                    input.form-control(type='password' value='okay')
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                    select.form-select.mb-3(aria-label='Default select example')
-                        option(selected='') O&apos;qituvchi username kiritilsin
-                        option(value='1') One
-                        option(value='2') Two
-                        option(value='3') Three
-                .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
-                    button.btn.btn-warning.text-white
-                        | Edit teacher
-    .row.g-4
-        .col-12
-            .h-100.bg-white.rounded.p-4
-                table.table.align-middle.mb-0.bg-white
-                    thead.bg-light
-                        tr
-                            th Name
-                            th Title
-                            th Position
-                            th Edit
-                            th Delete
-                            th
-                                button.btn.btn-primary +Create
-                    tbody
-                        tr
-                            td
-                                .d-flex.align-items-center
-                                    img.rounded-circle(src='https://mdbootstrap.com/img/new/avatars/8.jpg' alt='' style='width: 45px; height: 45px')
-                                .ms-3
-                                    p.fw-bold.mb-1 John Doe
-                                    p.text-muted.mb-0 john.doe@gmail.com
-                            td
-                                p.fw-normal.mb-1 Software engineer
-                                p.text-muted.mb-0 IT department
-                            td Senior
-                            td
-                                button.btn.btn-link.btn-sm.btn-rounded.text-warning(type='button')
-                                | Edit
-                            td
-                                button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button')
-                                    | Delete
+extends base
+block content    
+    .container-fluid.pt-4.px-4
+        .row.g-4.create.d-none.addTeacherForm
+            .col-12
+                .h-100.bg-light.rounded.p-4
+                    form.row.addForm(action='')
+                        h3.text-secondary O&apos;qituvchi qo&apos;shish
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Name
+                            input#name.form-control(type='text',required)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Username
+                            input.form-control#username(type='text',required)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Email
+                            input.form-control#email(type='text',required)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Rasm Yuklash
+                            input#formFile.form-control(type='file',required)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Password
+                            input.form-control#password(type='password',required)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label#passwordConfirm(for='') PasswordConfirm
+                            input.form-control(type='password',required)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            select.form-select.mb-3#subjectId(aria-label='Default select example',required)
+                                option(selected='') O&apos;qituvchi username kiritilsin
+                                option(value='1') One
+                                option(value='2') Two
+                                option(value='3') Three
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
+                            button.btn.btn-primary(type="submit") Add teacher
+        .row.g-4.edit.d-none.editTeacherForm 
+            .col-12
+                .h-100.bg-light.rounded.p-4
+                    form.row.editForm(action='')
+                        h3.text-secondary O&apos;qituvchi edit qilish
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Name
+                            input.form-control(type='text' value='Okay')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Username
+                            input.form-control(type='text' value='okay')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Email
+                            input.form-control(type='text' value='okay')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Rasm Yuklash
+                            input#formFile.form-control(type='file' value='okay')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Password
+                            input.form-control(type='password' value='okay')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') PasswordConfirm
+                            input.form-control(type='password' value='okay')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            select.form-select.mb-3(aria-label='Default select example')
+                                option(selected='') O&apos;qituvchi username kiritilsin
+                                option(value='1') One
+                                option(value='2') Two
+                                option(value='3') Three
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
+                            button.btn.btn-warning.text-white
+                                | Edit teacher
+        .row.g-4
+            .col-12
+                .h-100.bg-white.rounded.p-4
+                    table.table.align-middle.mb-0.bg-white
+                        thead.bg-light
+                            tr
+                                th Name
+                                th Title
+                                th Position
+                                th Edit
+                                th Delete
+                                th
+                                    button.btn.btn-primary.addTeacher +Create
+                        tbody
+                            tr
+                                td
+                                    .d-flex.align-items-center
+                                        img.rounded-circle(src='https://mdbootstrap.com/img/new/avatars/8.jpg' alt='' style='width: 45px; height: 45px')
+                                    .ms-3
+                                        p.fw-bold.mb-1 John Doe
+                                        p.text-muted.mb-0 john.doe@gmail.com
+                                td
+                                    p.fw-normal.mb-1 Software engineer
+                                    p.text-muted.mb-0 IT department
+                                td Senior
+                                td
+                                    button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button')
+                                        | Edit
+                                td
+                                    button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button')
+                                        | Delete
+    script(src="js/addTeacher.js")

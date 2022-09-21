@@ -20,14 +20,11 @@ router
     userController.updateMe
   );
 
-router
-  .route('/')
-  .get(userController.getAllUsers)
-  .post(
-    authController.protect,
-    authController.role(['admin']),
-    userController.addUser
-  );
+router.route('/').get(userController.getAllUsers).post(
+  // authController.protect,
+  // authController.role(['admin']),
+  userController.addUser
+);
 router
   .route('/:id')
   .get(userController.getUserById)
@@ -42,6 +39,6 @@ router
     userController.deleteUser
   );
 
-  router.route('/search').post(userController.userSearch);
+router.route('/search').post(userController.userSearch);
 
 module.exports = router;
