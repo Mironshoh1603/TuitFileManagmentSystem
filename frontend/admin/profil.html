@@ -283,168 +283,57 @@
 
         <!-- Widgets Start -->
         <div class="container-fluid pt-4 px-4">
-          <div class="row g-4 create">
+          <div class="row g-4">
             <div class="col-12">
               <div class="h-100 bg-light rounded p-4">
                 <form action="" class="row">
-                  <h3 class="text-secondary">O'qituvchi qo'shish</h3>
+                  <h3 class="text-secondary">Sizning ma'lumotlaringiz</h3>
                   <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Name</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Username</label>
-                    <input type="text" class="form-control" />
+                    <label for="" class="form-label">Ismingiz</label>
+                    <input type="text" value="Ism" class="form-control" />
                   </div>
                   <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
                     <label for="" class="form-label">Email</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Rasm Yuklash</label>
-                    <input class="form-control" type="file" id="formFile" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Password</label>
-                    <input type="password" class="form-control" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">PasswordConfirm</label>
-                    <input type="password" class="form-control" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <select
-                      class="form-select mb-3"
-                      aria-label="Default select example"
-                    >
-                      <option selected>O'qituvchi username kiritilsin</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div
-                    class="form-group col-sm-12 col-md-6 col-xl-6 mb-3 d-flex justify-content-end"
-                    style="height: 40px"
-                  >
-                    <button class="btn btn-primary" s>Add teacher</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="row g-4 edit">
-            <div class="col-12">
-              <div class="h-100 bg-light rounded p-4">
-                <form action="" class="row">
-                  <h3 class="text-secondary">O'qituvchi edit qilish</h3>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Name</label>
-                    <input type="text" class="form-control" value="Okay" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Username</label>
-                    <input type="text" class="form-control" value="okay" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Email</label>
-                    <input type="text" class="form-control" value="okay" />
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Rasm Yuklash</label>
                     <input
+                      type="email"
+                      value="Emailingiz"
                       class="form-control"
-                      type="file"
-                      id="formFile"
-                      value="okay"
                     />
                   </div>
                   <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">Password</label>
-                    <input type="password" class="form-control" value="okay" />
+                    <label for="" class="form-label">Email</label>
+                    <input
+                      type="text"
+                      value="usernameingiz"
+                      class="form-control"
+                    />
                   </div>
                   <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <label for="" class="form-label">PasswordConfirm</label>
-                    <input type="password" class="form-control" value="okay" />
+                    <label for="" class="form-label">Rasmingiz</label>
+                    <input type="file" class="form-control" />
                   </div>
-                  <div class="form-group col-sm-12 col-md-6 col-xl-6 mb-3">
-                    <select
-                      class="form-select mb-3"
-                      aria-label="Default select example"
-                    >
-                      <option selected>O'qituvchi username kiritilsin</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div
-                    class="form-group col-sm-12 col-md-6 col-xl-6 mb-3 d-flex justify-content-end"
-                    style="height: 40px"
-                  >
-                    <button class="btn btn-warning text-white">
-                      Edit teacher
-                    </button>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button class="btn btn-primary">Save</button>
                   </div>
                 </form>
-              </div>
-            </div>
-          </div>
-          <div class="row g-4">
-            <div class="col-12">
-              <div class="h-100 bg-white rounded p-4">
-                <table class="table align-middle mb-0 bg-white">
-                  <thead class="bg-light">
-                    <tr>
-                      <th>Name</th>
-                      <th>Title</th>
-                      <th>Position</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                      <th><button class="btn btn-primary">+Create</button></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <img
-                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            class="rounded-circle"
-                          />
-                          <div class="ms-3">
-                            <p class="fw-bold mb-1">John Doe</p>
-                            <p class="text-muted mb-0">john.doe@gmail.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="fw-normal mb-1">Software engineer</p>
-                        <p class="text-muted mb-0">IT department</p>
-                      </td>
-
-                      <td>Senior</td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-link btn-sm btn-rounded text-warning"
-                        >
-                          Edit
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-link btn-sm btn-rounded text-danger"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <form action="" class="row">
+                  <h3 class="text-secondary">Sizning paswordlaringiz</h3>
+                  <div class="form-group col-sm-12 col-md-12 col-xl-12 mb-3">
+                    <label for="" class="form-label">Eski parol</label>
+                    <input type="password" value="Ism" class="form-control" />
+                  </div>
+                  <div class="form-group col-sm-12 col-md-12 col-xl-12 mb-3">
+                    <label for="" class="form-label">Yangi parol</label>
+                    <input type="password" value="Ism" class="form-control" />
+                  </div>
+                  <div class="form-group col-sm-12 col-md-12 col-xl-12 mb-3">
+                    <label for="" class="form-label">Yangi parol</label>
+                    <input type="password" value="Ism" class="form-control" />
+                  </div>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button class="btn btn-primary">Save</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
