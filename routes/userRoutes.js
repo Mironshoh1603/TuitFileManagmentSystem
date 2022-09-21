@@ -20,11 +20,15 @@ router
     userController.updateMe
   );
 
-router.route('/').get(userController.getAllUsers).post(
-  // authController.protect,
-  // authController.role(['admin']),
-  userController.addUser
-);
+router
+  .route('/')
+  .get(userController.getAllUsers)
+  .post(
+    authController.protect,
+    authController.role(['admin']),
+    userController.middleware,
+    userController.addUser
+  );
 router
   .route('/:id')
   .get(userController.getUserById)
