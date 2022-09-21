@@ -19,7 +19,7 @@ const home = async (req, res, next) => {
       await axios1.get('http://localhost:8000/api/v1/subjects/')
     ).data.data;
     console.log(books.length);
-    res.render('home', {
+    res.render('client/home', {
       books,
       teachers,
       mavzular,
@@ -42,21 +42,21 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
     newArr.push(variable.name);
   });
   console.log(newArr, 'mana subjects');
-  res.render('teachers', { teachers, newArr });
+  res.render('client/teachers', { teachers, newArr });
 });
 const loginRender = catchErrorAsync(async (req, res, next) => {
-  res.render('login');
+  res.render('client/login');
 });
 const aboutRender = catchErrorAsync(async (req, res, next) => {
   const { data } = await axios('http://localhost:8000/api/v1/posts/');
 
   console.log(data.data, 'makandja');
-  res.render('about', { data: data.data });
+  res.render('client/about', { data: data.data });
 });
 const contact = async (req, res, next) => {
   console.log('wsvsves');
   try {
-    res.render('contact');
+    res.render('client/contact');
     console.log('hello');
   } catch (err) {
     console.log('salom');
