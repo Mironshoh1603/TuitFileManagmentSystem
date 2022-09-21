@@ -1,0 +1,206 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(content='width=device-width, initial-scale=1.0' name='viewport')
+  title Courses - Mentor Bootstrap Template
+  meta(content='' name='description')
+  meta(content='' name='keywords')
+  // Favicons
+  link(href='assets/img/favicon.png' rel='icon')
+  link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='assets/vendor/aos/aos.css' rel='stylesheet')
+  link(href='assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
+  link(href='assets/css/style.css' rel='stylesheet')
+  //
+    =======================================================
+    * Template Name: Mentor - v4.8.1
+    * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ========================================================
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='index.html') Mentor
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li
+          a(href='index.html') Home
+        li
+          a(href='about.html') About
+        li
+          a.active(href='courses.html') Courses
+        li
+          a(href='trainers.html') Trainers
+        li
+          a(href='events.html') Events
+        li
+          a(href='pricing.html') Pricing
+        li.dropdown
+          a(href='#')
+            span Drop Down
+            i.bi.bi-chevron-down
+          ul
+            li
+              a(href='#') Drop Down 1
+            li.dropdown
+              a(href='#')
+                span Deep Drop Down
+                i.bi.bi-chevron-right
+              ul
+                li
+                  a(href='#') Deep Drop Down 1
+                li
+                  a(href='#') Deep Drop Down 2
+                li
+                  a(href='#') Deep Drop Down 3
+                li
+                  a(href='#') Deep Drop Down 4
+                li
+                  a(href='#') Deep Drop Down 5
+            li
+              a(href='#') Drop Down 2
+            li
+              a(href='#') Drop Down 3
+            li
+              a(href='#') Drop Down 4
+        li
+          a(href='contact.html') Contact
+      i.bi.bi-list.mobile-nav-toggle
+    // .navbar
+    a.get-started-btn(href='courses.html') Get Started
+// End Header
+main#main(data-aos='fade-in')
+  // ======= Breadcrumbs =======
+  .breadcrumbs
+    .container
+      h2 Kitoblar
+      p Bu yerda kitoblar ro&apos;yxati bo&apos;ladi
+  // End Breadcrumbs
+  // ======= Courses Section =======
+  section#courses.courses
+    .container(data-aos='fade-up')
+      ul.list-group
+       each fil in  file
+        li.list-group-item.d-flex.list-group-item-action.justify-content-between.align-items-center=fil.name
+       
+          a.btn.btn-primary(href=`${fil.name}`)
+            svg.bi.bi-download(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewbox='0 0 16 16')
+              path(d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z')
+              path(d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z')
+  // End Courses Section
+// End #main
+// ======= Footer =======
+footer#footer
+  .footer-top
+    .container
+      .row
+        .col-lg-3.col-md-6.footer-contact
+          h3 Mentor
+          p
+            | A108 Adam Street 
+            br
+            |                 New York, NY 535022
+            br
+            |                 United States 
+            br
+            br
+            strong Phone:
+            |  +1 5589 55488 55
+            br
+            strong Email:
+            |  info@example.com
+            br
+        .col-lg-2.col-md-6.footer-links
+          h4 Useful Links
+          ul
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Home
+            li
+              i.bx.bx-chevron-right
+              a(href='#') About us
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Services
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Terms of service
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Privacy policy
+        .col-lg-3.col-md-6.footer-links
+          h4 Our Services
+          ul
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Web Design
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Web Development
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Product Management
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Marketing
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Graphic Design
+        .col-lg-4.col-md-6.footer-newsletter
+          h4 Join Our Newsletter
+          p
+            | Tamen quem nulla quae legam multos aute sint culpa legam noster
+            | magna
+          form(action='' method='post')
+            input(type='email' name='email')
+            input(type='submit' value='Subscribe')
+  .container.d-md-flex.py-4
+    .me-md-auto.text-center.text-md-start
+      .copyright
+        | &copy; Copyright 
+        strong
+          span Mentor
+        | . All Rights Reserved
+      .credits
+        // All the links in the footer should remain intact.
+        // You can delete the links only if you purchased the pro version.
+        // Licensing information: https://bootstrapmade.com/license/
+        // Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+        | Designed by 
+        a(href='https://bootstrapmade.com/') BootstrapMade
+    .social-links.text-center.text-md-right.pt-3.pt-md-0
+      a.twitter(href='#')
+        i.bx.bxl-twitter
+      a.facebook(href='#')
+        i.bx.bxl-facebook
+      a.instagram(href='#')
+        i.bx.bxl-instagram
+      a.google-plus(href='#')
+        i.bx.bxl-skype
+      a.linkedin(href='#')
+        i.bx.bxl-linkedin
+// End Footer
+#preloader
+a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
+  i.bi.bi-arrow-up-short
+// Vendor JS Files
+script(src='assets/vendor/purecounter/purecounter_vanilla.js')
+script(src='assets/vendor/aos/aos.js')
+script(src='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='assets/vendor/swiper/swiper-bundle.min.js')
+script(src='assets/vendor/php-email-form/validate.js')
+// Template Main JS File
+script(src='assets/js/main.js')
