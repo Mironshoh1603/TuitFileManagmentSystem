@@ -45,7 +45,7 @@ const salom = async (req, res, next) => {
 
     console.log('tttt', arra);
 
-    res.render('topics', { kalla, arra, files });
+    res.render('client/topics', { kalla, arra, files });
   } catch (error) {
     console.log(error);
   }
@@ -69,13 +69,12 @@ const books = async (req, res, next) => {
     );
 
     const och = book.data.data.map((val) => {
-      
       return {
         name: `http://localhost:8000/api/v1/buckets/${val.key}`,
       };
     });
     console.log('occccccccccc', och);
-    res.render('books', { file, size,och });
+    res.render('client/books', { file, size, och });
   } catch (error) {
     console.log(error);
   }
