@@ -92,7 +92,10 @@ const fileSearch = catchErrorAsync(async (req, res, next) => {
 });
 
 const getFileFromBucket = (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
   const key = req.params.key;
+  res.attachment(key);
   const readStream = getFileStream(key);
 
   readStream.pipe(res);
