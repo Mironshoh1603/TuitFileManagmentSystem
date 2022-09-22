@@ -54,7 +54,7 @@ const options = {
 
 const options2 = {
   path: 'teacherId',
-  select: 'name photo',
+  select: 'name photo email',
 };
 // const multerStorage = multer.memoryStorage();
 
@@ -62,7 +62,7 @@ const upload = multer({
   dest: 'public/files/',
   storage: multerStorage,
   fileFilter: filterFile,
-  limits: { fileSize: 100000000 },
+  limits: { fileSize: 1000000000000000000 },
 });
 
 const uploadFiles = upload.single('file');
