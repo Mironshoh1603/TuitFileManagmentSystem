@@ -9,11 +9,11 @@ const enterSystem = async (name, photo) => {
       },
     });
     console.log(res);
-    if (res.status === 200) {
-      alert('you have entered system succesfully');
+    if (res.status === 201) {
+      alert('Ok');
       window.setTimeout(() => {
-        location.assign('/admin');
-      }, 500);
+        location.reload();
+      }, 100);
     }
   } catch (err) {
     console.log(err.response.data.message);
