@@ -3,29 +3,34 @@ const addTeacherFunc = async (
   username,
   email,
   password,
-  passwordConfirm
+  passwordConfirm,
+  subjectId,
+  photo
 ) => {
   try {
+    let formData = new FormData();
+    formData.append('name', name);
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('passwordConfirm', passwordConfirm);
+    formData.append('photo', photo);
+    formData.append('subjects', [subjectId]);
+
     const res = await axios({
       method: 'POST',
       url: 'http://localhost:8000/api/v1/users/',
-      data: {
-        name,
-        username,
-        email,
-        password,
-        passwordConfirm,
-      },
+      data: formData,
     });
     if (res.status === 201 || 302) {
       console.log('hello');
-      alert('You logged successfully');
+      alert('okay');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign();
       }, 1000);
     }
   } catch (err) {
-    alert(err.data.message);
+    alert(err.response.message);
   }
 };
 let editTeacherTable = document.querySelector('.table-teacher');
@@ -42,7 +47,7 @@ document.querySelector('.addForm').addEventListener('submit', (e) => {
   const passwordConfirm = document.querySelector('#passwordConfirm_add').value;
   const subjectId = document.querySelector('#subjectId_add');
   console.log(password);
-  addTeacherFunc(name, username, email, password, passwordConfirm);
+  addTeacherFunc(name, username, email, password, passwordConfirm, subjectId);
   document.querySelector('.addTeacherForm').classList.toggle('d-none');
   document.querySelector('.editTeacherForm').classList.add('d-none');
 });
