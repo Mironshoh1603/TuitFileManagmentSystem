@@ -82,7 +82,7 @@ const books = async (req, res, next) => {
 };
 
 const teacherRender = catchErrorAsync(async (req, res, next) => {
-  const { data } = await axios('http://localhost:8000/api/v1/users/');
+  const { data } = await axios.get('http://localhost:8000/api/v1/users/');
   // console.log('datacha ', data);
   const teachers = data.data.filter((word) => word.role === 'teacher');
   let newArr = [];
