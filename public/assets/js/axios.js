@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* axios v0.25.0 | (c) 2022 by Matt Zabriskie */
 /* axios v0.24.0 | (c) 2022 by Matt Zabriskie */
 !(function (e, t) {
@@ -1139,7 +1138,6 @@
     },
   ]);
 });
-=======
 /* axios v0.25.0 | (c) 2022 by Matt Zabriskie */
 /* axios v0.24.0 | (c) 2022 by Matt Zabriskie */
 !(function (e, t) {
@@ -2280,4 +2278,3 @@
     },
   ]);
 });
->>>>>>> f91fb87cf9b1e6be0216b43372c78d7a00ae77f0

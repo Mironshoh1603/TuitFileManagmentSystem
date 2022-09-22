@@ -4,4 +4,8 @@ const home = catchErrorAsync(async (req, res, next) => {
   res.render('admin/index');
 });
 
-module.exports = { home };
+const kitob = catchErrorAsync(async (req, res, next) => {
+  res.render('admin/book');
+});
+
+module.exports = { home, kitob };

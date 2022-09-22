@@ -1,3 +1,4 @@
+const { Kinesis } = require('aws-sdk');
 const axios = require('axios');
 const catchErrorAsync = require('../utility/catchErrorAsync');
 
@@ -113,6 +114,9 @@ const contact = async (req, res, next) => {
     res.render('error');
   }
 };
+
+
+
 module.exports = {
   teacherRender,
   loginRender,
