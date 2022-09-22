@@ -44,32 +44,33 @@ block content
         .row.g-4
             .col-12
                 .h-100.bg-white.rounded.p-4
-                    table.table.align-middle.mb-0.bg-white
-                        thead.bg-light
-                            tr
-                                th Kitob nomi
-                                th Kitob hajmi 
-                                th O&apos;qituvchi nomi
-                                th Edit
-                                th Delete
-                                th
-                                    button.btn.btn-primary.addTeacher +Create
-                        tbody.table-column
-                            each book,index in books
+                    .table-responsive-xs.table-responsive-sm
+                        table.table.align-middle.mb-0.bg-white
+                            thead.bg-light
                                 tr
-                                    td=book.name
-                                    td=book.size
-                                    td
-                                        .d-flex.align-items-center
-                                            img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
-                                            .ms-3
-                                                p.fw-bold.mb-1=teachers[index].name
-                                                p.text-muted.mb-0=teachers[index].email
-                                    td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button' , value=`${book._id}`)
-                                            | Edit
-                                    td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${book._id}`)
-                                            | Delete
+                                    th Kitob nomi
+                                    th Kitob hajmi 
+                                    th O&apos;qituvchi nomi
+                                    th Edit
+                                    th Delete
+                                    th
+                                        button.btn.btn-primary.addTeacher +Create
+                            tbody.table-column
+                                each book,index in books
+                                    tr
+                                        td=book.name
+                                        td=book.size
+                                        td
+                                            .d-flex.align-items-center
+                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                                .ms-3
+                                                    p.fw-bold.mb-1=teachers[index].name
+                                                    p.text-muted.mb-0=teachers[index].email
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button' , value=`${book._id}`)
+                                                | Edit
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${book._id}`)
+                                                | Delete
     script(src='/adminasset/js/kitob.js')
 
