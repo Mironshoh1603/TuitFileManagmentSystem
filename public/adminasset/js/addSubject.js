@@ -4,13 +4,13 @@ let addTeacherBtn = document.querySelector('.addTeacher');
 let editTable = document.querySelector('.table-column');
 const enterSystem = async (name, photo) => {
   try {
+    let formData = new FormData();
+    formData.append('photo', photo);
+    formData.append('name', name);
     const res = await axios({
       method: 'POST',
       url: 'http://localhost:8000/api/v1/subjects/',
-      data: {
-        name: name,
-        photo: photo,
-      },
+      data: formData,
     });
     console.log(res);
     if (res.status === 201) {
@@ -28,7 +28,7 @@ const enterSystem = async (name, photo) => {
 document.querySelector('#btn-add').addEventListener('click', (e) => {
   e.preventDefault();
   const name = document.querySelector('#name').value;
-  const photo = document.querySelector('#photo').value;
+  const photo = document.querySelector('#photo').files[0];
   console.log(name);
   console.log(photo);
   enterSystem(name, photo);
@@ -55,6 +55,7 @@ editTable.addEventListener('click', async (e) => {
       console.log(subject);
       document.querySelector('#name_edit').value = subject.data.data.name;
       document.querySelector('.editTeacherForm').value = subject.data.data._id;
+      console.log(document.querySelector('.editTeacherForm').value, 'mana');
       // document.querySelector('#formFile_edit').value = subject.data.data.name;
     } catch (err) {
       alert(err);
@@ -83,7 +84,7 @@ editTable.addEventListener('click', async (e) => {
 document.querySelector('.editForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.querySelector('#name_edit').value;
-  const photo = document.querySelector('#formFile_edit').value;
+  const photo = document.querySelector('#formFile_edit').files[0];
   const subjectId = document.querySelector('.editTeacherForm').value;
   console.log(name, photo, 'datas');
   editTeacherFunc(name, photo, subjectId);
@@ -93,13 +94,13 @@ document.querySelector('.editForm').addEventListener('submit', (e) => {
 
 const editTeacherFunc = async (name, photo, subjectId) => {
   try {
+    let formData = new FormData();
+    formData.append('name', name);
+    formData.append('photo', photo);
     console.log('resdan oldin');
     const res = await axios.patch(
       `http://localhost:8000/api/v1/subjects/${subjectId}`,
-      {
-        name: name,
-        photo: photo,
-      }
+      formData
     );
     console.log(res.data.data, 'RESPONE');
     window.setTimeout(() => {
