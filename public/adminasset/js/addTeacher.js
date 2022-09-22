@@ -21,7 +21,12 @@ const addTeacherFunc = async (
 
     const res = await axios.post(
       'http://localhost:8000/api/v1/users/',
-      formData
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
     );
     console.log(res);
     if (res.status === 201) {
@@ -37,44 +42,7 @@ const addTeacherFunc = async (
     console.log(err.message);
   }
 };
-const enterSystem = async (
-  name,
-  username,
-  email,
-  password,
-  passwordConfirm,
-  subjectId,
-  photo
-) => {
-  try {
-    let formData = new FormData();
-    formData.append('name', name);
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('passwordConfirm', passwordConfirm);
-    formData.append('photo', photo);
-    formData.append('subjects', subjectId);
-    const res = await axios({
-      method: 'POST',
-      url: 'http://localhost:8000/api/v1/users/',
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    console.log(res);
-    if (res.status === 201) {
-      alert('Ok');
-      window.setTimeout(() => {
-        location.reload('/admin/teachers');
-      }, 100);
-    }
-  } catch (err) {
-    console.log(err.response.data.message);
-    alert(`Error: ${err.response.data.message}`);
-  }
-};
+
 let editTeacherTable = document.querySelector('.table-teacher');
 let addTeacherBtn = document.querySelector('.addTeacher');
 addTeacherBtn.addEventListener('click', (e) => {

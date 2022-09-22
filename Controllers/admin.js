@@ -8,12 +8,12 @@ const home = catchErrorAsync(async (req, res, next) => {
   );
   const subjects = await axios('http://localhost:8000/api/v1/subjects/');
   const files = await axios('http://localhost:8000/api/v1/files/');
-  console.log(
-    teachers.data.results,
-    files.data.results,
-    subjects.data.results,
-    "o'lchamlari"
-  );
+  // console.log(
+  //   teachers.data.results,
+  //   files.data.results,
+  //   subjects.data.results,
+  //   "o'lchamlari"
+  // );
   res.render('admin/index', { subjects, files, teachers });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
@@ -30,7 +30,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
 });
 const profil = catchErrorAsync(async (req, res, next) => {
   const admin = await User.findOne({ role: 'admin' });
-  console.log(admin);
+  // console.log(admin);
   res.render('admin/profil', { admin });
 });
 
@@ -69,7 +69,7 @@ const subject = catchErrorAsync(async (req, res, next) => {
     };
     teachers.push(variable);
   });
-  console.log('teachers', teachers);
+  // console.log('teachers', teachers);
   res.render('admin/subject', { subjects, teachers });
 });
 

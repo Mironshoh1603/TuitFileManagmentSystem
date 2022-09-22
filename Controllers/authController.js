@@ -80,6 +80,7 @@ const login = async (req, res, next) => {
 
 const protect = async (req, res, next) => {
   // 1) Token bor yuqligini headerdan tekshirish
+  console.log('_req ', req.body);
 
   let token;
 
@@ -167,6 +168,7 @@ const role = (roles) => {
   // console.log('Men Roleman');
   return catchErrorAsync(async (req, res, next) => {
     // 1) User ni roleni olamiz databasedan, tekshiramiz
+
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError('Siz bu amaliyotni bajarish huquqiga ega emassiz!', 401)
