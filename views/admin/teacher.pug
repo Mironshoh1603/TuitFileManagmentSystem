@@ -67,32 +67,33 @@ block content
         .row.g-4
             .col-12
                 .h-100.bg-white.rounded.p-4
-                    table.table.align-middle.mb-0.bg-white
-                        thead.bg-light
-                            tr
-                                th Name
-                                th Title
-                                th Position
-                                th Edit
-                                th Delete
-                                th
-                                    button.btn.btn-primary.addTeacher +Create
-                        tbody.table-teacher
-                            each teacher in teachers
+                    .table-responsive-xs.table-responsive-sm
+                        table.table.align-middle.mb-0.bg-white
+                            thead.bg-light
                                 tr
-                                    td
-                                        .d-flex.align-items-center
-                                            img.rounded-circle(src=`/img/user/${teacher.photo}` alt='' style='width: 45px; height: 45px')
-                                        .ms-3
-                                            p.fw-bold.mb-1=teacher.name
-                                            p.text-muted.mb-0=teacher.email
-                                    td
-                                        p.fw-normal.mb-1=teacher.subject
-                                    td Senior
-                                    td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${teacher.id}`)
-                                            | Edit
-                                    td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher.id}`)
-                                            | Delete
+                                    th Name
+                                    th Title
+                                    th Position
+                                    th Edit
+                                    th Delete
+                                    th
+                                        button.btn.btn-primary.addTeacher +Create
+                            tbody.table-teacher
+                                each teacher in teachers
+                                    tr
+                                        td
+                                            .d-flex.align-items-center
+                                                img.rounded-circle(src=`/img/user/${teacher.photo}` alt='' style='width: 45px; height: 45px')
+                                            .ms-3
+                                                p.fw-bold.mb-1=teacher.name
+                                                p.text-muted.mb-0=teacher.email
+                                        td
+                                            p.fw-normal.mb-1=teacher.subject
+                                        td Senior
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${teacher.id}`)
+                                                | Edit
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher.id}`)
+                                                | Delete
     script(src="/adminasset/js/addTeacher.js")
