@@ -51,25 +51,50 @@
 //   console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', ustoz, mavzu, file, names);
 // });
 
+// const bookadd = async (ustoz, mavzu, file, names) => {
+//   try {
+//     const res = await axios.post('http://localhost:8000/api/v1/files', {
+//       ustoz: ustoz,
+//       mavzu: mavzu,
+//       file: file,
+//       names: names,
+//     });
+
+//     console.log(res);
+//     if (res.status === 201) {
+//       alert('create succesfully');
+//       window.setTimeout(() => {
+//         location.assign('/admin');
+//       }, 500);
+//     }
+//   } catch (err) {
+//     console.log(err.message);
+//     alert(`Error: ${err.message}`);
+//   }
+// };
+
 const bookadd = async (ustoz, mavzu, file, names) => {
   try {
-    const res = await axios.post('http://localhost:8000/api/v1/files', {
-      ustoz: ustoz,
-      mavzu: mavzu,
-      file: file,
-      names: names,
+    const res = await axios({
+      method: 'POST',
+      url: 'http://localhost:8000/api/v1/files/',
+      data: {
+        teacherId: ustoz,
+        subjectId: mavzu,
+        file: file,
+        name: names,
+      },
     });
-
     console.log(res);
     if (res.status === 201) {
-      alert('create succesfully');
+      alert('Ok');
       window.setTimeout(() => {
-        location.assign('/admin');
-      }, 500);
+        location.reload();
+      }, 100);
     }
   } catch (err) {
-    console.log(err.message);
-    alert(`Error: ${err.message}`);
+    console.log(err.response.data.message);
+    alert(`Error: ${err.response.data.message}`);
   }
 };
 
@@ -77,11 +102,11 @@ document.querySelector('#qow').addEventListener('submit', (e) => {
   e.preventDefault();
   const ustoz = document.querySelector('#ustoz').value;
   const mavzu = document.querySelector('#mavzu').value;
-  const file = document.querySelector('#file').files[0].name;
+  const file = document.querySelector('#file').value;
+  // const size = document.querySelector('#file').value;
   const names = document.querySelector('#names').value;
   console.log(ustoz);
   console.log(mavzu);
-  console.log(file);
   console.log(names);
 
   bookadd(ustoz, mavzu, file, names);

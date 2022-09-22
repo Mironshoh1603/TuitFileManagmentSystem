@@ -26,7 +26,19 @@ const profil = catchErrorAsync(async (req, res, next) => {
 });
 
 const kitoblar = catchErrorAsync(async (req, res, next) => {
-  res.render('admin/book');
+  let books = await axios('http://localhost:8000/api/v1/files/');
+  books = books.data.data;
+  let teachers = [];
+
+  books.map((val) => {
+    let variable = val.teacherId || {
+      name: 'Nimajon Nimayev',
+      photo: 'user.jpeg',
+      email: 'nima@gmail.com',
+    };
+    teachers.push(variable);
+  });
+  res.render('admin/book', { books, teachers });
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {
@@ -48,6 +60,6 @@ const subject = catchErrorAsync(async (req, res, next) => {
 });
 
 // module.exports = { home, kitoblar };
-module.exports = { home,kitoblar, teacherRender, profil, subject };
+module.exports = { home, kitoblar, teacherRender, profil, subject };
 // module.exports = { home, subject };
 // module.exports = { home, teacherRender, profil, subject };

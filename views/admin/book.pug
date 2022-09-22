@@ -63,18 +63,19 @@ block content
                                 th
                                     button.btn.btn-primary +Create
                         tbody
-                            tr
-                                td kitob nomi bo&apos;ladi
-                                td Mavzu nomi shu yerda bo&apos;ladi
-                                td
-                                    .d-flex.align-items-center
-                                        img.rounded-circle(src='https://mdbootstrap.com/img/new/avatars/8.jpg' alt='' style='width: 45px; height: 45px')
-                                        .ms-3
-                                            p.fw-bold.mb-1 John Doe
-                                            p.text-muted.mb-0 john.doe@gmail.com
-                                td
-                                    button.btn.btn-link.btn-sm.btn-rounded.text-warning(type='button')
-                                    | Edit
-                                td
-                                    button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button')
-                                    | Delete
+                            each book,index in books
+                                tr
+                                    td=book.name
+                                    td=book.size
+                                    td
+                                        .d-flex.align-items-center
+                                            img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                            .ms-3
+                                                p.fw-bold.mb-1=teachers[index].name
+                                                p.text-muted.mb-0=teachers[index].email
+                                    td
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning(type='button')
+                                        | Edit
+                                    td
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button')
+                                        | Delete

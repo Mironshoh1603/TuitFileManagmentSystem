@@ -54,7 +54,7 @@ const options = {
 
 const options2 = {
   path: 'teacherId',
-  select: 'name photo',
+  select: 'name photo email',
 };
 // const multerStorage = multer.memoryStorage();
 
