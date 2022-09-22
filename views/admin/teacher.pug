@@ -27,7 +27,7 @@ block content
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             select.form-select.mb-3#subjectId_add(aria-label='Default select example',required)
                                 option(selected='') O&apos;qituvchi username kiritilsin
-                                option(value='1') One
+                                option(value='63207626b46642a5a11530c3') One
                                 option(value='2') Two
                                 option(value='3') Three
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
@@ -82,7 +82,7 @@ block content
                                 tr
                                     td
                                         .d-flex.align-items-center
-                                            img.rounded-circle(src=`assets/img/trainers/${teacher.photo}` alt='' style='width: 45px; height: 45px')
+                                            img.rounded-circle(src=`/assets/img/trainers/` alt='' style='width: 45px; height: 45px')
                                         .ms-3
                                             p.fw-bold.mb-1= teacher.name
                                             p.text-muted.mb-0=teacher.email
@@ -95,4 +95,4 @@ block content
                                     td
                                         button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button', target=`${teacher.id}`)
                                             | Delete
-    script(src="js/addTeacher.js")
+    script(src="/adminasset/js/addTeacher.js")
