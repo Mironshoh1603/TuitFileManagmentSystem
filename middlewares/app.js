@@ -20,11 +20,16 @@ const { urlencoded } = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const formData = require('express-form-data');
+const formidable = require('express-formidable');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
+app.use(formidable());
+
+app.use(formData.parse());
 // app.use((req, res, next) => {
 //   console.log(req.body, 'Body ekan');
 //   next();
@@ -37,10 +42,12 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: '10kb' }));
-app.use(urlencoded({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); // Parse URL-encoded bodies using query-string library
+// or
+app.use(express.urlencoded({ extended: true })); 
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 app.use(cors());
 // app.use(express.urlencoded({ extended: true }));
 

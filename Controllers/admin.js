@@ -20,9 +20,12 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   const teachersData = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
+  let subjects = await axios('http://localhost:8000/api/v1/subjects/');
+  subjects = subjects.data.data;
   const teachers = teachersData.data.data;
   res.render('admin/teacher', {
     teachers,
+    subjects,
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
