@@ -27,9 +27,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-app.use(formidable());
+// app.use(formidable());
 
-app.use(formData.parse());
+// app.use(formData.parse());
 // app.use((req, res, next) => {
 //   console.log(req.body, 'Body ekan');
 //   next();
@@ -45,9 +45,9 @@ app.use(
 app.use(express.json()); // Used to parse JSON bodies
 app.use(express.urlencoded()); // Parse URL-encoded bodies using query-string library
 // or
-app.use(express.urlencoded({ extended: true })); 
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 // app.use(express.urlencoded({ extended: true }));
 
