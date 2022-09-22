@@ -35,7 +35,12 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
   let books = await axios('http://localhost:8000/api/v1/files/');
   books = books.data.data;
   let teachers = [];
-
+  let teacherDatas = await axios(
+    'http://localhost:8000/api/v1/users?role=teacher'
+  );
+  teacherDatas = teacherDatas.data.data;
+  let subjects = await axios('http://localhost:8000/api/v1/subjects/');
+  subjects = subjects.data.data;
   books.map((val) => {
     let variable = val.teacherId || {
       name: 'Nimajon Nimayev',
@@ -44,11 +49,11 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     };
     teachers.push(variable);
   });
-  res.render('admin/book', { books, teachers });
+  res.render('admin/book', { books, teachers, teacherDatas, subjects });
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {
-  console.log('mana');
+  // console.log('mana');
   let subjects = await axios('http://localhost:8000/api/v1/subjects/');
   subjects = subjects.data.data;
   let teachers = [];

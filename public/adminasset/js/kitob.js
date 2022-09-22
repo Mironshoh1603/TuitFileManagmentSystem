@@ -1,89 +1,16 @@
-// const axios = require('axios');
-// const bookadd = async (formData) => {
-//   try {
-//     const data = { ustoz, mavzu, file, names };
-
-//     const dat = await fetch('http://localhost:8000/api/v1/files', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(formData),
-//     })
-//       .then((response) => response.json())
-//       .then((dataw) => {
-//         console.log('Success:', dataw);
-//       })
-//       .catch((error) => {
-//         console.error('Error:', error);
-//       });
-//     // console.log('adddddddddddddd', res);
-//     if (res.status === 200) {
-//       alert('you have entered system succesfully');
-//       window.setTimeout(() => {
-//         location.assign('/');
-//       }, 1000);
-//     }
-//     console.log('dattttttttttttt', dat);
-//   } catch (error) {
-//     // console.log(error.message);
-//   }
-
-//   // console.log('salom');
-// };
-
-// console.log('hello');
-// document.querySelector('#qow').addEventListener('submit', (e) => {
-//   e.preventDefault();
-
-//   const ustoz = document.querySelector('#ustoz').value;
-//   const mavzu = document.querySelector('#mavzu').value;
-//   const file = document.querySelector('#file').files[0];
-//   const names = document.querySelector('#names').value;
-
-//   let formData = new FormData();
-//   formData.append('ustoz', ustoz);
-//   formData.append('mavzu', mavzu);
-//   formData.append('names', names);
-//   formData.append('file', file);
-//   bookadd(formData);
-
-//   console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', ustoz, mavzu, file, names);
-// });
-
-// const bookadd = async (ustoz, mavzu, file, names) => {
-//   try {
-//     const res = await axios.post('http://localhost:8000/api/v1/files', {
-//       ustoz: ustoz,
-//       mavzu: mavzu,
-//       file: file,
-//       names: names,
-//     });
-
-//     console.log(res);
-//     if (res.status === 201) {
-//       alert('create succesfully');
-//       window.setTimeout(() => {
-//         location.assign('/admin');
-//       }, 500);
-//     }
-//   } catch (err) {
-//     console.log(err.message);
-//     alert(`Error: ${err.message}`);
-//   }
-// };
-
-const bookadd = async (ustoz, mavzu, file, names) => {
+let addTeacherBtn = document.querySelector('.addTeacher');
+let editTable = document.querySelector('.table-column');
+const enterSystem = async (name, file, subject) => {
   try {
+    console.log(file, 'mana file');
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('subjectId', subject);
+    formData.append('name', name);
     const res = await axios({
       method: 'POST',
       url: 'http://localhost:8000/api/v1/files/',
-      data: {
-        teacherId: ustoz,
-        subjectId: mavzu,
-        file: file,
-        name: names,
-      },
+      data: formData,
     });
     console.log(res);
     if (res.status === 201) {
@@ -98,16 +25,92 @@ const bookadd = async (ustoz, mavzu, file, names) => {
   }
 };
 
-document.querySelector('#qow').addEventListener('submit', (e) => {
+document.querySelector('#btn-add').addEventListener('click', (e) => {
   e.preventDefault();
-  const ustoz = document.querySelector('#ustoz').value;
-  const mavzu = document.querySelector('#mavzu').value;
-  const file = document.querySelector('#file').value;
-  // const size = document.querySelector('#file').value;
-  const names = document.querySelector('#names').value;
-  console.log(ustoz);
-  console.log(mavzu);
-  console.log(names);
-
-  bookadd(ustoz, mavzu, file, names);
+  const name = document.querySelector('#name').value;
+  const file = document.querySelector('#photo').files[0];
+  const subject = document.querySelector('#subject').value;
+  console.log(name);
+  console.log(file);
+  console.log(subject);
+  enterSystem(name, file, subject);
 });
+addTeacherBtn.addEventListener('click', (e) => {
+  document.querySelector('.addTeacherForm').classList.toggle('d-none');
+});
+
+editTable.addEventListener('click', async (e) => {
+  console.log('hello');
+  e.preventDefault();
+  console.log(e.target, 'e target');
+  if (e.target.classList.contains('editTeacher')) {
+    document.querySelector('.editTeacherForm').classList.toggle('d-none');
+    document.querySelector('.addTeacherForm').classList.add('d-none');
+    // console.log(editTable.value, 'mana valuesi');
+    let value = e.target.getAttribute('value');
+    console.log(value, 'value');
+    try {
+      const subject = await axios({
+        method: 'GET',
+        url: `http://localhost:8000/api/v1/files/${value}`,
+      });
+      console.log(subject);
+      document.querySelector('#name_edit').value = subject.data.data.name;
+      // document.querySelector('#subject-edit').value = subject.data.data.subjectId.name;
+      document.querySelector('.editTeacherForm').value = subject.data.data._id;
+      // document.querySelector('#formFile_edit').value = subject.data.data.name;
+    } catch (err) {
+      alert(err);
+    }
+  } else if (e.target.classList.contains('deleteTeacher')) {
+    let value = e.target.getAttribute('value');
+    try {
+      const subject = await axios({
+        method: 'DELETE',
+        url: `http://localhost:8000/api/v1/subjects/${value}`,
+      });
+      console.log(subject.data);
+      window.setTimeout(() => {
+        location.reload();
+      }, 100);
+
+      // document.querySelector('#name_edit').value = subject.data.data.name;
+      // document.querySelector('.editTeacherForm').value = subject.data.data._id;
+      // document.querySelector('#formFile_edit').value = subject.data.data.name;
+    } catch (err) {
+      alert(err);
+    }
+  } // document.querySelector('.addTeacherForm').classList.add('d-none');
+});
+
+document.querySelector('.editForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.querySelector('#name_edit').value;
+  const file = document.querySelector('#formFile_edit').value;
+  const subjectId = document.querySelector('#subject-edit').value;
+  const fileId = document.querySelector('.editTeacherForm').value;
+  console.log(name, file, 'datas');
+  editTeacherFunc(name, file, subjectId, fileId);
+  // window.reload();
+  // document.querySelector('.editTeacherForm').classList.toggle('d-none');
+});
+
+const editTeacherFunc = async (name, file, subjectId, fileId) => {
+  try {
+    console.log('resdan oldin');
+    let formData = new FormData();
+    formData.append('name', name);
+    formData.append('file', file);
+    formData.append('subjectId', subjectId);
+    const res = await axios.patch(
+      `http://localhost:8000/api/v1/files/${fileId}`,
+      formData
+    );
+    console.log(res.data.data, 'RESPONE');
+    window.setTimeout(() => {
+      location.reload();
+    }, 100);
+  } catch (err) {
+    console.log(err);
+  }
+};
