@@ -52,6 +52,7 @@ const resizeImage = catchErrorAsync(async (req, res, next) => {
     .toFormat('jpeg')
     .toFile(`${__dirname}/../public/img/subjects/${req.file.filename}`);
   req.body.photo = req.file.filename;
+  req.body.teachers = req.body.teachers || req.user._id;
   next();
 });
 
