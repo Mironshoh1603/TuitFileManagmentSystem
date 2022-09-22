@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /* axios v0.25.0 | (c) 2022 by Matt Zabriskie */
 /* axios v0.24.0 | (c) 2022 by Matt Zabriskie */
+=======
+
+>>>>>>> be0e3c9034860b9a684159bd765ff556daa6c9ae
 !(function (e, t) {
   'object' == typeof exports && 'object' == typeof module
     ? (module.exports = t())

@@ -1,4 +1,4 @@
-// // const axios = require('axios');
+// const axios = require('axios');
 // const bookadd = async (formData) => {
 //   try {
 //     const data = { ustoz, mavzu, file, names };
@@ -53,19 +53,16 @@
 
 const bookadd = async (ustoz, mavzu, file, names) => {
   try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://localhost:8000/api/v1/files/',
-      data: {
-        ustoz: ustoz,
-        mavzu: mavzu,
-        file: file,
-        names: names,
-      },
+    const res = await axios.post('http://localhost:8000/api/v1/files', {
+      ustoz: ustoz,
+      mavzu: mavzu,
+      file: file,
+      names: names,
     });
+
     console.log(res);
-    if (res.status === 200) {
-      alert('you have entered system succesfully');
+    if (res.status === 201) {
+      alert('create succesfully');
       window.setTimeout(() => {
         location.assign('/admin');
       }, 500);
@@ -76,11 +73,11 @@ const bookadd = async (ustoz, mavzu, file, names) => {
   }
 };
 
-document.querySelector('#qosh').addEventListener('click', (e) => {
+document.querySelector('#qow').addEventListener('submit', (e) => {
   e.preventDefault();
   const ustoz = document.querySelector('#ustoz').value;
   const mavzu = document.querySelector('#mavzu').value;
-  const file = document.querySelector('#file').files[0];
+  const file = document.querySelector('#file').files[0].name;
   const names = document.querySelector('#names').value;
   console.log(ustoz);
   console.log(mavzu);

@@ -64,6 +64,7 @@ const login = async (req, res, next) => {
     // 4) JWT token yasab berish
     const token = createToken(user._id);
     saveTokenCookie(res, token);
+
     // 5) Response qaytarish
     res.status(200).json({
       status: 'success',
@@ -79,7 +80,9 @@ const login = async (req, res, next) => {
 
 const protect = async (req, res, next) => {
   // 1) Token bor yuqligini headerdan tekshirish
+  console.log(req.body, 'body protect');
   let token;
+  console.log(req.cookies);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')

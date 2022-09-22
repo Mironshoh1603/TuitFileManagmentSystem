@@ -6,12 +6,13 @@
         | DASHMIN
     .d-flex.align-items-center.ms-4.mb-4
       .position-relative
-        img.rounded-circle(src='img/user.jpg' alt='' style='width: 40px; height: 40px;')
+        img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
         .bg-success.rounded-circle.border.border-2.border-white.position-absolute.end-0.bottom-0.p-1
       .ms-3
         h6.mb-0 Jhon Doe
         span Admin
     .navbar-nav.w-100
+      a.nav-item.nav-link.active(href="/profil") 
       a.nav-item.nav-link.active(href='index.html')
         i.fa.fa-tachometer-alt.me-2
         | Dashboard

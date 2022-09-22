@@ -1,0 +1,36 @@
+extends base 
+block content   
+    .container-fluid.pt-4.px-4
+        .row.g-4
+            .col-12
+                .h-100.bg-light.rounded.p-4
+                    form.row#userData(action='')
+                        h3.text-secondary Sizning ma&apos;lumotlaringiz
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Name
+                            input#name_user.form-control(type='text' value=`${admin.name}`)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Username
+                            input#username_user.form-control(type='text' value=`${admin.username}`)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Email
+                            input#email_user.form-control(type='email' value=`${admin.email}`)
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            label.form-label(for='') Rasmingiz
+                            input#photo_user.form-control(type='file',value=`${admin.photo}`)
+                        .col-12.d-flex.justify-content-end
+                            button.btn.btn-primary(type="submit") Save
+                    form.row#userPassword(action='')
+                        h3.text-secondary Sizning paswordlaringiz
+                        .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
+                            label.form-label(for='') Eski parol
+                            input#password_user.form-control(type='password' value='Ism')
+                        .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
+                            label.form-label(for='') Yangi parol
+                            input#newPassword_user.form-control(type='password' value='Ism')
+                        .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
+                            label.form-label(for='') Yangi parol
+                            input#newPass_Confirm_user.form-control(type='password' value='Ism')
+                        .col-12.d-flex.justify-content-end
+                            button.btn.btn-primary(type="submit") Save
+    script(src="/admin/js/profil.js") 
