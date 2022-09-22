@@ -17,7 +17,7 @@ block content
                             input.form-control#email_add(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
-                            input#formFile_add.form-control(type='file',required)
+                            input#formFile_add.form-control(type='file')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Password
                             input.form-control#password_add(type='password',required)
@@ -45,7 +45,7 @@ block content
                             input.form-control#username_edit(type='text' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
-                            input.form-control_#email_edit(type='text' value='okay')
+                            input.form-control#email_edit(type='text' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
                             input#formFile_edit.form-control(type='file' value='okay')
@@ -77,22 +77,22 @@ block content
                                 th Delete
                                 th
                                     button.btn.btn-primary.addTeacher +Create
-                        tbody
+                        tbody.table-teacher
                             each teacher in teachers
                                 tr
                                     td
                                         .d-flex.align-items-center
-                                            img.rounded-circle(src=`/assets/img/trainers/` alt='' style='width: 45px; height: 45px')
+                                            img.rounded-circle(src=`/img/user/${teacher.photo}` alt='' style='width: 45px; height: 45px')
                                         .ms-3
-                                            p.fw-bold.mb-1= teacher.name
+                                            p.fw-bold.mb-1=teacher.name
                                             p.text-muted.mb-0=teacher.email
                                     td
                                         p.fw-normal.mb-1=teacher.subject
                                     td Senior
                                     td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', target=`${teacher.target}`)
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${teacher.id}`)
                                             | Edit
                                     td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button', target=`${teacher.id}`)
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher.id}`)
                                             | Delete
     script(src="/adminasset/js/addTeacher.js")

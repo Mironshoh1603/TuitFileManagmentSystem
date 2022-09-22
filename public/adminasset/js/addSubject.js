@@ -1,5 +1,4 @@
 // const { default: axios } = require('axios');
-
 let addTeacherBtn = document.querySelector('.addTeacher');
 let editTable = document.querySelector('.table-column');
 const enterSystem = async (name, photo) => {
@@ -16,7 +15,7 @@ const enterSystem = async (name, photo) => {
     if (res.status === 201) {
       alert('Ok');
       window.setTimeout(() => {
-        location.reload();
+        location.reload('/admin/teachers');
       }, 100);
     }
   } catch (err) {

@@ -17,9 +17,10 @@ const home = catchErrorAsync(async (req, res, next) => {
   res.render('admin/index', { subjects, files, teachers });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
-  const teachers = await axios(
+  const teachersData = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
+  const teachers = teachersData.data.data;
   res.render('admin/teacher', {
     teachers,
   });
