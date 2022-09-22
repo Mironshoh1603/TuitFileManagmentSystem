@@ -8,24 +8,24 @@ block content
                         h3.text-secondary O&apos;qituvchi qo&apos;shish
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Name
-                            input#name.form-control(type='text',required)
+                            input#name_add.form-control(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Username
-                            input.form-control#username(type='text',required)
+                            input.form-control#username_add(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
-                            input.form-control#email(type='text',required)
+                            input.form-control#email_add(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
-                            input#formFile.form-control(type='file',required)
+                            input#formFile_add.form-control(type='file',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Password
-                            input.form-control#password(type='password',required)
+                            input.form-control#password_add(type='password',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label#passwordConfirm(for='') PasswordConfirm
-                            input.form-control(type='password',required)
+                            label.form-label(for='') PasswordConfirm
+                            input.form-control#passwordConfirm_add(type='password',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select.form-select.mb-3#subjectId(aria-label='Default select example',required)
+                            select.form-select.mb-3#subjectId_add(aria-label='Default select example',required)
                                 option(selected='') O&apos;qituvchi username kiritilsin
                                 option(value='1') One
                                 option(value='2') Two
@@ -39,24 +39,24 @@ block content
                         h3.text-secondary O&apos;qituvchi edit qilish
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Name
-                            input.form-control(type='text' value='Okay')
+                            input.form-control#name_edit(type='text' value='Okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Username
-                            input.form-control(type='text' value='okay')
+                            input.form-control#username_edit(type='text' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
-                            input.form-control(type='text' value='okay')
+                            input.form-control_#email_edit(type='text' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
-                            input#formFile.form-control(type='file' value='okay')
+                            input#formFile_edit.form-control(type='file' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Password
-                            input.form-control(type='password' value='okay')
+                            input.form-control#password_edit(type='password' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') PasswordConfirm
-                            input.form-control(type='password' value='okay')
+                            input.form-control#passwordConfirm_edit(type='password' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select.form-select.mb-3(aria-label='Default select example')
+                            select.form-select.mb-3#subjectId_edit(aria-label='Default select example')
                                 option(selected='') O&apos;qituvchi username kiritilsin
                                 option(value='1') One
                                 option(value='2') Two
