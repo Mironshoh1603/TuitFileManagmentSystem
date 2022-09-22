@@ -25,10 +25,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-app.use((req, res, next) => {
-  console.log(req.body, 'Body ekan');
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.body, 'Body ekan');
+//   next();
+// });
 
 app.use(
   helmet({

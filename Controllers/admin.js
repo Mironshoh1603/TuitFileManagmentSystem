@@ -31,7 +31,22 @@ const profil = catchErrorAsync(async (req, res, next) => {
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {
-  res.render('admin/subject');
+  console.log('mana');
+  let subjects = await axios('http://localhost:8000/api/v1/subjects/');
+  subjects = subjects.data.data;
+  let teachers = [];
+
+  subjects.map((val) => {
+    let variable = val.teachers[0] || {
+      name: 'Nimajon Nimayev',
+      photo: 'user.jpeg',
+      email: 'nima@gmail.com',
+    };
+    teachers.push(variable);
+  });
+  console.log('teachers', teachers);
+  res.render('admin/subject', { subjects, teachers });
 });
 
+// module.exports = { home, subject };
 module.exports = { home, teacherRender, profil, subject };
