@@ -17,7 +17,12 @@ const home = catchErrorAsync(async (req, res, next) => {
   res.render('admin/index', { subjects, files, teachers });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
-  res.render('admin/teacher');
+  const teachers = await axios(
+    'http://localhost:8000/api/v1/users?role=teacher'
+  );
+  res.render('admin/teacher', {
+    teachers,
+  });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
   const admin = await User.findOne({ role: 'admin' });

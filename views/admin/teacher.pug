@@ -78,21 +78,21 @@ block content
                                 th
                                     button.btn.btn-primary.addTeacher +Create
                         tbody
-                            tr
-                                td
-                                    .d-flex.align-items-center
-                                        img.rounded-circle(src='https://mdbootstrap.com/img/new/avatars/8.jpg' alt='' style='width: 45px; height: 45px')
-                                    .ms-3
-                                        p.fw-bold.mb-1 John Doe
-                                        p.text-muted.mb-0 john.doe@gmail.com
-                                td
-                                    p.fw-normal.mb-1 Software engineer
-                                    p.text-muted.mb-0 IT department
-                                td Senior
-                                td
-                                    button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button')
-                                        | Edit
-                                td
-                                    button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button')
-                                        | Delete
-    script(src="/adminasset/js/addTeacher.js")
+                            each teacher in teachers
+                                tr
+                                    td
+                                        .d-flex.align-items-center
+                                            img.rounded-circle(src=`assets/img/trainers/${teacher.photo}` alt='' style='width: 45px; height: 45px')
+                                        .ms-3
+                                            p.fw-bold.mb-1= teacher.name
+                                            p.text-muted.mb-0=teacher.email
+                                    td
+                                        p.fw-normal.mb-1=teacher.subject
+                                    td Senior
+                                    td
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', target=`${teacher.target}`)
+                                            | Edit
+                                    td
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button', target=`${teacher.id}`)
+                                            | Delete
+    script(src="js/addTeacher.js")
