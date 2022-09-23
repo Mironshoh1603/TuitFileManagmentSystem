@@ -20,9 +20,17 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   const teachersData = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
-  let subjects = await axios('http://localhost:8000/api/v1/subjects/');
-  subjects = subjects.data.data;
+  let subjects = [];
   const teachers = teachersData.data.data;
+
+  teachers.map((val) => {
+    let variable = val.subject[0] || {
+      name: 'Nimajon Nimayev',
+      photo: 'user.jpeg',
+      email: 'nima@gmail.com',
+    };
+    teachers.push(variable);
+  });
   console.log(subjects);
   res.render('admin/teacher', {
     teachers,
