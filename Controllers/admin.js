@@ -15,7 +15,7 @@ const home = catchErrorAsync(async (req, res, next) => {
   //   subjects.data.results,
   //   "o'lchamlari"
   // );
-  res.render('admin/index', { subjects, files, teachers });
+  res.render('admin/index', { subjects, files, teachers, user });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const teachersData = await axios(
