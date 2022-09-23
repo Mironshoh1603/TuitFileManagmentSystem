@@ -64,18 +64,9 @@ block content
         .row.g-4
             .col-12
                 .h-100.bg-white.rounded.p-4
-                    table.table.align-middle.mb-0.bg-white
-                        thead.bg-light
-                            tr
-                                th Name
-                                th Title
-                                th Position
-                                th Edit
-                                th Delete
-                                th
-                                    button.btn.btn-primary.addTeacher +Create
-                        tbody.table-teacher
-                            each teacher in teachers
+                    .table-responsive-xs.table-responsive-sm
+                        table.table.align-middle.mb-0.bg-white
+                            thead.bg-light
                                 tr
                                     td
                                         .d-flex.align-items-center
