@@ -52,6 +52,8 @@ const salom = async (req, res, next) => {
   }
 };
 
+
+
 const books = async (req, res, next) => {
   try {
     const book = await axios.get(`http://localhost:8000/api/v1/files`);
@@ -115,8 +117,6 @@ const contact = async (req, res, next) => {
   }
 };
 
-
-
 module.exports = {
   teacherRender,
   loginRender,
@@ -124,5 +124,5 @@ module.exports = {
   home,
   contact,
   salom,
-  books,
+  books
 };

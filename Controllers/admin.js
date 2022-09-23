@@ -80,8 +80,17 @@ const subject = catchErrorAsync(async (req, res, next) => {
   // console.log('teachers', teachers);
   res.render('admin/subject', { subjects, teachers });
 });
+const checkUser = async (req, res, next) => {
+  try {
+    let sal = await axios.get('http://localhost:8000/api/v1/users/me');
+    console.log('bu salllllllllllllllllllllllllllll', sal);
+    res.render('admin/__sidebar');
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // module.exports = { home, kitoblar };
-module.exports = { home, kitoblar, teacherRender, profil, subject };
+module.exports = { home, kitoblar, teacherRender, profil, subject, checkUser };
 // module.exports = { home, subject };
 // module.exports = { home, teacherRender, profil, subject };

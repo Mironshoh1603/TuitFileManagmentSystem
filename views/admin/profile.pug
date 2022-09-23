@@ -7,10 +7,10 @@ block content
                     form.row#userData(action='')
                         h3.text-secondary Sizning ma&apos;lumotlaringiz
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Name
+                            label.form-label(for='') Ism
                             input#name_user.form-control(type='text' value=`${admin.name}`)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Username
+                            label.form-label(for='') Familiya
                             input#username_user.form-control(type='text' value=`${admin.username}`)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
@@ -19,9 +19,9 @@ block content
                             label.form-label(for='') Rasmingiz
                             input#photo_user.form-control(type='file',value=`${admin.photo}`)
                         .col-12.d-flex.justify-content-end
-                            button.btn.btn-primary(type="submit") Save
+                            button.btn.btn-primary(type="submit") Saqlash
                     form.row#userPassword(action='')
-                        h3.text-secondary Sizning paswordlaringiz
+                        h3.text-secondary Sizning Parolingiz
                         .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
                             label.form-label(for='') Eski parol
                             input#password_user.form-control(type='password' value='Ism')
@@ -32,5 +32,5 @@ block content
                             label.form-label(for='') Yangi parol
                             input#newPass_Confirm_user.form-control(type='password' value='Ism')
                         .col-12.d-flex.justify-content-end
-                            button.btn.btn-primary(type="submit") Save
+                            button.btn.btn-primary(type="submit") Saqlash
     script(src="/adminasset/js/profil.js") 
