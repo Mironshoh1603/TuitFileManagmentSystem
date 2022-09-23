@@ -10,4 +10,5 @@ router.route('/login').get(viewController.loginRender);
 router.route('/about').get(viewController.aboutRender);
 router.route('/admin/book').get(adminController.kitoblar);
 
+
 module.exports = router;

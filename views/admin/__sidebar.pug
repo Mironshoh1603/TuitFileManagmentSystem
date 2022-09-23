@@ -1,5 +1,6 @@
 .sidebar.pe-4.pb-3
   nav.navbar.bg-light.navbar-light
+    a.navbar-brand.mx-4.mb-3(href='/')
     a.navbar-brand.mx-4.mb-3(href='/admin')
       h3.text-primary
         i.fa.fa-hashtag.me-2
@@ -9,9 +10,11 @@
         img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
         .bg-success.rounded-circle.border.border-2.border-white.position-absolute.end-0.bottom-0.p-1
       .ms-3
-        h6.mb-0 Jhon Doe
-        span Admin
+        h6.mb-0
+        span admin
     .navbar-nav.w-100
+      a.nav-item.nav-link.active(href="/profil") 
+      a.nav-item.nav-link.active(href='index')
       a.nav-item.nav-link.active(href="/admin/profil") 
       a.nav-item.nav-link.active(href='/admin')
         i.fa.fa-tachometer-alt.me-2
@@ -19,6 +22,7 @@
       a.nav-item.nav-link(href='/admin/teachers')
         i.fa.fa-th.me-2
         | O&apos;qituvchilar
+      a.nav-item.nav-link(href='/admin/mavzu')
       a.nav-item.nav-link(href='/admin/subject')
         i.fa.fa-th.me-2
         | Mavzular
