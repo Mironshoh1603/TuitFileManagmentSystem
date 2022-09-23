@@ -1,29 +1,59 @@
 .sidebar.pe-4.pb-3
-  nav.navbar.bg-light.navbar-light
-    a.navbar-brand.mx-4.mb-3(href='/admin')
-      h3.text-primary
-        i.fa.fa-hashtag.me-2
-        | DASHMIN
-    .d-flex.align-items-center.ms-4.mb-4
-      .position-relative
-        img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
-        .bg-success.rounded-circle.border.border-2.border-white.position-absolute.end-0.bottom-0.p-1
-      .ms-3
-        h6.mb-0 Jhon Doe
-        span Admin
-    .navbar-nav.w-100
-      a.nav-item.nav-link(href='/admin')
-        i.fa.fa-tachometer-alt.me-2
-        | Dashboard
-      a.nav-item.nav-link(href='/admin/profil')
-        i.fa.fa-user.me-2
-        | Profil
-      a.nav-item.nav-link(href='/admin/teachers')
-        i.fa.fa-th.me-2
-        | O&apos;qituvchilar
-      a.nav-item.nav-link(href='/admin/subject')
-        i.fa.fa-th.me-2
-        | Mavzular
-      a.nav-item.nav-link(href='/admin/book')
-        i.fa.fa-th.me-2
-        | Kitoblar
+  if role 
+    nav.navbar.bg-light.navbar-light
+      a.navbar-brand.mx-4.mb-3(href='/admin')
+        h3.text-primary
+          i.fa.fa-hashtag.me-2
+          | DASHMIN
+      .d-flex.align-items-center.ms-4.mb-4
+        .position-relative
+          img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+          .bg-success.rounded-circle.border.border-2.border-white.position-absolute.end-0.bottom-0.p-1
+        .ms-3
+          h6.mb-0= user.name
+          span= user.role
+      .navbar-nav.w-100
+        a.nav-item.nav-link(href='/admin')
+          i.fa.fa-tachometer-alt.me-2
+          | Dashboard
+        a.nav-item.nav-link(href='/admin/profil')
+          i.fa.fa-user.me-2
+          | Profil
+        a.nav-item.nav-link(href='/admin/teachers')
+          i.fa.fa-th.me-2
+          | O&apos;qituvchilar
+        a.nav-item.nav-link(href='/admin/subject')
+          i.fa.fa-th.me-2
+          | Fanlar
+        a.nav-item.nav-link(href='/admin/book')
+          i.fa.fa-th.me-2
+          | Kitoblar
+  else 
+    nav.navbar.bg-light.navbar-light
+      a.navbar-brand.mx-4.mb-3(href='/admin')
+        h3.text-primary
+          i.fa.fa-hashtag.me-2
+          | DASHMIN
+      .d-flex.align-items-center.ms-4.mb-4
+        .position-relative
+          img.rounded-circle(src=`img/users/${user.photo}` alt='' style='width: 40px; height: 40px;')
+          .bg-success.rounded-circle.border.border-2.border-white.position-absolute.end-0.bottom-0.p-1
+        .ms-3
+          h6.mb-0=user.name
+          span= user.role
+      .navbar-nav.w-100
+        a.nav-item.nav-link(href='/admin')
+          i.fa.fa-tachometer-alt.me-2
+          | Dashboard
+        a.nav-item.nav-link(href='/admin/profil')
+          i.fa.fa-user.me-2
+          | Profil
+        a.nav-item.nav-link.d-none(href='/admin/teachers')
+          i.fa.fa-th.me-2
+          | O&apos;qituvchilar
+        a.nav-item.nav-link(href='/admin/subject')
+          i.fa.fa-th.me-2
+          | Fanlar
+        a.nav-item.nav-link(href='/admin/book')
+          i.fa.fa-th.me-2
+          | Kitoblar

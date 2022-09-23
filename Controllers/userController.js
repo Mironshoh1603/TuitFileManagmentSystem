@@ -153,5 +153,5 @@ module.exports = {
   updateMe,
   userSearch,
   middleware,
-  exampleAddUser
+  exampleAddUser,
 };

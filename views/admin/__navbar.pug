@@ -1,5 +1,5 @@
 nav.navbar.navbar-expand.bg-light.navbar-light.sticky-top.px-4.py-0
-  a.navbar-brand.d-flex.d-lg-none.me-4(href='index.html')
+  a.navbar-brand.d-flex.d-lg-none.me-4(href='admin/index')
     h2.text-primary.mb-0
       i.fa.fa-hashtag
   a.sidebar-toggler.flex-shrink-0(href='#')
@@ -54,8 +54,8 @@ nav.navbar.navbar-expand.bg-light.navbar-light.sticky-top.px-4.py-0
         a.dropdown-item.text-center(href='#') See all notifications
     .nav-item.dropdown
       a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
-        img.rounded-circle.me-lg-2(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
-        span.d-none.d-lg-inline-flex John Doe
+        img.rounded-circle.me-lg-2(src=`img/users/${user.photo}` alt='' style='width: 40px; height: 40px;')
+        span.d-none.d-lg-inline-flex= user.name
       .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
         a.dropdown-item(href='/admin/profil') My Profile
         a.dropdown-item(href='/') Log Out

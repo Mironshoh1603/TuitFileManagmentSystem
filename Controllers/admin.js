@@ -4,6 +4,12 @@ const axios = require('axios');
 const User = require('./../models/user');
 const home = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
+  let role;
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
   const teachers = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
@@ -15,7 +21,7 @@ const home = catchErrorAsync(async (req, res, next) => {
   //   subjects.data.results,
   //   "o'lchamlari"
   // );
-  res.render('admin/index', { subjects, files, teachers, user });
+  res.render('admin/index', { subjects, files, teachers, user, role });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const teachersData = await axios(
@@ -31,9 +37,9 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
-  const admin = await User.findOne({ role: 'admin' });
-  // console.log(admin);
-  res.render('admin/profil', { admin });
+  const admin = await User.findById(req.user._id);
+  console.log(admin);
+  res.render('admin/profile', { admin });
 });
 
 const kitoblar = catchErrorAsync(async (req, res, next) => {
