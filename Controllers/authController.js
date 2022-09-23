@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const AppError = require('../utility/appError');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const { log } = require('console');
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -70,6 +71,9 @@ const login = async (req, res, next) => {
       status: 'success',
       token: token,
     });
+    // res.locals.userData = user;
+
+    // console.log('buuuuu userdataaa', userData);
   } catch (err) {
     res.status(404).json({
       status: 'fail',
@@ -127,6 +131,7 @@ const protect = async (req, res, next) => {
 
   req.user = user;
   res.locals.userData = user;
+  // console.log('bu userdataaaaaaaaaaaa', userData);
   next();
 };
 
@@ -214,6 +219,15 @@ const updatePassword = catchErrorAsync(async (req, res, next) => {
   });
 });
 
+const isUser = catchErrorAsync(async (req, res, next) => {
+  const users = await User.findById(req.user.id);
+  res.status(200).json({
+    message: true,
+    users,
+  });
+  next();
+});
+
 const logout = (req, res, next) => {
   res.cookie('jwt', 'logout', {
     httpOnly: true,
@@ -232,4 +246,5 @@ module.exports = {
   isSignIn,
   logout,
   saveTokenCookie,
+  isUser
 };

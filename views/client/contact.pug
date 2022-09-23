@@ -5,7 +5,7 @@ block content
     main#main
         .breadcrumbs(data-aos='fade-in')
             .container
-                h2 Contact Us
+                h2 Contact
                 p
                     | Savollaringiz yoki takliflaringiz bo&apos;lsa biz bilan bog&apos;laning. Biz
                     | bundan xursand bo&apos;lamiz
@@ -18,7 +18,7 @@ block content
                         .info
                             .address
                                 i.bi.bi-geo-alt
-                                h4 Location:
+                                h4 Manzil
                                 p A108 Amir Temur ko&apos;chasi, , NY 535022
                             .email
                                 i.bi.bi-envelope
@@ -26,23 +26,23 @@ block content
                                 p info@example.com
                             .phone
                                 i.bi.bi-phone
-                                h4 Call:
+                                h4 Telefon
                                 p +1 5589 55488 55s
                     .col-lg-8.mt-5.mt-lg-0
                         form.php-email-form(action='forms/contact.php' method='post' role='form')
                             .row
                                 .col-md-6.form-group
-                                    input#name.form-control(type='text' name='name' placeholder='Your Name' required='')
+                                    input#name.form-control(type='text' name='name' placeholder='Ismingiz' required='')
                                 .col-md-6.form-group.mt-3.mt-md-0
-                                    input#email.form-control(type='email' name='email' placeholder='Your Email' required='')
+                                    input#email.form-control(type='email' name='email' placeholder='Email manzilingiz' required='')
                                 .form-group.mt-3
-                                    input#subject.form-control(type='text' name='subject' placeholder='Subject' required='')
+                                    input#subject.form-control(type='text' name='subject' placeholder='Mavzu' required='')
                                 .form-group.mt-3
-                                    textarea.form-control(name='message' rows='5' placeholder='Message' required='')
+                                    textarea.form-control(name='message' rows='5' placeholder='Xabar' required='')
                                 .my-3
                                     .loading Loading
                                     .error-message
                                     .sent-message
                                         | Your message has been sent. Thank you!
                                 .text-center
-                                    button(type='submit') Send Message
+                                    button(type='submit') Xabar Yuborish
