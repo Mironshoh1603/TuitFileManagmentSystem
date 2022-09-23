@@ -3,6 +3,7 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 const axios = require('axios');
 const User = require('./../models/user');
 const home = catchErrorAsync(async (req, res, next) => {
+  const user = req.user;
   const teachers = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
