@@ -16,8 +16,15 @@ header#header.fixed-top
                 li
                     a(href='/books') Kitoblar
                 li
-                    a(href='/contact') Contact
+                    a(href='/contact') Bog`lanish
                     i.bi.bi-list.mobile-nav-toggle
-        a.get-started-btn(href='/login') Tizmimga kirish
-            i.bi.bi-list.mobile-nav-toggle
+        if cookie
+                a.get-started-btn(href='/logout') Logout
+        else
+                a.get-started-btn(href='/login') Login
+                
         //- a.get-started-btn(href='/login') Sign In
+
+
+
+

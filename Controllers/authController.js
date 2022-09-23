@@ -250,5 +250,5 @@ module.exports = {
   isSignIn,
   logout,
   saveTokenCookie,
-  isUser
+  isUser,
 };

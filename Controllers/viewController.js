@@ -4,6 +4,13 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 
 const home = async (req, res, next) => {
   try {
+    let cookie;
+    if (req.cookies) {
+      cookie = true;
+    } else {
+      cookie = false;
+    }
+    console.log('cooki' + cookie);
     const books = await (
       await axios.get('http://127.0.0.1:8000/api/v1/files/')
     ).data.data;
@@ -24,6 +31,7 @@ const home = async (req, res, next) => {
       teachers,
       mavzular,
       newArr,
+      cookie
     });
   } catch (error) {
     console.log(error);
@@ -52,16 +60,14 @@ const salom = async (req, res, next) => {
   }
 };
 
-
-
 const books = async (req, res, next) => {
   try {
     const book = await axios.get(`http://localhost:8000/api/v1/files`);
     const file = book.data.data.map((val) => {
-      return { name: val.key };
+      return { name: val.name };
     });
     const size = book.data.data.map((val) => {
-      return { name: val.size };
+      return { name: (val.size / 1048576).toFixed(3) };
     });
     console.log('bu sizeeeeee', size);
     console.log(
@@ -124,5 +130,5 @@ module.exports = {
   home,
   contact,
   salom,
-  books
+  books,
 };
