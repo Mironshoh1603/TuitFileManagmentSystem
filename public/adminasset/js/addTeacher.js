@@ -30,7 +30,6 @@ const addTeacherFunc = async (
     );
     console.log(res);
     if (res.status === 201) {
-      console.log('hello');
       alert('okay');
       window.setTimeout(() => {
         location.assign();
@@ -42,6 +41,7 @@ const addTeacherFunc = async (
     console.log(err.message);
   }
 };
+console.log('hello');
 
 let editTeacherTable = document.querySelector('.table-teacher');
 let addTeacherBtn = document.querySelector('.addTeacher');

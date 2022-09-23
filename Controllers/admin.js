@@ -23,6 +23,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   let subjects = await axios('http://localhost:8000/api/v1/subjects/');
   subjects = subjects.data.data;
   const teachers = teachersData.data.data;
+  console.log(subjects);
   res.render('admin/teacher', {
     teachers,
     subjects,

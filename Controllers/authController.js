@@ -93,7 +93,8 @@ const protect = async (req, res, next) => {
     token = req.cookies.jwt;
   }
   if (!token) {
-    return next(new AppError('Siz tizimga kirishingiz shart!'));
+    res.redirect('/login');
+    return;
   }
   // 2) Token ni tekshirish Serverniki bilan clientnikini solishtirish
 
