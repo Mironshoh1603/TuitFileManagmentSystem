@@ -10,16 +10,13 @@ const enterSystem = async (name, file, subject) => {
   formData.append('file', file);
   formData.append('subjectId', subject);
   formData.append('name', name);
-  axios({
-    method: 'POST',
-    url: 'http://localhost:8000/api/v1/files/',
-    data: formData,
-  })
-    .then(function (val) {
-      spinner.style.visibility = 'visible';
-      spinner.style.opacity = '1';
-      console.log(val, 'qalaysan bu men');
-      return JSON.stringify(val);
+
+  axios
+    .post('http://localhost:8000/api/v1/files/', formData, {
+      onUploadProgress: function (progressEvent) {
+        spinner.style.visibility = 'visible';
+        spinner.style.opacity = '1';
+      }.bind(this),
     })
     .then(function (data) {
       spinner.style.visibility = 'hidden';
@@ -29,7 +26,7 @@ const enterSystem = async (name, file, subject) => {
       if (data.status === 201 || data.status === 302) {
         // alert('Ok');
         window.setTimeout(() => {
-          // location.reload();
+          location.reload();
           console.log('men reloadman');
         }, 100);
       }
@@ -48,6 +45,9 @@ document.querySelector('#btn-add').addEventListener('click', (e) => {
   const file = document.querySelector('#photo').files[0];
   const subject = document.querySelector('#subject').value;
   console.log(name);
+  document.querySelector('#name').value = '';
+  document.querySelector('#photo').value = '';
+  document.querySelector('#subject').value = '';
   console.log(file);
   console.log(subject);
   enterSystem(name, file, subject);
@@ -82,22 +82,22 @@ editTable.addEventListener('click', async (e) => {
   } else if (e.target.classList.contains('deleteTeacher')) {
     let value = e.target.getAttribute('value');
     try {
-      console.log(value, '_value');
-      const subject = await axios.delete(
-        `http://localhost:8000/api/v1/subjects/${value}`,
-        { Authorization: 'Bearer token', 'My-Custom-Header': 'foobar' }
-      );
-      console.log(subject);
-      window.setTimeout(() => {
-        location.reload();
-      }, 100);
+      const subject = await axios({
+        method: 'DELETE',
+        url: `http://localhost:8000/api/v1/files/${value}`,
+      });
+      console.log(subject.data);
+      if (subject.status === 204) {
+        window.setTimeout(() => {
+          location.reload();
+        }, 100);
+      }
 
       // document.querySelector('#name_edit').value = subject.data.data.name;
       // document.querySelector('.editTeacherForm').value = subject.data.data._id;
       // document.querySelector('#formFile_edit').value = subject.data.data.name;
     } catch (err) {
-      console.log(err);
-      alert(err.message);
+      alert(err);
     }
   } // document.querySelector('.addTeacherForm').classList.add('d-none');
 });
