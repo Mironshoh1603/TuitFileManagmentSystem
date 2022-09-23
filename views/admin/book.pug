@@ -1,81 +1,76 @@
 extends base
-block content      
+block content    
     .container-fluid.pt-4.px-4
-        .row.g-4
+        .row.g-4.create.d-none.addTeacherForm
             .col-12
                 .h-100.bg-light.rounded.p-4
-                    form.row#qow(action='')
-                        h3.text-secondary Kitob qo&apos;shish
+                    form.row.addForm(action='')
+                        h3.text-secondary Kitobni qo&apos;shish
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select#ustoz.form-select.mb-3(aria-label='Default select example')
-                                option(selected='') O&apos;qituvchi username kiritilsin
-                                option(value='63207626b46642a5a11530c3') One
-                                option(value='2') Two
-                                option(value='3') Three
+                            label.form-label(for='' ) Fileni tanlang
+                            input#photo.form-control(type='file',accept='Application/*' ,required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select#mavzu.form-select.mb-3(aria-label='Default select example')
-                                option(selected='') O&apos;qituvchi username kiritilsin
-                                option(value='6322d69444ada808d81f178c') One
-                                option(value='2') Two
-                                option(value='3') Three
-                        .col-sm-12.col-md-6.col-xl-6.mb-3
-                            input#names.form-control(type='text' placeholder='Kitob nomini kiriting')
-                        .col-sm-12.col-md-6.col-xl-6.mb-3
-                            input#file.form-control(type='file' placeholder='Kitob nomini kiriting')
-                        .form-group.col-sm-12.col-md-12.col-xl-12.mb-3.d-flex.justify-content-end
-                            button#qosh.btn.btn-primary.text-white(type="submit")
-                                | Kitob qo&apos;shish
-        .row.g-4
+                            label.form-label(for='') Kitob nomini kiriting
+                            input#name.form-control(type='text',required)
+                        //- .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                        //-     select.form-select.mb-3(aria-label='Default select example')
+                        //-         each teacher in teacherDatas    
+                        //-             option(value=`${teacher._id}`)=teacher.username
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            select#subject.form-select.mb-3(aria-label='Default select example')
+                                each subject in subjects
+                                    option(value=`${subject._id}`)=subject.name
+                                          
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
+                            button#btn-add.btn.btn-primary(type="submit") Kitob Qo`shish
+        .row.g-4.edit.d-none.editTeacherForm
             .col-12
                 .h-100.bg-light.rounded.p-4
-                    form.row(action='')
-                        h3.text-secondary Kitob edit qilish
+                    form.row.editForm(action='')
+                        h3.text-secondary Kitob Tahrirlash
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select.form-select.mb-3(aria-label='Default select example')
-                                option(selected='') O&apos;qituvchi username kiritilsin
-                                option(value='1') One
-                                option(value='2') Two
-                                option(value='3') Three
+                            label.form-label(for='') Kitob nomi
+                            input.form-control#name_edit(type='text' value='Okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select.form-select.mb-3(aria-label='Default select example')
-                                option(selected='') Mavzu nomi kiritilsin
-                                option(value='1') One
-                                option(value='2') Two
-                                option(value='3') Three
-                        .col-sm-12.col-md-6.col-xl-6.mb-3
-                            input.form-control(type='text' placeholder='Kitob nomini kiriting')
-                        .col-sm-12.col-md-6.col-xl-6.mb-3
-                            input.form-control(type='file' placeholder='Kitob nomini kiriting')
-                        .form-group.col-sm-12.col-md-12.col-xl-12.mb-3.d-flex.justify-content-end
+                            label.form-label(for='') Kitob Yuklash
+                            input#formFile_edit.form-control(type='file' accept='Application/*')
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
+                            select#subject-edit.form-select.mb-3(aria-label='Default select example')
+                                each subject in subjects
+                                    option(value=`${subject._id}`)=subject.name
+                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
-                                | Kitob edit qilish
+                                | O`qituvchini Tahrirlash
         .row.g-4
             .col-12
                 .h-100.bg-white.rounded.p-4
-                    table.table.align-middle.mb-0.bg-white
-                        thead.bg-light
-                            tr
-                                th Kitob nomi
-                                th Mavzu nomi
-                                th O&apos;qituvchi nomi
-                                th Edit
-                                th Delete
-                                th
-                                    button.btn.btn-primary +Create
-                        tbody
-                            each book,index in books
+                    .table-responsive.table-responsive-xs.table-responsive-sm
+                        table.table.table-sm.align-middle.mb-0.bg-white
+                            thead.bg-light
                                 tr
-                                    td=book.name
-                                    td=book.size
-                                    td
-                                        .d-flex.align-items-center
-                                            img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
-                                            .ms-3
-                                                p.fw-bold.mb-1=teachers[index].name
-                                                p.text-muted.mb-0=teachers[index].email
-                                    td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning(type='button')
-                                        | Edit
-                                    td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button')
-                                        | Delete
+                                    th Kitob nomi
+                                    th Kitob hajmi 
+                                    th O&apos;qituvchi nomi 
+                                    th Tahrirlash
+                                    th O`chirish
+                                    th
+                                        button.btn.btn-primary.addTeacher +Qo`shish
+                            tbody.table-column
+                                each book,index in books
+                                    tr
+                                        td=book.name
+                                        td=book.size
+                                        td
+                                            .d-flex.align-items-center
+                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                                .ms-3
+                                                    p.fw-bold.mb-1=teachers[index].name
+                                                    p.text-muted.mb-0=teachers[index].email
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button' , value=`${book._id}`)
+                                                | Tahrirlash
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${book._id}`)
+                                                | O`chirish
+    script(src='/adminasset/js/kitob.js')
+

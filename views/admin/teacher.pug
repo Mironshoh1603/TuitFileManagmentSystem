@@ -7,92 +7,80 @@ block content
                     form.row.addForm(action='')
                         h3.text-secondary O&apos;qituvchi qo&apos;shish
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Name
+                            label.form-label(for='') Ism
                             input#name_add.form-control(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Username
+                            label.form-label(for='') Familiya
                             input.form-control#username_add(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
                             input.form-control#email_add(type='text',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
-                            input#formFile_add.form-control(type='file',required)
+                            input#formFile_add.form-control(type='file' ,  accept='image/*')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Password
+                            label.form-label(for='') Parol
                             input.form-control#password_add(type='password',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') PasswordConfirm
+                            label.form-label(for='') Parolni tasdiqlash
                             input.form-control#passwordConfirm_add(type='password',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             select.form-select.mb-3#subjectId_add(aria-label='Default select example',required)
-                                option(selected='') O&apos;qituvchi username kiritilsin
-                                option(value='1') One
-                                option(value='2') Two
-                                option(value='3') Three
+                                each subject in subjects
+                                    option(selected=`${subject._id}`)=subject.name
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
-                            button.btn.btn-primary(type="submit") Add teacher
+                            button.btn.btn-primary(type="submit") O`qituvchi Qo`shish
         .row.g-4.edit.d-none.editTeacherForm 
             .col-12
                 .h-100.bg-light.rounded.p-4
                     form.row.editForm(action='')
-                        h3.text-secondary O&apos;qituvchi edit qilish
+                        h3.text-secondary O&apos;qituvchi Tahrirlash
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Name
+                            label.form-label(for='') Ism
                             input.form-control#name_edit(type='text' value='Okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Username
+                            label.form-label(for='') Familiya
                             input.form-control#username_edit(type='text' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
-                            input.form-control_#email_edit(type='text' value='okay')
+                            input.form-control#email_edit(type='text' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
                             input#formFile_edit.form-control(type='file' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Password
+                            label.form-label(for='') Parol
                             input.form-control#password_edit(type='password' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') PasswordConfirm
+                            label.form-label(for='') Parolni tasdiqlash
                             input.form-control#passwordConfirm_edit(type='password' value='okay')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             select.form-select.mb-3#subjectId_edit(aria-label='Default select example')
-                                option(selected='') O&apos;qituvchi username kiritilsin
-                                option(value='1') One
-                                option(value='2') Two
-                                option(value='3') Three
+                                each subject in subjects
+                                    option(selected=`${subject._id}`)=subject.name
+                                
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
                                 | Edit teacher
         .row.g-4
             .col-12
                 .h-100.bg-white.rounded.p-4
-                    table.table.align-middle.mb-0.bg-white
-                        thead.bg-light
-                            tr
-                                th Name
-                                th Title
-                                th Position
-                                th Edit
-                                th Delete
-                                th
-                                    button.btn.btn-primary.addTeacher +Create
-                        tbody
-                            each teacher in teachers
+                    .table-responsive-xs.table-responsive-sm
+                        table.table.align-middle.mb-0.bg-white
+                            thead.bg-light
                                 tr
                                     td
                                         .d-flex.align-items-center
-                                            img.rounded-circle(src=`assets/img/trainers/${teacher.photo}` alt='' style='width: 45px; height: 45px')
-                                        .ms-3
-                                            p.fw-bold.mb-1= teacher.name
-                                            p.text-muted.mb-0=teacher.email
+                                            img.rounded-circle(src=`/img/users/${teacher.photo}` alt='' style='width: 45px; height: 45px')
+                                            .ms-3
+                                                p.fw-bold.mb-1=teacher.name
+                                                p.text-muted.mb-0=teacher.email
                                     td
                                         p.fw-normal.mb-1=teacher.subject
                                     td Senior
                                     td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', target=`${teacher.target}`)
-                                            | Edit
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${teacher.id}`)
+                                            | Tahrirlash
                                     td
-                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger(type='button', target=`${teacher.id}`)
-                                            | Delete
-    script(src="js/addTeacher.js")
+                                        button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher.id}`)
+                                            | O`chirish
+    script(src="/adminasset/js/addTeacher.js")

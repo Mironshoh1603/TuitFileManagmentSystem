@@ -20,15 +20,9 @@ const { urlencoded } = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
+const multer = require('multer');
+// const upload = multer();
 const app = express();
-app.use(express.json());
-app.use(cors());
-app.use(cookieParser());
-// app.use((req, res, next) => {
-//   console.log(req.body, 'Body ekan');
-//   next();
-// });
 
 app.use(
   helmet({
@@ -36,11 +30,12 @@ app.use(
     crossOriginEmbedderPolicy: false,
   })
 );
+app.use(cookieParser());
+app.use(cors());
 
 app.use(express.json({ limit: '10kb' }));
-app.use(urlencoded({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ limit: '10kb' }));
+
 app.use(cors());
 // app.use(express.urlencoded({ extended: true }));
 

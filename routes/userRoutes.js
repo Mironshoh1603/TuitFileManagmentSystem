@@ -27,6 +27,8 @@ router
   .post(
     authController.protect,
     authController.role(['admin']),
+    userController.uploadImageUser,
+    userController.resizeImage,
     userController.middleware,
     userController.addUser
   );

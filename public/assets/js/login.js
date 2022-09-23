@@ -12,7 +12,7 @@ const enterSystem = async (email, password) => {
     if (res.status === 200) {
       alert('you have entered system succesfully');
       window.setTimeout(() => {
-        location.assign('/teachers');
+        location.assign('/admin');
       }, 500);
     }
   } catch (err) {

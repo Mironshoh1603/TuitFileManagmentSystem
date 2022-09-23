@@ -1,6 +1,7 @@
 .sidebar.pe-4.pb-3
   nav.navbar.bg-light.navbar-light
     a.navbar-brand.mx-4.mb-3(href='/')
+    a.navbar-brand.mx-4.mb-3(href='/admin')
       h3.text-primary
         i.fa.fa-hashtag.me-2
         | DASHMIN
@@ -14,12 +15,15 @@
     .navbar-nav.w-100
       a.nav-item.nav-link.active(href="/profil") 
       a.nav-item.nav-link.active(href='index')
+      a.nav-item.nav-link.active(href="/admin/profil") 
+      a.nav-item.nav-link.active(href='/admin')
         i.fa.fa-tachometer-alt.me-2
         | Dashboard
-      a.nav-item.nav-link(href='teacher.html')
+      a.nav-item.nav-link(href='/admin/teachers')
         i.fa.fa-th.me-2
         | O&apos;qituvchilar
       a.nav-item.nav-link(href='/admin/mavzu')
+      a.nav-item.nav-link(href='/admin/subject')
         i.fa.fa-th.me-2
         | Mavzular
       a.nav-item.nav-link(href='/admin/book')

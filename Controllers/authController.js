@@ -84,9 +84,10 @@ const login = async (req, res, next) => {
 
 const protect = async (req, res, next) => {
   // 1) Token bor yuqligini headerdan tekshirish
-  console.log(req.body, 'body protect');
+  console.log('_req ', req.body);
+
   let token;
-  console.log(req.cookies);
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -96,7 +97,8 @@ const protect = async (req, res, next) => {
     token = req.cookies.jwt;
   }
   if (!token) {
-    return next(new AppError('Siz tizimga kirishingiz shart!'));
+    res.redirect('/login');
+    return;
   }
   // 2) Token ni tekshirish Serverniki bilan clientnikini solishtirish
 
@@ -169,8 +171,10 @@ const isSignIn = async (req, res, next) => {
 };
 
 const role = (roles) => {
+  // console.log('Men Roleman');
   return catchErrorAsync(async (req, res, next) => {
     // 1) User ni roleni olamiz databasedan, tekshiramiz
+
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError('Siz bu amaliyotni bajarish huquqiga ega emassiz!', 401)
