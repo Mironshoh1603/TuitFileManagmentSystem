@@ -29,7 +29,8 @@ const enterSystem = async (name, file, subject) => {
       if (data.status === 201 || data.status === 302) {
         // alert('Ok');
         window.setTimeout(() => {
-          location.reload();
+          // location.reload();
+          console.log('men reloadman');
         }, 100);
       }
       return data;
