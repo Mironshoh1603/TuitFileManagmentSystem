@@ -1,28 +1,44 @@
+// const { json } = require('body-parser');
+
 let addTeacherBtn = document.querySelector('.addTeacher');
 let editTable = document.querySelector('.table-column');
+let spinner = document.getElementById('spinner');
+
 const enterSystem = async (name, file, subject) => {
-  try {
-    console.log(file, 'mana file');
-    let formData = new FormData();
-    formData.append('file', file);
-    formData.append('subjectId', subject);
-    formData.append('name', name);
-    const res = await axios({
-      method: 'POST',
-      url: 'http://localhost:8000/api/v1/files/',
-      data: formData,
+  console.log(file, 'mana file');
+  let formData = new FormData();
+  formData.append('file', file);
+  formData.append('subjectId', subject);
+  formData.append('name', name);
+  axios({
+    method: 'POST',
+    url: 'http://localhost:8000/api/v1/files/',
+    data: formData,
+  })
+    .then(function (val) {
+      spinner.style.visibility = 'visible';
+      spinner.style.opacity = '1';
+      console.log(val, 'qalaysan bu men');
+      return JSON.stringify(val);
+    })
+    .then(function (data) {
+      spinner.style.visibility = 'hidden';
+      spinner.style.opacity = '0';
+      console.log(data, '_data');
+      data = JSON.parse(data);
+      if (data.status === 201 || data.status === 302) {
+        // alert('Ok');
+        window.setTimeout(() => {
+          location.reload();
+        }, 100);
+      }
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(`Error: ${err.response.data.message}`);
     });
-    console.log(res);
-    if (res.status === 201) {
-      alert('Ok');
-      window.setTimeout(() => {
-        location.reload();
-      }, 100);
-    }
-  } catch (err) {
-    console.log(err.response.data.message);
-    alert(`Error: ${err.response.data.message}`);
-  }
+  // console.log(res);
 };
 
 document.querySelector('#btn-add').addEventListener('click', (e) => {
@@ -65,11 +81,12 @@ editTable.addEventListener('click', async (e) => {
   } else if (e.target.classList.contains('deleteTeacher')) {
     let value = e.target.getAttribute('value');
     try {
-      const subject = await axios({
-        method: 'DELETE',
-        url: `http://localhost:8000/api/v1/subjects/${value}`,
-      });
-      console.log(subject.data);
+      console.log(value, '_value');
+      const subject = await axios.delete(
+        `http://localhost:8000/api/v1/subjects/${value}`,
+        { Authorization: 'Bearer token', 'My-Custom-Header': 'foobar' }
+      );
+      console.log(subject);
       window.setTimeout(() => {
         location.reload();
       }, 100);
@@ -78,7 +95,8 @@ editTable.addEventListener('click', async (e) => {
       // document.querySelector('.editTeacherForm').value = subject.data.data._id;
       // document.querySelector('#formFile_edit').value = subject.data.data.name;
     } catch (err) {
-      alert(err);
+      console.log(err);
+      alert(err.message);
     }
   } // document.querySelector('.addTeacherForm').classList.add('d-none');
 });
@@ -111,6 +129,6 @@ const editTeacherFunc = async (name, file, subjectId, fileId) => {
       location.reload();
     }, 100);
   } catch (err) {
-    console.log(err);
+    console.log(err, "error bo'ldi");
   }
 };
