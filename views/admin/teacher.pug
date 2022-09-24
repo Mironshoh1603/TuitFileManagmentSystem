@@ -69,23 +69,23 @@ block content
                             thead.bg-light
                                 tr
                                     th Name
-                                    th Title
+                                    th Subject
                                     th Position
                                     th Edit
                                     th Delete
                                     th
                                         button.btn.btn-primary.addTeacher +Create
                             tbody.table-column
-                                each subject,index in subjects
+                                each teacher,index in teachers
                                     tr
-                                        td subject.name
-                                        td subject.files.length
                                         td
                                             .d-flex.align-items-center
-                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                                img.rounded-circle(src=`/img/users/${teacher.photo}` alt='' style='width: 45px; height: 45px')
                                                 .ms-3
-                                                    p.fw-bold.mb-1=teachers[index].name 
-                                                    p.text-muted.mb-0=teachers[index].email
+                                                    p.fw-bold.mb-1=teacher.name
+                                                    p.text-muted.mb-0=teacher.email
+                                        td=subject[index].name
+                                        td=teacher.files.length
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
                                                 | Edit
