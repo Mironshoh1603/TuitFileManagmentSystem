@@ -28,6 +28,37 @@ block content
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
                                 |  O`qituvchini Tahrirlash
+        .row.g-4.search 
+            .col-12
+                .h-100.bg-white.rounded.p-4
+                    .table-responsive-xs.table-responsive-sm
+                        table.table.align-middle.mb-0.bg-white
+                            thead.bg-light
+                                tr
+                                    th Name
+                                    th Title
+                                    th Position
+                                    th Tahrirlash
+                                    th O`chirish
+                                    th
+                                        button.btn.btn-primary.addTeacher +Yaratish
+                            tbody.table-column
+                                each subject,index in subjects
+                                    tr
+                                        td=subject.name
+                                        td=subject.files.length
+                                        td
+                                            .d-flex.align-items-center
+                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                                .ms-3
+                                                    p.fw-bold.mb-1=teachers[index].name 
+                                                    p.text-muted.mb-0=teachers[index].email
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
+                                                | Tahrirlash
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
+                                                | O`chirish
         .row.g-4
             .col-12
                 .h-100.bg-white.rounded.p-4

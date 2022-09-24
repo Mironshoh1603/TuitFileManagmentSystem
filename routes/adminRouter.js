@@ -6,6 +6,7 @@ router
   .get(authController.protect, adminController.teacherRender);
 router.use('/profil', authController.protect, adminController.profil);
 router.route('/subject').get(authController.protect, adminController.subject);
+router.route('/book').get(authController.protect, adminController.kitoblar);
 // router.route('/teachers').get(adminController.teacherRender);
 // router.route('/login').get(adminController.loginRender);
 // router.route('/about').get(adminController.aboutRender);

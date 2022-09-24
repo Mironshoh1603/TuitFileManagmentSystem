@@ -8,8 +8,13 @@ const update_user = async (name, username, email, photo) => {
 
     const res = await axios({
       method: 'PATCH',
-      url: 'http://127.0.0.1:8000/api/v1/users/updateMe',
-      data: formData,
+      url: 'http://localhost:8000/api/v1/users/updateMe',
+      data: {
+        name: name,
+        username: username,
+        email: email,
+        photo: photo,
+      },
     });
     console.log(res.data.data, 'RESPONE');
     if (res.status === 200) {
@@ -53,9 +58,10 @@ document.querySelector('#userData').addEventListener('submit', (e) => {
   const name = document.querySelector('#name_user').value;
   const username = document.querySelector('#username_user').value;
   const email = document.querySelector('#email_user').value;
-  const user_id = document.querySelector('#userData').value;
-  update_user(name, username, email, user_id);
-  console.log(name, username, email);
+  const photo = document.querySelector('#photo_user').files[0];
+  console.log(name, username, email, photo);
+
+  update_user(name, username, email, photo);
 });
 
 document.querySelector('#userPassword').addEventListener('submit', (e) => {

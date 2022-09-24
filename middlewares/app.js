@@ -77,7 +77,8 @@ app.use(morgan('tiny'));
 // app.get('/api/v1/tours/:id', getTourById);
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
-
+app.use(bodyParser.json()); // <--- Here
+app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(app.router);
 app.use('/', viewRoute);
 app.use('/api/v1/subjects', subjectRouter);

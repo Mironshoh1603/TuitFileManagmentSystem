@@ -110,11 +110,11 @@ const updateMe = catchErrorAsync(async (req, res, next) => {
   // 2) update user info
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
+  user.username = req.body.username || user.username;
   user.photo = req.file.filename || user.photo;
   // 3) save info into database
   const userUpdateInfo = await User.findByIdAndUpdate(req.user.id, user, {
     new: true,
-    runValidators: true,
   });
 
   res.status(201).json({
