@@ -28,9 +28,9 @@ block content
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
                                 |  O`qituvchini Tahrirlash
-        .row.g-4.search 
+        .row.g-4
             .col-12
-                .h-100.bg-white.rounded.p-4
+                .bg-white.rounded.p-4.searchContent.d-none
                     .table-responsive-xs.table-responsive-sm
                         table.table.align-middle.mb-0.bg-white
                             thead.bg-light
@@ -59,9 +59,7 @@ block content
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
                                                 | O`chirish
-        .row.g-4
-            .col-12
-                .h-100.bg-white.rounded.p-4
+                .bg-white.rounded.p-4
                     .table-responsive-xs.table-responsive-sm
                         table.table.align-middle.mb-0.bg-white
                             thead.bg-light
