@@ -71,7 +71,7 @@ editTable.addEventListener('click', async (e) => {
         method: 'GET',
         url: `http://localhost:8000/api/v1/files/${value}`,
       });
-      console.log(subject);
+      console.log("bu subjecttttttttt", subject);
       document.querySelector('#name_edit').value = subject.data.data.name;
       // document.querySelector('#subject-edit').value = subject.data.data.subjectId.name;
       document.querySelector('.editTeacherForm').value = subject.data.data._id;

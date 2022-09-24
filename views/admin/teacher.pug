@@ -78,8 +78,8 @@ block content
                             tbody.table-column
                                 each subject,index in subjects
                                     tr
-                                        td subject.name
-                                        td subject.files.length
+                                        td=subject.name
+                                        td=subject.files.length
                                         td
                                             .d-flex.align-items-center
                                                 img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')

@@ -23,7 +23,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   let subjects = await axios('http://localhost:8000/api/v1/subjects/');
   subjects = subjects.data.data;
   const teachers = teachersData.data.data;
-  console.log(subjects);
+  console.log( "bu subjectttttttttt",subjects);
   res.render('admin/teacher', {
     teachers,
     subjects,
@@ -38,6 +38,9 @@ const profil = catchErrorAsync(async (req, res, next) => {
 const kitoblar = catchErrorAsync(async (req, res, next) => {
   let books = await axios('http://localhost:8000/api/v1/files/');
   books = books.data.data;
+
+  let si = books.map((val) => ((val.size)/1048576).toFixed(3));
+  console.log({ si });
   let teachers = [];
   let teacherDatas = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
@@ -47,13 +50,13 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
   subjects = subjects.data.data;
   books.map((val) => {
     let variable = val.teacherId || {
-      name: 'Nimajon Nimayev',
+      name: 'Nimajon qalesan',
       photo: 'user.jpeg',
       email: 'nima@gmail.com',
     };
     teachers.push(variable);
   });
-  res.render('admin/book', { books, teachers, teacherDatas, subjects });
+  res.render('admin/book', {si, books, teachers, teacherDatas, subjects });
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {

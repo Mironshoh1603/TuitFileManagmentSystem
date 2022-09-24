@@ -5,12 +5,8 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 const home = async (req, res, next) => {
   try {
     let cookie;
-    if (req.cookies) {
-      cookie = true;
-    } else {
-      cookie = false;
-    }
-    console.log('cooki' + cookie);
+    await req.cookies ? (cookie = true) : (cookie = false);
+    console.log('cooooooooooooooooooooooooooooooooooooooooo' + cookie);
     const books = await (
       await axios.get('http://127.0.0.1:8000/api/v1/files/')
     ).data.data;
@@ -31,7 +27,7 @@ const home = async (req, res, next) => {
       teachers,
       mavzular,
       newArr,
-      cookie
+      cookie,
     });
   } catch (error) {
     console.log(error);

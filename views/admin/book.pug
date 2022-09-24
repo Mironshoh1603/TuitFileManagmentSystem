@@ -59,7 +59,7 @@ block content
                                 each book,index in books
                                     tr
                                         td=book.name
-                                        td=book.size
+                                        td=`${si[index]} MB`
                                         td
                                             .d-flex.align-items-center
                                                 img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
