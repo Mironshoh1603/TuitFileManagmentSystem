@@ -2,6 +2,7 @@
 const catchErrorAsync = require('../utility/catchErrorAsync');
 const axios = require('axios');
 const User = require('./../models/user');
+const SubjectModel = require('./../models/subject');
 const home = catchErrorAsync(async (req, res, next) => {
   const teachers = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
@@ -14,6 +15,7 @@ const home = catchErrorAsync(async (req, res, next) => {
   //   subjects.data.results,
   //   "o'lchamlari"
   // );
+  // console.log("bu subjectttt",subjects);
   res.render('admin/index', { subjects, files, teachers });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
@@ -23,7 +25,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   let subjects = await axios('http://localhost:8000/api/v1/subjects/');
   subjects = subjects.data.data;
   const teachers = teachersData.data.data;
-  console.log( "bu subjectttttttttt",subjects);
+  // console.log( "bu subjectttttttttt",subjects);
   res.render('admin/teacher', {
     teachers,
     subjects,
@@ -39,7 +41,7 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
   let books = await axios('http://localhost:8000/api/v1/files/');
   books = books.data.data;
 
-  let si = books.map((val) => ((val.size)/1048576).toFixed(3));
+  let si = books.map((val) => (val.size / 1048576).toFixed(3));
   console.log({ si });
   let teachers = [];
   let teacherDatas = await axios(
@@ -56,37 +58,49 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     };
     teachers.push(variable);
   });
-  res.render('admin/book', {si, books, teachers, teacherDatas, subjects });
+  res.render('admin/book', { si, books, teachers, teacherDatas, subjects });
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {
   // console.log('mana');
+
   let subjects = await axios('http://localhost:8000/api/v1/subjects/');
   subjects = subjects.data.data;
   let teachers = [];
+  // console.log('subjectssssssss', subjects);
+
+  // console.log('bu subject', subjects);("_id")
+
+  const sal = await User.findById(req.user._id).populate({
+    path: 'subjects',
+    select: '-_id name',
+  });
 
   subjects.map((val) => {
-    let variable = val.teachers[0] || {
+    let variable = val?.teachers[0] || {
       name: 'Nimajon Nimayev',
       photo: 'user.jpeg',
       email: 'nima@gmail.com',
     };
     teachers.push(variable);
   });
+  // console.log("bbbbbbbbbbbbbbb",teachers);
+  let subj = sal.role == 'admin' ? subjects : sal.subjects;
+  // console.log(subj, 'subjjjj');
+  let tea = sal.role == 'admin' ? teachers : sal;
+
+  console.log(Array.isArray(sal));
+  console.log('Saa' + Array.isArray(teachers));
+
+  // console.log({ tea }, 'teeeeeac');
+  // console.log(teachers, 'teachers');
+  // console.log(sal, 'sallllllllll');
+
   // console.log('teachers', teachers);
-  res.render('admin/subject', { subjects, teachers });
+  res.render('admin/subject', { subj, tea });
 });
-const checkUser = async (req, res, next) => {
-  try {
-    let sal = await axios.get('http://localhost:8000/api/v1/users/me');
-    console.log('bu salllllllllllllllllllllllllllll', sal);
-    res.render('admin/__sidebar');
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 // module.exports = { home, kitoblar };
-module.exports = { home, kitoblar, teacherRender, profil, subject, checkUser };
+module.exports = { home, kitoblar, teacherRender, profil, subject };
 // module.exports = { home, subject };
 // module.exports = { home, teacherRender, profil, subject };

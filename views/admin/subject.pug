@@ -43,16 +43,34 @@ block content
                                     th
                                         button.btn.btn-primary.addTeacher +Qo`shish
                             tbody.table-column
-                                each subject,index in subjects
+                            if (Array.isArray(tea))
+                                each subject,index in subj
                                     tr
                                         td=subject.name
-                                        td=subject.files.length
+                                        //- td=subject.files.length
                                         td
                                             .d-flex.align-items-center
-                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                                img.rounded-circle(src=`/img/users/${tea[index].photo}` alt='' style='width: 45px; height: 45px')
                                                 .ms-3
-                                                    p.fw-bold.mb-1=teachers[index].name 
-                                                    p.text-muted.mb-0=teachers[index].email
+                                                    p.fw-bold.mb-1=tea[index].name
+                                                    p.text-muted.mb-0=tea[index].email
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
+                                                | Tahrirlash
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
+                                                | O`chirish
+                            else 
+                                each subject,index in subj
+                                    tr
+                                        td=subject.name
+                                        //- td=subject.files.length
+                                        td
+                                            .d-flex.align-items-center
+                                                img.rounded-circle(src=`/img/users/${tea.photo}` alt='' style='width: 45px; height: 45px')
+                                                .ms-3
+                                                    p.fw-bold.mb-1=tea.name
+                                                    p.text-muted.mb-0=tea.email
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
                                                 | Tahrirlash

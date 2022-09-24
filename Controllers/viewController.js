@@ -5,7 +5,8 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 const home = async (req, res, next) => {
   try {
     let cookie;
-    await req.cookies ? (cookie = true) : (cookie = false);
+    req.cookies.jwt ? (cookie = true) : (cookie = false);
+    console.log(req.cookies);
     console.log('cooooooooooooooooooooooooooooooooooooooooo' + cookie);
     const books = await (
       await axios.get('http://127.0.0.1:8000/api/v1/files/')
@@ -17,11 +18,11 @@ const home = async (req, res, next) => {
       let variable = val.subjects[0] || { name: '' };
       newArr.push(variable.name);
     });
-    console.log(newArr, 'mana subjects');
+    // console.log(newArr, 'mana subjects');
     const mavzular = await (
       await axios.get('http://localhost:8000/api/v1/subjects/')
     ).data.data;
-    console.log(books.length);
+    // console.log(books.length);
     res.render('client/home', {
       books,
       teachers,
@@ -39,7 +40,7 @@ const salom = async (req, res, next) => {
     // console.log(data.data.map((val) => val.teachers));
     const kalla = data.data;
 
-    console.log('kallllllllllll', { kalla });
+    // console.log('kallllllllllll', { kalla });
 
     const arra = kalla.map((val) => {
       return { num: val.teachers.length };
@@ -48,7 +49,7 @@ const salom = async (req, res, next) => {
       return { num: val.files.length };
     });
 
-    console.log('tttt', arra);
+    // console.log('tttt', arra);
 
     res.render('client/topics', { kalla, arra, files });
   } catch (error) {
@@ -65,7 +66,7 @@ const books = async (req, res, next) => {
     const size = book.data.data.map((val) => {
       return { name: (val.size / 1048576).toFixed(3) };
     });
-    console.log('bu sizeeeeee', size);
+    // console.log('bu sizeeeeee', size);
     console.log(
       'buu boookkk',
       book.data.data.map((val) => {
@@ -78,7 +79,7 @@ const books = async (req, res, next) => {
         name: `http://localhost:8000/api/v1/buckets/${val.key}`,
       };
     });
-    console.log('occccccccccc', och);
+    // console.log('occccccccccc', och);
     res.render('client/books', { file, size, och });
   } catch (error) {
     console.log(error);
@@ -90,13 +91,13 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   // console.log('datacha ', data);
   const teachers = data.data.filter((word) => word.role === 'teacher');
   let newArr = [];
-  console.log(teachers, 'dvgvdv');
+  // console.log(teachers, 'dvgvdv');
 
   const subjects = teachers.map((val) => {
     let variable = val.subjects[0] || { name: '' };
     newArr.push(variable.name);
   });
-  console.log(newArr, 'mana subjects');
+  // console.log(newArr, 'mana subjects');
   res.render('client/teachers', { teachers, newArr });
 });
 const loginRender = catchErrorAsync(async (req, res, next) => {
@@ -105,11 +106,11 @@ const loginRender = catchErrorAsync(async (req, res, next) => {
 const aboutRender = catchErrorAsync(async (req, res, next) => {
   const { data } = await axios('http://localhost:8000/api/v1/posts/');
 
-  console.log(data.data, 'makandja');
+  // console.log(data.data, 'makandja');
   res.render('client/about', { data: data.data });
 });
 const contact = async (req, res, next) => {
-  console.log('wsvsves');
+  // console.log('wsvsves');
   try {
     res.render('client/contact');
     console.log('hello');

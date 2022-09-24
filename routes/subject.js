@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(subjectController.getAllSubjects)
+  .get(  subjectController.getAllSubjects)
   .post(
     authController.protect,
     authController.role(['admin', 'teacher']),

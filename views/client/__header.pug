@@ -19,10 +19,12 @@ header#header.fixed-top
                     a(href='/contact') Bog`lanish
                     i.bi.bi-list.mobile-nav-toggle
         if cookie
-                a.get-started-btn(href='/logout') Logout
+                a.get-started-btn#logout(href='/logout') Logout
         else
                 a.get-started-btn(href='/login') Login
-                
+        if cookie 
+                script(src="/assets/js/logout.js")
+                     
         //- a.get-started-btn(href='/login') Sign In
 
 

@@ -233,7 +233,7 @@ const isUser = catchErrorAsync(async (req, res, next) => {
 });
 
 const logout = (req, res, next) => {
-  res.cookie('jwt', 'logout', {
+  res.clearCookie('jwt', null, {
     httpOnly: true,
   });
   res.status(200).json({
