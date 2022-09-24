@@ -3,6 +3,7 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 const axios = require('axios');
 const User = require('./../models/user');
 const home = catchErrorAsync(async (req, res, next) => {
+  console.log(req.user);
   const user = req.user;
   let role;
   if (req.user.role === 'admin') {
@@ -45,9 +46,15 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
-  const admin = await User.findById(req.user._id);
-  console.log(admin);
-  res.render('admin/profile', { admin });
+  const user = req.user;
+  console.log(user);
+  let role;
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
+  res.render('admin/profile', { user, role });
 });
 
 const kitoblar = catchErrorAsync(async (req, res, next) => {

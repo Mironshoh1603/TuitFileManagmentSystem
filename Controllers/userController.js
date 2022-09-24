@@ -95,7 +95,7 @@ const deleteUser = deleteOne(User);
 
 const updateMe = catchErrorAsync(async (req, res, next) => {
   //1) user password not changed
-
+  console.log(req.user);
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
