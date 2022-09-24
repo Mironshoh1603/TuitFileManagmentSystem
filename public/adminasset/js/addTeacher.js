@@ -21,18 +21,13 @@ const addTeacherFunc = async (
 
     const res = await axios.post(
       'http://localhost:8000/api/v1/users/',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+      formData
     );
     console.log(res);
     if (res.status === 201) {
       alert('okay');
       window.setTimeout(() => {
-        location.assign();
+        location.reload();
       }, 1000);
     }
   } catch (err) {
@@ -43,7 +38,7 @@ const addTeacherFunc = async (
 };
 console.log('hello');
 
-let editTeacherTable = document.querySelector('.table-teacher');
+let editTeacherTable = document.querySelector('.table-column');
 let addTeacherBtn = document.querySelector('.addTeacher');
 addTeacherBtn.addEventListener('click', (e) => {
   document.querySelector('.addTeacherForm').classList.toggle('d-none');
@@ -55,9 +50,10 @@ document.querySelector('.addForm').addEventListener('submit', (e) => {
   const email = document.querySelector('#email_add').value;
   const password = document.querySelector('#password_add').value;
   const passwordConfirm = document.querySelector('#passwordConfirm_add').value;
-  const subjectId = document.querySelector('#subjectId_add').value;
+  const subjectId = document.querySelector('#subject').value;
+  console.log('------', document.querySelector('#subject'));
   const photo = document.querySelector('#formFile_add').files[0];
-  console.log(password);
+  console.log(subjectId, '_subjects');
   addTeacherFunc(
     name,
     username,
@@ -81,7 +77,7 @@ editTeacherTable.addEventListener('click', async (e) => {
     document.querySelector('.addTeacherForm').classList.add('d-none');
     // console.log(editTable.value, 'mana valuesi');
     let value = e.target.getAttribute('value');
-    console.log(value, 'value');
+    console.log(value, 'value mana');
     try {
       const teacher = await axios({
         method: 'GET',
@@ -92,12 +88,15 @@ editTeacherTable.addEventListener('click', async (e) => {
       document.querySelector('#username_edit').value =
         teacher.data.data.username;
       document.querySelector('#email_edit').value = teacher.data.data.email;
-      document.querySelector('#formFile_edit').value = teacher.data.data.photo;
-      document.querySelector('#password_edit').value =
-        teacher.data.data.password;
-      document.querySelector('#passwordConfirm_edit').value =
-        teacher.data.data.passwordConfirm;
+      document.querySelector('#subject_edit').value =
+        teacher.data.data.subjects[0];
+      // document.querySelector('#formFile_edit').value = teacher.data.data.photo;
+      // document.querySelector('#password_edit').value =
+      //   teacher.data.data.password;
+      // document.querySelector('#passwordConfirm_edit').value =
+      //   teacher.data.data.passwordConfirm;
       document.querySelector('.editTeacherForm').value = teacher.data.data._id;
+      console.log(document.querySelector('#name_edit').value, 'Mana value');
       // document.querySelector('#formFile_edit').value = subject.data.data.name;
     } catch (err) {
       alert(err);
@@ -125,21 +124,14 @@ editTeacherTable.addEventListener('click', async (e) => {
 document.querySelector('.editForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.querySelector('#name_edit').value;
+
   const username = document.querySelector('#username_edit').value;
   const email = document.querySelector('#email_edit').value;
-  const password = document.querySelector('#password_edit');
-  const passwordConfirm = document.querySelector('#passwordConfirm_edit').value;
-  const photo = document.querySelector('#formFile_edit').value;
-  const teacherId = document.querySelector('.editTeacher').value;
-  editTeacherFunc(
-    name,
-    username,
-    email,
-    password,
-    passwordConfirm,
-    photo,
-    teacherId
-  );
+  const photo = document.querySelector('#formFile_edit').files[0];
+  const subjectId = document.querySelector('#subject_edit').value;
+  const teacherId = document.querySelector('.editTeacherForm').value;
+  console.log('TeacherID', teacherId);
+  editTeacherFunc(name, username, email, photo, subjectId, teacherId);
   document.querySelector('.editTeacherForm').classList.toggle('d-none');
 });
 const editTeacherFunc = async (
@@ -147,23 +139,35 @@ const editTeacherFunc = async (
   username,
   email,
   photo,
-  password,
   subjectId,
   teacherId
 ) => {
+  console.log("o'zgargan name", name);
+  let formData = new FormData();
+  formData.append('name', name);
+  formData.append('username', username);
+  formData.append('email', email);
+  formData.append('photo', photo);
+  formData.append('subjects', [subjectId]);
+  let subjects = subjectId;
   try {
-    const res = await axios({
-      method: 'PATCH',
-      url: `http://localhost:8000/api/v1/users/:${teacherId}`,
-      data: {
+    console.log(formData, 'Manabu Formda');
+    const res = await axios.patch(
+      `http://localhost:8000/api/v1/users/${teacherId}`,
+      {
         name,
         username,
         email,
         photo,
-        password,
-        subjectId: [subjectId],
-      },
-    });
+        subjects,
+      }
+    );
+    console.log(res.data.data);
+    if (res.status === 202) {
+      window.setTimeout(() => {
+        location.reload();
+      }, 100);
+    }
   } catch (err) {
     console.log(err);
   }

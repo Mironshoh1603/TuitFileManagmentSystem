@@ -68,7 +68,7 @@ const options2 = {
 };
 
 const middleware = catchErrorAsync(async (req, res, next) => {
-  console.log(req.body, 'Manabu bodyni ichi');
+  console.log(req.body, 'Manabu bodyni ichi'); 
   next();
 });
 
@@ -105,7 +105,7 @@ const updateMe = catchErrorAsync(async (req, res, next) => {
     );
   }
 
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user._id);
 
   // 2) update user info
   user.name = req.body.name || user.name;
@@ -153,5 +153,5 @@ module.exports = {
   updateMe,
   userSearch,
   middleware,
-  exampleAddUser
+  exampleAddUser,
 };

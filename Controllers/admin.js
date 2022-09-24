@@ -23,18 +23,20 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   let subjects = [];
   const teachers = teachersData.data.data;
 
+  // console.log(teachers, '_teachers');
   teachers.map((val) => {
-    let variable = val.subject[0] || {
-      name: 'Nimajon Nimayev',
-      photo: 'user.jpeg',
-      email: 'nima@gmail.com',
+    let variable = val.subjects[0] || {
+      name: 'Nima fani va nazariyasi',
     };
-    teachers.push(variable);
+    subjects.push(variable);
   });
-  console.log(subjects);
+  // console.log(subjects, '_subjects');
+  let allSubjects = await axios('http://localhost:8000/api/v1/subjects/');
+  allSubjects = allSubjects.data.data;
   res.render('admin/teacher', {
     teachers,
     subjects,
+    allSubjects
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {

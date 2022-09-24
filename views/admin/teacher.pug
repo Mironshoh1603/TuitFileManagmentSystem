@@ -30,67 +30,64 @@ block content
                                     option(selected=`${subject._id}`)=subject.name
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-primary(type="submit") Add teacher
-        .row.g-4.edit.d-none.editTeacherForm 
+        .row.g-4.edit.d-none.editTeacherForm
             .col-12
                 .h-100.bg-light.rounded.p-4
                     form.row.editForm(action='')
                         h3.text-secondary O&apos;qituvchi edit qilish
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Name
-                            input.form-control#name_edit(type='text' value='Okay')
+                            input.form-control#name_edit(type='text' )
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Username
-                            input.form-control#username_edit(type='text' value='okay')
+                            input.form-control#username_edit(type='text' )
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
-                            input.form-control#email_edit(type='text' value='okay')
+                            input.form-control#email_edit(type='text' )
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasm Yuklash
-                            input#formFile_edit.form-control(type='file' value='okay')
+                            input#formFile_edit.form-control(type='file' )
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Password
-                            input.form-control#password_edit(type='password' value='okay')
-                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') PasswordConfirm
-                            input.form-control#passwordConfirm_edit(type='password' value='okay')
-                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select.form-select.mb-3#subjectId_edit(aria-label='Default select example')
-                                each subject in subjects
-                                    option(selected=`${subject._id}`)=subject.name
-                                
+                            label.form-label(for='') Fanni Tanlang
+                            select#subject_edit.form-select.mb-3(aria-label='Default select example')
+                                each subject in allSubjects
+                                    option(value=`${subject._id}`)=subject.name
+
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
                                 | Edit teacher
         .row.g-4
-            .col-12
-                .h-100.bg-white.rounded.p-4
-                    .table-responsive-xs.table-responsive-sm
-                        table.table.align-middle.mb-0.bg-white
-                            thead.bg-light
-                                tr
-                                    th Name
-                                    th Subject
-                                    th Position
-                                    th Edit
-                                    th Delete
-                                    th
-                                        button.btn.btn-primary.addTeacher +Create
-                            tbody.table-column
-                                each teacher,index in teachers
+                .col-12
+                    .h-100.bg-white.rounded.p-4
+                        .table-responsive-xs.table-responsive-sm
+                            table.table.align-middle.mb-0.bg-white
+                                thead.bg-light
                                     tr
-                                        td
-                                            .d-flex.align-items-center
-                                                img.rounded-circle(src=`/img/users/${teacher.photo}` alt='' style='width: 45px; height: 45px')
-                                                .ms-3
-                                                    p.fw-bold.mb-1=teacher.name
-                                                    p.text-muted.mb-0=teacher.email
-                                        td=subject[index].name
-                                        td=teacher.files.length
-                                        td
-                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
-                                                | Edit
-                                        td
-                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
-                                                | Delete
+                                        th Name
+                                        th Subject
+                                        th Files
+                                        th Position
+                                        th Edit
+                                        th Delete
+                                        th
+                                            button.btn.btn-primary.addTeacher +Create
+                                tbody.table-column
+                                  each teacher,index in teachers
+                                      tr
 
-            script(src="/adminasset/js/addTeacher.js")
+                                          td
+                                              .d-flex.align-items-center
+                                                  img.rounded-circle(src=`/img/users/${teacher.photo}` alt='' style='width: 45px; height: 45px')
+                                                  .ms-3
+                                                      p.fw-bold.mb-1=teacher.name
+                                                      p.text-muted.mb-0=teacher.email
+                                          td=subjects[index].name
+                                          td=teacher.files.length
+                                          td Senior
+                                          td
+                                              button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button',value=`${teacher._id}` )
+                                                  | Edit
+                                          td
+                                              button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher._id}`)
+                                                  | Delete
+    script(src="/adminasset/js/addTeacher.js")

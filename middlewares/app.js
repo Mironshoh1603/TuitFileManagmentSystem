@@ -21,7 +21,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const multer = require('multer');
-// const upload = multer();
+const upload = multer();
 const app = express();
 
 app.use(
