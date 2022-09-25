@@ -3,9 +3,12 @@ block content
   main#main(data-aos='fade-in')
     // ======= Breadcrumbs =======
     .breadcrumbs
-      .container
+      .container.flex-row.align-items-center.justify-content-center
         h2 Bizning O`qituvchilar
-        p
+        form.d-flex.justify-content-center#searchForm(action="", value=`${url}`)
+          input#urlPath.d-none(type="text", value=`${url}`)
+          input.w-25.form-control#searchInput(type="text", placeholder="Izlash...")
+          button.btn.btn-primary.btn-sm(type="submit") Izlang  
     // End Breadcrumbs
     // ======= Trainers Section =======
     section#trainers.trainers
@@ -28,6 +31,7 @@ block content
                       i.bi.bi-instagram
                     a(href='')
                       i.bi.bi-linkedin
+  script(src="assets/js/search.js") 
     // End Trainers Section
   // End #main
     

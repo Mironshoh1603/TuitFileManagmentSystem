@@ -68,7 +68,7 @@ const options2 = {
 };
 
 const middleware = catchErrorAsync(async (req, res, next) => {
-  console.log(req.body, 'Manabu bodyni ichi'); 
+  console.log(req.body, 'Manabu bodyni ichi');
   next();
 });
 
@@ -125,8 +125,9 @@ const updateMe = catchErrorAsync(async (req, res, next) => {
 });
 
 const userSearch = catchErrorAsync(async (req, res, next) => {
+  let regex = new RegExp(req.query.search, 'i');
   let data = await User.find({
-    name: { $regex: `${req.query.search}`, $options: 'i' },
+    name: regex,
   }).limit(5);
   if (!data[0]) {
     res.status(200).json({

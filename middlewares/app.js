@@ -82,7 +82,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(app.router);
 app.use('/', viewRoute);
 app.use('/api/v1/subjects', subjectRouter);
-app.use('/api/v1/files', fileRouter);
+app.use('/api/v1/books', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);

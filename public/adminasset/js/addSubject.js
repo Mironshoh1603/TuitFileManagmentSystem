@@ -15,7 +15,7 @@ const enterSystem = async (name, photo) => {
     if (res.status === 201) {
       alert('Ok');
       window.setTimeout(() => {
-        location.reload('/admin/teachers');
+        location.reload('/admin/users');
       }, 100);
     }
   } catch (err) {

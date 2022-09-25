@@ -18,7 +18,7 @@ router.route('/updateMe').patch(
   // userController.resizeImage,
   userController.updateMe
 );
-
+router.route('/search').post(userController.userSearch);
 router
   .route('/')
   .get(userController.getAllUsers)
@@ -43,7 +43,5 @@ router
     authController.role(['admin']),
     userController.deleteUser
   );
-
-router.route('/search').post(userController.userSearch);
 
 module.exports = router;
