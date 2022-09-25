@@ -34,7 +34,6 @@ const enterSystem = async (name, file, subject) => {
     })
     .catch((err) => {
       console.log(err);
-      alert(`Error: ${err.response.data.message}`);
     });
   // console.log(res);
 };
