@@ -117,7 +117,6 @@ const subject = catchErrorAsync(async (req, res, next) => {
   const url = req._parsedUrl.path;
   console.log(url);
   let subjects = await axios(`http://localhost:8000/api/v1${url}`);
-  console.log(subjects.data);
   subjects = subjects.data.data;
   let teachers = [];
 

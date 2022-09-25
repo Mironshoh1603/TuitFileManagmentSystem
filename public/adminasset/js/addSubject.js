@@ -1,5 +1,5 @@
 // const { default: axios } = require('axios');
-let addTeacherBtn = document.querySelector('.addTeacher');
+let addSubjectBtn = document.querySelector('.addSubjectBtn');
 let editTable = document.querySelector('.table-column');
 const enterSystem = async (name, photo) => {
   try {
@@ -32,9 +32,12 @@ document.querySelector('.addForm').addEventListener('submit', (e) => {
   console.log(photo);
   enterSystem(name, photo);
 });
-addTeacherBtn.addEventListener('click', (e) => {
+
+console.log(addSubjectBtn);
+addSubjectBtn.addEventListener('click', () => {
   console.log('hello');
-  document.querySelector('.addTeacherForm').classList.toggle('d-none');
+  document.querySelector('.addSubjectForm').classList.toggle('d-none');
+  document.querySelector('.editTeacherForm').classList.add('d-none');
 });
 
 editTable.addEventListener('click', async (e) => {
@@ -43,7 +46,7 @@ editTable.addEventListener('click', async (e) => {
   console.log(e.target, 'e target');
   if (e.target.classList.contains('editTeacher')) {
     document.querySelector('.editTeacherForm').classList.toggle('d-none');
-    document.querySelector('.addTeacherForm').classList.add('d-none');
+    document.querySelector('.addSubjectForm').classList.add('d-none');
     // console.log(editTable.value, 'mana valuesi');
     let value = e.target.getAttribute('value');
     console.log(value, 'value');

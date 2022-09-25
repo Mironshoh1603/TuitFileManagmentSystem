@@ -1,7 +1,7 @@
 extends base
 block content    
     .container-fluid.pt-4.px-4
-        .row.g-4.create.d-none.addTeacherForm
+        .row.g-4.create.d-none.addSubjectForm
             .col-12
                 .h-100.bg-light.rounded.p-4
                     form.row.addForm(action='')
@@ -30,47 +30,18 @@ block content
                                 |  O`qituvchini Tahrirlash
         .row.g-4
             .col-12
-                .bg-white.rounded.p-4.searchContent.d-none
+                .h-100.bg-white.rounded.p-4
                     .table-responsive-xs.table-responsive-sm
                         table.table.align-middle.mb-0.bg-white
                             thead.bg-light
                                 tr
                                     th Name
                                     th Title
-                                    th Position
+                                    th Teacher
                                     th Tahrirlash
                                     th O`chirish
                                     th
-                                        button.addTeacher.btn.btn-primary +Yaratish
-                            tbody.table-column
-                                each subject,index in subjects
-                                    tr
-                                        td=subject.name
-                                        td=subject.files.length
-                                        td
-                                            .d-flex.align-items-center
-                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
-                                                .ms-3
-                                                    p.fw-bold.mb-1=teachers[index].name 
-                                                    p.text-muted.mb-0=teachers[index].email
-                                        td
-                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
-                                                | Tahrirlash
-                                        td
-                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
-                                                | O`chirish
-                .bg-white.rounded.p-4
-                    .table-responsive-xs.table-responsive-sm
-                        table.table.align-middle.mb-0.bg-white
-                            thead.bg-light
-                                tr
-                                    th Name
-                                    th Title
-                                    th Position
-                                    th Tahrirlash
-                                    th O`chirish
-                                    th
-                                        button.btn.btn-primary.addTeacher +Yaratish
+                                        button.btn.btn-primary.addSubjectBtn +Yaratish
                             tbody.table-column
                                 each subject,index in subjects
                                     tr
