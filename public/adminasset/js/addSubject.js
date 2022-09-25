@@ -109,3 +109,15 @@ const editTeacherFunc = async (name, photo, subjectId) => {
     console.log(err);
   }
 };
+
+const searchContent = document.querySelector('.searchContent');
+const searchForm = document.querySelector('#searchForm');
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  searchContent.classList.remove('d-none');
+});
+
+
+const searchFunc = async (req, res, next) => {
+  
+}

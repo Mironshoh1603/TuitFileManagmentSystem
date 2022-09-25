@@ -3,6 +3,14 @@ const catchErrorAsync = require('../utility/catchErrorAsync');
 const axios = require('axios');
 const User = require('./../models/user');
 const home = catchErrorAsync(async (req, res, next) => {
+  console.log(req.user);
+  const user = req.user;
+  let role;
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
   const teachers = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
@@ -14,7 +22,7 @@ const home = catchErrorAsync(async (req, res, next) => {
   //   subjects.data.results,
   //   "o'lchamlari"
   // );
-  res.render('admin/index', { subjects, files, teachers });
+  res.render('admin/index', { subjects, files, teachers, user, role });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const teachersData = await axios(
@@ -40,12 +48,28 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
-  const admin = await User.findOne({ role: 'admin' });
-  // console.log(admin);
-  res.render('admin/profil', { admin });
+  const user = req.user;
+  const path = console.log(req._parsedUrl.path);
+  let role;
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
+  res.render('admin/profile', { user, role, path });
 });
 
 const kitoblar = catchErrorAsync(async (req, res, next) => {
+  const user = req.user;
+  console.log(user);
+  let role;
+  const url = req._parsedUrl.path;
+  console.log(url);
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
   let books = await axios('http://localhost:8000/api/v1/files/');
   books = books.data.data;
   let teachers = [];
@@ -63,12 +87,29 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     };
     teachers.push(variable);
   });
-  res.render('admin/book', { books, teachers, teacherDatas, subjects });
+  res.render('admin/book', {
+    books,
+    teachers,
+    teacherDatas,
+    subjects,
+    user,
+    role,
+  });
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {
+  const user = req.user;
+  let role;
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
   // console.log('mana');
-  let subjects = await axios('http://localhost:8000/api/v1/subjects/');
+  const url = req._parsedUrl.path;
+  console.log(url);
+  let subjects = await axios(`http://localhost:8000/api/v1${url}`);
+  console.log(subjects.data);
   subjects = subjects.data.data;
   let teachers = [];
 
@@ -81,10 +122,31 @@ const subject = catchErrorAsync(async (req, res, next) => {
     teachers.push(variable);
   });
   // console.log('teachers', teachers);
-  res.render('admin/subject', { subjects, teachers });
+  res.render('admin/subject', { subjects, teachers, user, role });
 });
+const checkUser = async (req, res, next) => {
+  try {
+    let sal = await axios.get('http://localhost:8000/api/v1/users/me');
+    console.log('bu salllllllllllllllllllllllllllll', sal);
+    res.render('admin/__sidebar');
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+const search = catchErrorAsync(async (req, res, next) => {
+  const url = req._parsedUrl.path;
+  const data = await axios.get(`http://localhost:8000/api/v1/`);
+});
 // module.exports = { home, kitoblar };
-module.exports = { home, kitoblar, teacherRender, profil, subject };
+module.exports = {
+  home,
+  kitoblar,
+  teacherRender,
+  profil,
+  subject,
+  checkUser,
+  search,
+};
 // module.exports = { home, subject };
 // module.exports = { home, teacherRender, profil, subject };

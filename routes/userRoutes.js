@@ -6,19 +6,18 @@ const router = express.Router();
 
 // router.route('/signup').post(authController.signup);
 router.route('/signin').post(authController.login);
+router.route('/me').get(authController.protect, authController.isUser);
 
 router
   .route('/updatePassword')
   .post(authController.protect, authController.updatePassword);
 
-router
-  .route('/updateMe')
-  .patch(
-    authController.protect,
-    userController.uploadImageUser,
-    userController.resizeImage,
-    userController.updateMe
-  );
+router.route('/updateMe').patch(
+  authController.protect,
+  // userController.uploadImageUser,
+  // userController.resizeImage,
+  userController.updateMe
+);
 
 router
   .route('/')

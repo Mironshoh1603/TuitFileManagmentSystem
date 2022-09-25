@@ -13,12 +13,12 @@ block content
                             label.form-label(for='' ) Rasmni Yuklash
                             input#photo.form-control(type='file',accept='image/*' ,required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
-                            button#btn-add.btn.btn-primary(type="submit") Add teacher
+                            button#btn-add.btn.btn-primary(type="submit") O`qituvchi Qo`shish
         .row.g-4.edit.d-none.editTeacherForm
             .col-12
                 .h-100.bg-light.rounded.p-4
                     form.row.editForm(action='')
-                        h3.text-secondary Fanni edit qilish
+                        h3.text-secondary Fanni Tahrirlash
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Fan nomi
                             input.form-control#name_edit(type='text' value='Okay')
@@ -27,10 +27,10 @@ block content
                             input#formFile_edit.form-control(type='file' accept='image/*')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
-                                | Edit teacher
+                                |  O`qituvchini Tahrirlash
         .row.g-4
             .col-12
-                .h-100.bg-white.rounded.p-4
+                .bg-white.rounded.p-4.searchContent.d-none
                     .table-responsive-xs.table-responsive-sm
                         table.table.align-middle.mb-0.bg-white
                             thead.bg-light
@@ -38,10 +38,10 @@ block content
                                     th Name
                                     th Title
                                     th Position
-                                    th Edit
-                                    th Delete
+                                    th Tahrirlash
+                                    th O`chirish
                                     th
-                                        button.btn.btn-primary.addTeacher +Create
+                                        button.btn.btn-primary.addTeacher +Yaratish
                             tbody.table-column
                                 each subject,index in subjects
                                     tr
@@ -55,8 +55,37 @@ block content
                                                     p.text-muted.mb-0=teachers[index].email
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
-                                                | Edit
+                                                | Tahrirlash
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
-                                                | Delete
+                                                | O`chirish
+                .bg-white.rounded.p-4
+                    .table-responsive-xs.table-responsive-sm
+                        table.table.align-middle.mb-0.bg-white
+                            thead.bg-light
+                                tr
+                                    th Name
+                                    th Title
+                                    th Position
+                                    th Tahrirlash
+                                    th O`chirish
+                                    th
+                                        button.btn.btn-primary.addTeacher +Yaratish
+                            tbody.table-column
+                                each subject,index in subjects
+                                    tr
+                                        td=subject.name
+                                        td=subject.files.length
+                                        td
+                                            .d-flex.align-items-center
+                                                img.rounded-circle(src=`/img/users/${teachers[index].photo}` alt='' style='width: 45px; height: 45px')
+                                                .ms-3
+                                                    p.fw-bold.mb-1=teachers[index].name 
+                                                    p.text-muted.mb-0=teachers[index].email
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button', value=`${subject._id}`)
+                                                | Tahrirlash
+                                        td
+                                            button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
+                                                | O`chirish
     script(src="/adminasset/js/addSubject.js")

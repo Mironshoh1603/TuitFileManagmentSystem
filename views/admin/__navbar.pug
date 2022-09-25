@@ -1,61 +1,124 @@
-nav.navbar.navbar-expand.bg-light.navbar-light.sticky-top.px-4.py-0
-  a.navbar-brand.d-flex.d-lg-none.me-4(href='index.html')
-    h2.text-primary.mb-0
-      i.fa.fa-hashtag
-  a.sidebar-toggler.flex-shrink-0(href='#')
-    i.fa.fa-bars
-  form.d-none.d-md-flex.ms-4
-    input.form-control.border-0(type='search' placeholder='Search')
-  .navbar-nav.align-items-center.ms-auto
-    .nav-item.dropdown
-      a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
-        i.fa.fa-envelope.me-lg-2
-        span.d-none.d-lg-inline-flex Message
-      .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
-        a.dropdown-item(href='#')
-          .d-flex.align-items-center
-            img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
-            .ms-2
-              h6.fw-normal.mb-0 Jhon send you a message
-              small 15 minutes ago
-        hr.dropdown-divider
-        a.dropdown-item(href='#')
-          .d-flex.align-items-center
-            img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
-            .ms-2
-              h6.fw-normal.mb-0 Jhon send you a message
-              small 15 minutes ago
-        hr.dropdown-divider
-        a.dropdown-item(href='#')
-          .d-flex.align-items-center
-            img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
-            .ms-2
-              h6.fw-normal.mb-0 Jhon send you a message
-              small 15 minutes ago
-        hr.dropdown-divider
-        a.dropdown-item.text-center(href='#') See all message
-    .nav-item.dropdown
-      a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
-        i.fa.fa-bell.me-lg-2
-        span.d-none.d-lg-inline-flex Notificatin
-      .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
-        a.dropdown-item(href='#')
-          h6.fw-normal.mb-0 Profile updated
-          small 15 minutes ago
-        hr.dropdown-divider
-        a.dropdown-item(href='#')
-          h6.fw-normal.mb-0 New user added
-          small 15 minutes ago
-        hr.dropdown-divider
-        a.dropdown-item(href='#')
-          h6.fw-normal.mb-0 Password changed
-          small 15 minutes ago
-        hr.dropdown-divider
-        a.dropdown-item.text-center(href='#') See all notifications
-    .nav-item.dropdown
-      a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
-        img.rounded-circle.me-lg-2(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
-        span.d-none.d-lg-inline-flex John Doe
-      .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
-        a.dropdown-item(href='#') My Profile
-        a.dropdown-item(href='/') Log Out
+if role
+  nav.navbar.navbar-expand.bg-light.navbar-light.sticky-top.px-4.py-0
+    a.navbar-brand.d-flex.d-lg-none.me-4(href='admin/index')
+      h2.text-primary.mb-0
+        i.fa.fa-hashtag
+    a.sidebar-toggler.flex-shrink-0(href='#')
+      i.fa.fa-bars
+    form.d-md-flex.ms-4#searchForm
+      input.form-control.border-0(type='search' placeholder='Search' value=`${path}`)
+    .navbar-nav.align-items-center.ms-auto
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
+          i.fa.fa-envelope.me-lg-2
+          span.d-none.d-lg-inline-flex Xabarlar
+        .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
+          a.dropdown-item(href='#')
+            .d-flex.align-items-center
+              img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .ms-2
+                h6.fw-normal.mb-0 Jhon send you a message
+                small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            .d-flex.align-items-center
+              img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .ms-2
+                h6.fw-normal.mb-0 Jhon send you a message
+                small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            .d-flex.align-items-center
+              img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .ms-2
+                h6.fw-normal.mb-0 Jhon send you a message
+                small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item.text-center(href='#') See all message
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
+          i.fa.fa-bell.me-lg-2
+          span.d-none.d-lg-inline-flex Bildirishnoma
+        .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
+          a.dropdown-item(href='#')
+            h6.fw-normal.mb-0 Profile updated
+            small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            h6.fw-normal.mb-0 New user added
+            small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            h6.fw-normal.mb-0 Password changed
+            small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item.text-center(href='#') Barcha bildirishnomalar
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
+          img.rounded-circle.me-lg-2(src=`/img/users/${user.photo}` alt='okay' style='width: 40px; height: 40px;')
+          span.d-none.d-lg-inline-flex=user.name
+        .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
+          a.dropdown-item(href='/admin/profil') Mening ma'lumotlarim
+          a.dropdown-item(href='/') Chiqish
+else 
+  nav.navbar.navbar-expand.bg-light.navbar-light.sticky-top.px-4.py-0
+    a.navbar-brand.d-flex.d-lg-none.me-4(href='admin/index')
+      h2.text-primary.mb-0
+        i.fa.fa-hashtag
+    a.sidebar-toggler.flex-shrink-0(href='#')
+      i.fa.fa-bars
+    form.d-none.d-md-flex.ms-4#search
+      input.form-control.border-0.d-none(type='search' placeholder='Search')
+    .navbar-nav.align-items-center.ms-auto
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
+          i.fa.fa-envelope.me-lg-2
+          span.d-none.d-lg-inline-flex Xabarlar
+        .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
+          a.dropdown-item(href='#')
+            .d-flex.align-items-center
+              img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .ms-2
+                h6.fw-normal.mb-0 Jhon send you a message
+                small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            .d-flex.align-items-center
+              img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .ms-2
+                h6.fw-normal.mb-0 Jhon send you a message
+                small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            .d-flex.align-items-center
+              img.rounded-circle(src='/adminasset/img/user.jpg' alt='' style='width: 40px; height: 40px;')
+              .ms-2
+                h6.fw-normal.mb-0 Jhon send you a message
+                small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item.text-center(href='#') See all message
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
+          i.fa.fa-bell.me-lg-2
+          span.d-none.d-lg-inline-flex Bildirishnoma
+        .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
+          a.dropdown-item(href='#')
+            h6.fw-normal.mb-0 Profile updated
+            small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            h6.fw-normal.mb-0 New user added
+            small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item(href='#')
+            h6.fw-normal.mb-0 Password changed
+            small 15 minutes ago
+          hr.dropdown-divider
+          a.dropdown-item.text-center(href='#') Barcha bildirishnomalar
+      .nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
+          img.rounded-circle.me-lg-2(src=`/img/users/${user.photo}` alt='okay' style='width: 40px; height: 40px;')
+          span.d-none.d-lg-inline-flex=user.name
+        .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
+          a.dropdown-item(href='/admin/profil') Mening ma'lumotlarim
+          a.dropdown-item(href='/') Chiqish
