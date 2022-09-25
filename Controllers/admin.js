@@ -25,12 +25,18 @@ const home = catchErrorAsync(async (req, res, next) => {
   res.render('admin/index', { subjects, files, teachers, user, role });
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
+  const user = req.user;
+  let role;
   const teachersData = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
+  if (req.user.role === 'admin') {
+    role = true;
+  } else if (req.user.role === 'teacher') {
+    role = false;
+  }
   let subjects = [];
   const teachers = teachersData.data.data;
-
   // console.log(teachers, '_teachers');
   teachers.map((val) => {
     let variable = val.subjects[0] || {
@@ -44,7 +50,9 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   res.render('admin/teacher', {
     teachers,
     subjects,
-    allSubjects
+    allSubjects,
+    user,
+    role,
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {

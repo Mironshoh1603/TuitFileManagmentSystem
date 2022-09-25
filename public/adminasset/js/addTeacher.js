@@ -42,6 +42,7 @@ let editTeacherTable = document.querySelector('.table-column');
 let addTeacherBtn = document.querySelector('.addTeacher');
 addTeacherBtn.addEventListener('click', (e) => {
   document.querySelector('.addTeacherForm').classList.toggle('d-none');
+  document.querySelector('.editTeacherForm').classList.add('d-none');
 });
 document.querySelector('.addForm').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -50,8 +51,8 @@ document.querySelector('.addForm').addEventListener('submit', (e) => {
   const email = document.querySelector('#email_add').value;
   const password = document.querySelector('#password_add').value;
   const passwordConfirm = document.querySelector('#passwordConfirm_add').value;
-  const subjectId = document.querySelector('#subject').value;
-  console.log('------', document.querySelector('#subject'));
+  console.log('------', document.querySelector('#subjectId_add'));
+  const subjectId = document.querySelector('#subjectId_add').value;
   const photo = document.querySelector('#formFile_add').files[0];
   console.log(subjectId, '_subjects');
   addTeacherFunc(
@@ -128,6 +129,8 @@ document.querySelector('.editForm').addEventListener('submit', (e) => {
   const username = document.querySelector('#username_edit').value;
   const email = document.querySelector('#email_edit').value;
   const photo = document.querySelector('#formFile_edit').files[0];
+  console.log(document.querySelector('#subject_edit') + 'subjectId');
+
   const subjectId = document.querySelector('#subject_edit').value;
   const teacherId = document.querySelector('.editTeacherForm').value;
   console.log('TeacherID', teacherId);

@@ -24,7 +24,7 @@ const enterSystem = async (name, photo) => {
   }
 };
 
-document.querySelector('#btn-add').addEventListener('click', (e) => {
+document.querySelector('.addForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.querySelector('#name').value;
   const photo = document.querySelector('#photo').files[0];
@@ -33,6 +33,7 @@ document.querySelector('#btn-add').addEventListener('click', (e) => {
   enterSystem(name, photo);
 });
 addTeacherBtn.addEventListener('click', (e) => {
+  console.log('hello');
   document.querySelector('.addTeacherForm').classList.toggle('d-none');
 });
 
@@ -117,7 +118,4 @@ searchForm.addEventListener('submit', (e) => {
   searchContent.classList.remove('d-none');
 });
 
-
-const searchFunc = async (req, res, next) => {
-  
-}
+const searchFunc = async (req, res, next) => {};

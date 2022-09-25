@@ -1,4 +1,4 @@
-extends base
+extends base 
 block content    
     .container-fluid.pt-4.px-4
         .row.g-4.create.d-none.addTeacherForm
@@ -26,8 +26,8 @@ block content
                             input.form-control#passwordConfirm_add(type='password',required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             select.form-select.mb-3#subjectId_add(aria-label='Default select example',required)
-                                each subject in subjects
-                                    option(selected=`${subject._id}`)=subject.name
+                                each subject in allSubjects
+                                    option(value=`${subject._id}`)=subject.name
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-primary(type="submit") O`qituvchi Qo`shish
         .row.g-4.edit.d-none.editTeacherForm 
@@ -37,10 +37,10 @@ block content
                         h3.text-secondary O&apos;qituvchi Tahrirlash
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Ism
-                            input.form-control#name_edit(type='text' value='Okay')
+                            input.form-control#name_edit(type='text')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Familiya
-                            input.form-control#username_edit(type='text' value='okay')
+                            input.form-control#username_edit(type='text')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
                             input.form-control#email_edit(type='text' )
@@ -48,16 +48,11 @@ block content
                             label.form-label(for='') Rasm Yuklash
                             input#formFile_edit.form-control(type='file' )
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Parol
-                            input.form-control#password_edit(type='password' value='okay')
-                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Parolni tasdiqlash
-                            input.form-control#passwordConfirm_edit(type='password' value='okay')
-                        .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            select.form-select.mb-3#subjectId_edit(aria-label='Default select example')
-                                each subject in subjects
-                                    option(selected=`${subject._id}`)=subject.name
-                                
+                            label.form-label(for='') Fanni Tanlang
+                            select#subject_edit.form-select.mb-3(aria-label='Default select example')
+                                each subject in allSubjects
+                                    -console.log(subject)
+                                    option(value=`${subject._id}`)=subject.name
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
                                 | Edit teacher
