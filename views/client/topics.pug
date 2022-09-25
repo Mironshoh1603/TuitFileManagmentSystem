@@ -25,6 +25,11 @@ block content
                   th(scope='row')=index+1
                   td=dat.name
                   td=arra[index].num
-                  td=files[index].num       
+                  td=files[index].num  
+          .container.d-flex.justify-content-center.align-items-center
+            ul.list-unstyled.d-flex.gap-2
+              each page in paginationArr
+                li 
+                  a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}`, style="font-size:20px")= page 
   script(src="assets/js/getTopiks.js")
   script(src="assets/js/search.js") 

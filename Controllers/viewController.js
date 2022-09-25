@@ -52,6 +52,11 @@ const subjects = async (req, res, next) => {
       console.log('byyyyyyyyyyyyy' + data);
     }
     // console.log(data.data.map((val) => val.teachers));
+    let count = Object.keys(data).length;
+    let paginationArr = [];
+    for (let i = 1; i <= count; i++) {
+      paginationArr.push(i);
+    }
     const kalla = data.data.data;
 
     console.log('kallllllllllll', { kalla });
@@ -65,7 +70,7 @@ const subjects = async (req, res, next) => {
 
     console.log('tttt', arra);
 
-    res.render('client/topics', { kalla, arra, files, url });
+    res.render('client/topics', { kalla, arra, files, url, paginationArr });
   } catch (error) {
     console.log(error);
   }
@@ -75,6 +80,7 @@ const books = async (req, res, next) => {
   try {
     const url = req._parsedUrl.pathname;
     const path = req._parsedUrl.path;
+
     let book;
     if (!req.query.search) {
       book = await axios.get(`http://localhost:8000/api/v1${path}`);
@@ -85,6 +91,11 @@ const books = async (req, res, next) => {
       // .populate({ path: 'subjectId', select: 'name' })
       // .populate({ path: 'teacherId', select: 'name photo email' });
       book = { data: { data: book } };
+    }
+    let count = Object.keys(book).length;
+    let paginationArr = [];
+    for (let i = 1; i <= count; i++) {
+      paginationArr.push(i);
     }
     const file = book.data.data.map((val) => {
       return { name: val.key };
@@ -98,7 +109,7 @@ const books = async (req, res, next) => {
         name: `http://localhost:8000/api/v1/buckets/${val.key}`,
       };
     });
-    res.render('client/books', { file, size, och, url });
+    res.render('client/books', { file, size, och, url, paginationArr });
   } catch (error) {
     console.log(error);
   }
@@ -110,7 +121,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   let data;
   if (!req.query.search) {
     data = await axios.get(`http://localhost:8000/api/v1${path}`);
-    console.log('hello');
+    console.log('hello' + path);
   } else {
     let regex = new RegExp(req.query.search, 'i');
     data = await User.find({ name: regex });
@@ -119,13 +130,18 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   }
 
   const teachers = data.data.data.filter((word) => word.role === 'teacher');
+  let count = Object.keys(teachers).length;
+  let paginationArr = [];
+  for (let i = 1; i <= count; i++) {
+    paginationArr.push(i);
+  }
+  console.log(paginationArr);
   let newArr = [];
-
   const subjects = teachers.map((val) => {
     let variable = val.subjects[0] || { name: '' };
     newArr.push(variable.name);
   });
-  res.render('client/teachers', { teachers, newArr, url });
+  res.render('client/teachers', { teachers, newArr, url, paginationArr });
 });
 const loginRender = catchErrorAsync(async (req, res, next) => {
   res.render('client/login');
