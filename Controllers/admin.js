@@ -29,16 +29,18 @@ const home = catchErrorAsync(async (req, res, next) => {
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
   const path = req._parsedUrl.path;
+  console.log(path);
+  const url = req._parsedOriginalUrl.pathname;
   let data;
   if (!req.query.search) {
     data = await axios.get(`http://localhost:8000/api/v1${path}`);
-    console.log(data.data.data);
   } else {
     let regex = new RegExp(req.query.search, 'i');
-    data = await User.find({ name: regex });
+    data = await User.find({ name: regex })
+      .populate({ path: 'subjects' })
+      .populate({ path: 'files' });
 
     data = { data: { data: data } };
-    console.log(data.data.data);
   }
 
   let role;
@@ -50,7 +52,6 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   }
   let subjects = [];
   const teachers = data.data.data;
-  console.log(teachers, '_teachers');
   teachers.map((val) => {
     let variable = val.subjects[0] || {
       name: 'Nima fani va nazariyasi',
@@ -58,7 +59,6 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
     subjects.push(variable);
   });
 
-  console.log(subjects);
   // console.log(subjects, '_subjects');
   let allSubjects = await axios('http://localhost:8000/api/v1/subjects/');
   allSubjects = allSubjects.data.data;
@@ -69,6 +69,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
     user,
     role,
     path,
+    url,
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
