@@ -5,8 +5,11 @@ if role
         i.fa.fa-hashtag
     a.sidebar-toggler.flex-shrink-0(href='#')
       i.fa.fa-bars
-    form.d-md-flex.ms-4#searchForm
-      input.form-control.border-0(type='search' placeholder='Search' value=`${path}`)
+    form.d-flex.justify-content-start.gap-1#searchForm(action="", )
+      input#urlPath.d-none(type="text", value=`${path}`)
+      input.w-50.form-control#searchInput(type="text", placeholder="Izlash...")
+      button.btn.btn-primary.btn-sm(type="submit") 
+        i( class="bi bi-search", style="font-size:16px")
     .navbar-nav.align-items-center.ms-auto
       .nav-item.dropdown
         a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown')
@@ -122,3 +125,4 @@ else
         .dropdown-menu.dropdown-menu-end.bg-light.border-0.rounded-0.rounded-bottom.m-0
           a.dropdown-item(href='/admin/profil') Mening ma'lumotlarim
           a.dropdown-item(href='/') Chiqish
+  

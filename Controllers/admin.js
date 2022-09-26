@@ -4,6 +4,7 @@ const axios = require('axios');
 const User = require('./../models/user');
 const home = catchErrorAsync(async (req, res, next) => {
   console.log(req.user);
+
   const user = req.user;
   let role;
   if (req.user.role === 'admin') {
@@ -11,11 +12,12 @@ const home = catchErrorAsync(async (req, res, next) => {
   } else if (req.user.role === 'teacher') {
     role = false;
   }
+
   const teachers = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
   );
   const subjects = await axios('http://localhost:8000/api/v1/subjects/');
-  const files = await axios('http://localhost:8000/api/v1/files/');
+  const files = await axios('http://localhost:8000/api/v1/books/');
   // console.log(
   //   teachers.data.results,
   //   files.data.results,
@@ -26,24 +28,37 @@ const home = catchErrorAsync(async (req, res, next) => {
 });
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
+  const path = req._parsedUrl.path;
+  let data;
+  if (!req.query.search) {
+    data = await axios.get(`http://localhost:8000/api/v1${path}`);
+    console.log(data.data.data);
+  } else {
+    let regex = new RegExp(req.query.search, 'i');
+    data = await User.find({ name: regex });
+
+    data = { data: { data: data } };
+    console.log(data.data.data);
+  }
+
   let role;
-  const teachersData = await axios(
-    'http://localhost:8000/api/v1/users?role=teacher'
-  );
+
   if (req.user.role === 'admin') {
     role = true;
   } else if (req.user.role === 'teacher') {
     role = false;
   }
   let subjects = [];
-  const teachers = teachersData.data.data;
-  // console.log(teachers, '_teachers');
+  const teachers = data.data.data;
+  console.log(teachers, '_teachers');
   teachers.map((val) => {
     let variable = val.subjects[0] || {
       name: 'Nima fani va nazariyasi',
     };
     subjects.push(variable);
   });
+
+  console.log(subjects);
   // console.log(subjects, '_subjects');
   let allSubjects = await axios('http://localhost:8000/api/v1/subjects/');
   allSubjects = allSubjects.data.data;
@@ -53,9 +68,12 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
     allSubjects,
     user,
     role,
+    path,
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
+  console.log(req);
+
   const user = req.user;
   const path = console.log(req._parsedUrl.path);
   let role;
