@@ -11,13 +11,13 @@ const update_user = async (name, username, email, photo) => {
       url: 'http://localhost:8000/api/v1/users/updateMe',
       data: formData,
     });
-    console.log(res.data.data, 'RESPONE');
-    if (res.status === 200) {
+    console.log(res, 'RESPONE');
+    if (res.status === 201) {
       console.log('hello');
       alert('You logged successfully');
-      // window.setTimeout(() => {
-      //   location.assign('/');
-      // }, 1000);
+      window.setTimeout(() => {
+        location.reload();
+      }, 1000);
     }
   } catch (err) {
     console.log(err);
@@ -44,7 +44,7 @@ const update_Password = async (password, newPassword, passwordConfirm) => {
       console.log(res);
       alert('You logged successfully');
       window.setTimeout(() => {
-        // window.reload();
+        window.reload();
       }, 1000);
     }
   } catch (err) {
