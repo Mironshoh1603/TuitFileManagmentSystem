@@ -2,6 +2,8 @@
 const catchErrorAsync = require('../utility/catchErrorAsync');
 const axios = require('axios');
 const User = require('./../models/user');
+const Subject = require('./../models/subject');
+const Book = require('./../models/file');
 const home = catchErrorAsync(async (req, res, next) => {
   console.log(req.user);
 
@@ -29,7 +31,7 @@ const home = catchErrorAsync(async (req, res, next) => {
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
   const path = req._parsedUrl.path;
-  console.log(path);
+  console.log(path + '_____path');
   const url = req._parsedOriginalUrl.pathname;
   let data;
   if (!req.query.search) {
@@ -126,6 +128,21 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
 
 const subject = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
+  const path = req._parsedUrl.path;
+  console.log(path + '_____path');
+  const url = req._parsedOriginalUrl.pathname;
+  let data;
+  if (!req.query.search) {
+    data = await axios.get(`http://localhost:8000/api/v1${path}`);
+  } else {
+    let regex = new RegExp(req.query.search, 'i');
+    data = await Subject.find({ name: regex })
+      .populate({ path: 'teachers' })
+      .populate({ path: 'files' });
+    console.log(data);
+    data = { data: { data: data } };
+  }
+
   let role;
   if (req.user.role === 'admin') {
     role = true;
@@ -133,10 +150,10 @@ const subject = catchErrorAsync(async (req, res, next) => {
     role = false;
   }
   // console.log('mana');
-  const url = req._parsedUrl.path;
   console.log(url);
-  let subjects = await axios(`http://localhost:8000/api/v1${url}`);
+  let subjects = data;
   subjects = subjects.data.data;
+  console.log(subjects);
   let teachers = [];
 
   subjects.map((val) => {
@@ -148,7 +165,7 @@ const subject = catchErrorAsync(async (req, res, next) => {
     teachers.push(variable);
   });
   // console.log('teachers', teachers);
-  res.render('admin/subject', { subjects, teachers, user, role });
+  res.render('admin/subject', { subjects, teachers, user, role, url });
 });
 const checkUser = async (req, res, next) => {
   try {
