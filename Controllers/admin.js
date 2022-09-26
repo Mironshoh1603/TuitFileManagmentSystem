@@ -54,6 +54,14 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   }
   let subjects = [];
   const teachers = data.data.data;
+  let counts = await axios.get('http://localhost:8000/api/v1/users?limit=500');
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
+  console.log(count);
+  let paginationArr = [];
+  for (let i = 1; i <= count / 10 + 1; i++) {
+    paginationArr.push(i);
+  }
   teachers.map((val) => {
     let variable = val.subjects[0] || {
       name: 'Nima fani va nazariyasi',
@@ -72,6 +80,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
     role,
     path,
     url,
+    paginationArr,
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
@@ -112,6 +121,14 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     role = false;
   }
   let books = data.data.data;
+  let counts = await axios.get('http://localhost:8000/api/v1/books?limit=500');
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
+  console.log(count);
+  let paginationArr = [];
+  for (let i = 1; i <= count / 10 + 1; i++) {
+    paginationArr.push(i);
+  }
   let teachers = [];
   let teacherDatas = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
@@ -135,6 +152,7 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     user,
     role,
     url,
+    paginationArr,
   });
 });
 
@@ -165,6 +183,16 @@ const subject = catchErrorAsync(async (req, res, next) => {
   console.log(url);
   let subjects = data;
   subjects = subjects.data.data;
+  let counts = await axios.get(
+    'http://localhost:8000/api/v1/subjects?limit=500'
+  );
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
+  console.log(count);
+  let paginationArr = [];
+  for (let i = 1; i <= count / 10 + 1; i++) {
+    paginationArr.push(i);
+  }
   console.log(subjects);
   let teachers = [];
 
@@ -177,7 +205,14 @@ const subject = catchErrorAsync(async (req, res, next) => {
     teachers.push(variable);
   });
   // console.log('teachers', teachers);
-  res.render('admin/subject', { subjects, teachers, user, role, url });
+  res.render('admin/subject', {
+    subjects,
+    teachers,
+    user,
+    role,
+    url,
+    paginationArr,
+  });
 });
 const checkUser = async (req, res, next) => {
   try {

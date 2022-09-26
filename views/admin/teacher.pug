@@ -57,7 +57,7 @@ block content
                                 | Edit teacher
         .row.g-4
                 .col-12
-                    .h-100.bg-white.rounded.p-4
+                    .bg-white.rounded.p-4
                         .table-responsive-xs.table-responsive-sm
                             table.table.align-middle.mb-0.bg-white
                                 thead.bg-light
@@ -71,7 +71,7 @@ block content
                                         th
                                             button.btn.btn-primary.addTeacher +Create
                                 tbody.table-column
-                                  each teacher,index in teachers
+                                  each teacher,index in teachers.slice(0,10)
                                       tr
 
                                           td
@@ -89,4 +89,9 @@ block content
                                           td
                                               button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher._id}`)
                                                   | Delete
+                    .container.d-flex.justify-content-center.align-items-center
+                        ul.list-unstyled.d-flex.gap-2
+                            each page in paginationArr
+                                li 
+                                    a.text-white.bg-primary.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page  
     script(src="/adminasset/js/addTeacher.js")
