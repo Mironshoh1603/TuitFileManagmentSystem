@@ -7,7 +7,7 @@ searchForm.addEventListener('submit', (e) => {
   console.log(urlPath);
 
   const searchInput = document.querySelector('#searchInput').value;
-  const url = '/admin' + urlPath + '?search=' + searchInput;
+  const url = urlPath + '?search=' + searchInput;
   console.log(url);
   window.setTimeout(() => {
     location.assign(`${url}`);
