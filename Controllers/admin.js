@@ -91,16 +91,27 @@ const profil = catchErrorAsync(async (req, res, next) => {
 const kitoblar = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
   console.log(user);
+  const path = req._parsedUrl.path;
+  console.log(path + '_____path');
+  const url = req._parsedOriginalUrl.pathname;
+  let data;
+  if (!req.query.search) {
+    data = await axios.get(`http://localhost:8000/api/v1${path}`);
+  } else {
+    let regex = new RegExp(req.query.search, 'i');
+    data = await Book.find({ name: regex })
+      .populate({ path: 'subjectId' })
+      .populate({ path: 'teacherId' });
+    console.log(data);
+    data = { data: { data: data } };
+  }
   let role;
-  const url = req._parsedUrl.path;
-  console.log(url);
   if (req.user.role === 'admin') {
     role = true;
   } else if (req.user.role === 'teacher') {
     role = false;
   }
-  let books = await axios('http://localhost:8000/api/v1/files/');
-  books = books.data.data;
+  let books = data.data.data;
   let teachers = [];
   let teacherDatas = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
@@ -123,6 +134,7 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     subjects,
     user,
     role,
+    url,
   });
 });
 
