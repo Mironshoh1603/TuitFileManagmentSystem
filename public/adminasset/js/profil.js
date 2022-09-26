@@ -5,24 +5,19 @@ const update_user = async (name, username, email, photo) => {
     formData.append('username', username);
     formData.append('email', email);
     formData.append('photo', photo);
-
+    console.log('mnana biz resni oldidamiz');
     const res = await axios({
       method: 'PATCH',
       url: 'http://localhost:8000/api/v1/users/updateMe',
-      data: {
-        name: name,
-        username: username,
-        email: email,
-        photo: photo,
-      },
+      data: formData,
     });
     console.log(res.data.data, 'RESPONE');
     if (res.status === 200) {
       console.log('hello');
       alert('You logged successfully');
-      window.setTimeout(() => {
-        location.assign('/');
-      }, 1000);
+      // window.setTimeout(() => {
+      //   location.assign('/');
+      // }, 1000);
     }
   } catch (err) {
     console.log(err);
@@ -31,20 +26,25 @@ const update_user = async (name, username, email, photo) => {
 console.log('hello');
 const update_Password = async (password, newPassword, passwordConfirm) => {
   try {
+    let formData = new FormData();
+    formData.append('password', password);
+    formData.append('newPassword', newPassword);
+    formData.append('passwordConfirm', passwordConfirm);
+    console.log('mnana biz resni oldidamiz');
     const res = await axios({
-      method: 'Patch',
-      url: 'localhost:8000/api/v1/users/updatePassword',
+      method: 'PATCH',
+      url: 'http://localhost:8000/api/v1/users/updatePassword',
       data: {
-        password,
-        newPassword,
-        passwordConfirm,
+        password: password,
+        newPassword: newPassword,
+        passwordConfirm: passwordConfirm,
       },
     });
     if (res.status === 200) {
-      console.log('hello');
+      console.log(res);
       alert('You logged successfully');
       window.setTimeout(() => {
-        location.assign('/');
+        // window.reload();
       }, 1000);
     }
   } catch (err) {
@@ -52,23 +52,24 @@ const update_Password = async (password, newPassword, passwordConfirm) => {
   }
 };
 
-document.querySelector('#userData').addEventListener('submit', (e) => {
+document.querySelector('#save_data').addEventListener('click', (e) => {
   console.log('salom');
   e.preventDefault();
   const name = document.querySelector('#name_user').value;
   const username = document.querySelector('#username_user').value;
   const email = document.querySelector('#email_user').value;
   const photo = document.querySelector('#photo_user').files[0];
-  console.log(name, username, email, photo);
+  console.log(name, username, email);
+  console.log(photo, 'mana photo');
 
   update_user(name, username, email, photo);
 });
 
-document.querySelector('#userPassword').addEventListener('submit', (e) => {
+document.querySelector('#userPassword').addEventListener('click', (e) => {
   e.preventDefault();
   const password = document.querySelector('#password_user').value;
-  const newPassword = document.querySelector('#newPassword_user');
-  const passwordConfirm = document.querySelector('#newPass_Confirm_user');
+  const newPassword = document.querySelector('#newPassword_user').value;
+  const passwordConfirm = document.querySelector('#newPass_Confirm_user').value;
+  console.log(password, newPassword, passwordConfirm, ' Passwordlar ');
   update_Password(password, newPassword, passwordConfirm);
-  console.log(password);
 });

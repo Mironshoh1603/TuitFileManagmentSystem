@@ -17,7 +17,7 @@ class FeatureAPI {
       const sortQuery = this.clientQuery.sort.split(',').join(' ');
       this.databaseQuery = this.databaseQuery.sort(sortQuery);
     } else {
-      this.databaseQuery = this.databaseQuery.sort('-createdAt');
+      this.databaseQuery = this.databaseQuery.sort('createdAt');
     }
     return this;
   }
@@ -34,7 +34,7 @@ class FeatureAPI {
   //Pagination
   pagination() {
     const page = this.clientQuery.page * 1 || 1;
-    const limit = this.clientQuery.limit * 1 || 10;
+    const limit = this.clientQuery.limit * 1 || 100;
     const skip = (page - 1) * limit;
     this.databaseQuery = this.databaseQuery.skip(skip).limit(limit);
     return this;
