@@ -103,12 +103,14 @@ const protect = async (req, res, next) => {
   // 2) Token ni tekshirish Serverniki bilan clientnikini solishtirish
 
   const tokencha = jwt.verify(token, process.env.JWT_SECRET);
-
+  console.log(tokencha, 'MAna biznin tokencha');
   // console.log(tokencha);
   // 3) Token ichidan idni olib databasedagi userni topamiz.
   const user = await User.findById(tokencha.id);
-
   if (!user) {
+    if (req.cookies.jwt) {
+      return res.redirect('/login');
+    }
     return next(
       new AppError(
         'Bunday user mavjud emas. Iltimos tizimga qayta kiring!',
@@ -122,6 +124,9 @@ const protect = async (req, res, next) => {
     console.log(user.passwordChangedDate.getTime() / 1000);
     // console.log(tokencha.iat);
     if (user.passwordChangedDate.getTime() / 1000 > tokencha.iat) {
+      if (req.cookies.jwt) {
+        return res.redirect('/login');
+      }
       return next(
         new AppError(
           'Sizning tokeningiz yaroqsiz! Iltimos qayta tizimga kiring!',
@@ -133,6 +138,7 @@ const protect = async (req, res, next) => {
 
   req.user = user;
   res.locals.userData = user;
+  console.log(user, 'Bizning user');
   // console.log('bu userdataaaaaaaaaaaa', userData);
   next();
 };
@@ -186,6 +192,8 @@ const role = (roles) => {
 
 const updatePassword = catchErrorAsync(async (req, res, next) => {
   // 1) Get user info or model
+  console.log(req.body, '  User');
+  // console.log(req.user, '  User');
 
   if (req.body.password === req.body.newPassword) {
     return next(
@@ -250,5 +258,6 @@ module.exports = {
   isSignIn,
   logout,
   saveTokenCookie,
-  isUser
+  isUser,
+  createToken,
 };

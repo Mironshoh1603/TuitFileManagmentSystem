@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
     },
     passwordConfirm: {
       type: String,
-      required: [true, 'Siz passwordni kiritishingiz shart'],
+      required: [true, 'Siz passwordConfirmni kiritishingiz shart'],
       validate: {
         validator: function (val) {
           return val === this.password;
@@ -90,6 +90,7 @@ const userSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    timestamps: true,
   }
 );
 

@@ -7,8 +7,8 @@ const {
   updateOne,
   deleteOne,
 } = require('./handlerController');
+const { saveTokenCookie, createToken } = require('./authController');
 
-const { saveTokenCookie } = require('./authController');
 const multer = require('multer');
 const sharp = require('sharp');
 
@@ -44,7 +44,7 @@ const upload = multer({
 const uploadImageUser = upload.single('photo');
 
 const resizeImage = catchErrorAsync(async (req, res, next) => {
-  console.log(req.file, 'men');
+  console.log(!req.file, 'men');
   if (!req.file) {
     return next();
   }
@@ -95,7 +95,7 @@ const deleteUser = deleteOne(User);
 
 const updateMe = catchErrorAsync(async (req, res, next) => {
   //1) user password not changed
-  console.log(req.user);
+  console.log(req.body, 'body');
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -111,16 +111,20 @@ const updateMe = catchErrorAsync(async (req, res, next) => {
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
   user.username = req.body.username || user.username;
-  user.photo = req.file.filename || user.photo;
+  user.photo = req.file ? req.file.filename : user.photo;
   // 3) save info into database
   const userUpdateInfo = await User.findByIdAndUpdate(req.user.id, user, {
     new: true,
   });
 
+  const token = createToken(user._id);
+  saveTokenCookie(res, token);
+
   res.status(201).json({
     status: 'success',
     message: 'Your data has been updated',
     data: userUpdateInfo,
+    token: token,
   });
 });
 
