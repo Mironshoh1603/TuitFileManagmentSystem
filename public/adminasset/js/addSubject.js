@@ -8,7 +8,7 @@ const enterSystem = async (name, photo) => {
     formData.append('name', name);
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:8000/api/v1/subjects/',
+      url: 'https://mironshoh.ml/api/v1/subjects/',
       data: formData,
     });
     console.log(res);
@@ -53,7 +53,7 @@ editTable.addEventListener('click', async (e) => {
     try {
       const subject = await axios({
         method: 'GET',
-        url: `http://localhost:8000/api/v1/subjects/${value}`,
+        url: `https://mironshox.ml/api/v1/subjects/${value}`,
       });
       console.log(subject);
       document.querySelector('#name_edit').value = subject.data.data.name;
@@ -68,7 +68,7 @@ editTable.addEventListener('click', async (e) => {
     try {
       const subject = await axios({
         method: 'DELETE',
-        url: `http://localhost:8000/api/v1/subjects/${value}`,
+        url: `https://mironshox.ml/api/v1/subjects/${value}`,
       });
       console.log(subject.data);
       window.setTimeout(() => {
@@ -102,7 +102,7 @@ const editTeacherFunc = async (name, photo, subjectId) => {
     formData.append('photo', photo);
     console.log('resdan oldin');
     const res = await axios.patch(
-      `http://localhost:8000/api/v1/subjects/${subjectId}`,
+      `https://mironshox.ml/api/v1/subjects/${subjectId}`,
       formData
     );
     console.log(res.data.data, 'RESPONE');

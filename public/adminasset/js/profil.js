@@ -8,7 +8,7 @@ const update_user = async (name, username, email, photo) => {
     console.log('mnana biz resni oldidamiz');
     const res = await axios({
       method: 'PATCH',
-      url: 'http://localhost:8000/api/v1/users/updateMe',
+      url: 'https://mironshox.ml/api/v1/users/updateMe',
       data: formData,
     });
     console.log(res, 'RESPONE');
@@ -33,7 +33,7 @@ const update_Password = async (password, newPassword, passwordConfirm) => {
     console.log('mnana biz resni oldidamiz');
     const res = await axios({
       method: 'PATCH',
-      url: 'http://localhost:8000/api/v1/users/updatePassword',
+      url: 'https://mironshox.ml/api/v1/users/updatePassword',
       data: {
         password: password,
         newPassword: newPassword,
