@@ -52,9 +52,13 @@ const subjects = async (req, res, next) => {
       console.log('byyyyyyyyyyyyy' + data);
     }
     // console.log(data.data.map((val) => val.teachers));
-    let count = Object.keys(data).length;
+    let counts = await axios.get(
+      'http://localhost:8000/api/v1/subjects?limit=500'
+    );
+    counts = counts.data.data;
+    let count = Object.keys(counts).length;
     let paginationArr = [];
-    for (let i = 1; i <= count; i++) {
+    for (let i = 1; i <= count / 10 + 1; i++) {
       paginationArr.push(i);
     }
     const kalla = data.data.data;
@@ -92,9 +96,13 @@ const books = async (req, res, next) => {
       // .populate({ path: 'teacherId', select: 'name photo email' });
       book = { data: { data: book } };
     }
-    let count = Object.keys(book).length;
+    let counts = await axios.get(
+      'http://localhost:8000/api/v1/books?limit=500'
+    );
+    counts = counts.data.data;
+    let count = Object.keys(counts).length;
     let paginationArr = [];
-    for (let i = 1; i <= count; i++) {
+    for (let i = 1; i <= count / 10 + 1; i++) {
       paginationArr.push(i);
     }
     const file = book.data.data.map((val) => {
@@ -130,9 +138,11 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   }
 
   const teachers = data.data.data.filter((word) => word.role === 'teacher');
-  let count = Object.keys(teachers).length;
+  let counts = await axios.get('http://localhost:8000/api/v1/users?limit=500');
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
   let paginationArr = [];
-  for (let i = 1; i <= count; i++) {
+  for (let i = 1; i <= count / 10 + 1; i++) {
     paginationArr.push(i);
   }
   console.log(paginationArr);
