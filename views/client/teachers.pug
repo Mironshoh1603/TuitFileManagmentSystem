@@ -14,7 +14,7 @@ block content
     section#trainers.trainers
       .container(data-aos='fade-up')
         .row(data-aos='zoom-in' data-aos-delay='100')
-          each teacher,index in teachers
+          each teacher,index in teachers.slice(0,10)
             .col-lg-4.col-md-6.d-flex.align-items-stretch
               .member
                 img.img-fluid(src=`img/users/${teacher.photo}` alt='')
@@ -35,7 +35,7 @@ block content
           ul.list-unstyled.d-flex.gap-2
             each page in paginationArr
               li 
-                a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}`, style="font-size:20px")= page 
+                a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page 
 
 
   script(src="assets/js/search.js") 

@@ -22,7 +22,7 @@ block content
                 th(scope='col') Hajmi
                 th(scope='col') Yuklash
             tbody
-            each f,index in file
+            each f,index in file.slice(0,10)
               tr
                 th(scope='row')=index+1
                 td=f.name
@@ -36,7 +36,7 @@ block content
           ul.list-unstyled.d-flex.gap-2
             each page in paginationArr
               li 
-                a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}`, style="font-size:20px")= page 
+                a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page 
   script(src="assets/js/search.js")               
             
 

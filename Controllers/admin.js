@@ -2,6 +2,8 @@
 const catchErrorAsync = require('../utility/catchErrorAsync');
 const axios = require('axios');
 const User = require('./../models/user');
+const Subject = require('./../models/subject');
+const Book = require('./../models/file');
 const home = catchErrorAsync(async (req, res, next) => {
   console.log(req.user);
 
@@ -29,7 +31,7 @@ const home = catchErrorAsync(async (req, res, next) => {
 const teacherRender = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
   const path = req._parsedUrl.path;
-  console.log(path);
+  console.log(path + '_____path');
   const url = req._parsedOriginalUrl.pathname;
   let data;
   if (!req.query.search) {
@@ -52,6 +54,14 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
   }
   let subjects = [];
   const teachers = data.data.data;
+  let counts = await axios.get('http://localhost:8000/api/v1/users?limit=500');
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
+  console.log(count);
+  let paginationArr = [];
+  for (let i = 1; i <= count / 10 + 1; i++) {
+    paginationArr.push(i);
+  }
   teachers.map((val) => {
     let variable = val.subjects[0] || {
       name: 'Nima fani va nazariyasi',
@@ -70,6 +80,7 @@ const teacherRender = catchErrorAsync(async (req, res, next) => {
     role,
     path,
     url,
+    paginationArr,
   });
 });
 const profil = catchErrorAsync(async (req, res, next) => {
@@ -89,16 +100,35 @@ const profil = catchErrorAsync(async (req, res, next) => {
 const kitoblar = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
   console.log(user);
+  const path = req._parsedUrl.path;
+  console.log(path + '_____path');
+  const url = req._parsedOriginalUrl.pathname;
+  let data;
+  if (!req.query.search) {
+    data = await axios.get(`http://localhost:8000/api/v1${path}`);
+  } else {
+    let regex = new RegExp(req.query.search, 'i');
+    data = await Book.find({ name: regex })
+      .populate({ path: 'subjectId' })
+      .populate({ path: 'teacherId' });
+    console.log(data);
+    data = { data: { data: data } };
+  }
   let role;
-  const url = req._parsedUrl.path;
-  console.log(url);
   if (req.user.role === 'admin') {
     role = true;
   } else if (req.user.role === 'teacher') {
     role = false;
   }
-  let books = await axios('http://localhost:8000/api/v1/files/');
-  books = books.data.data;
+  let books = data.data.data;
+  let counts = await axios.get('http://localhost:8000/api/v1/books?limit=500');
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
+  console.log(count);
+  let paginationArr = [];
+  for (let i = 1; i <= count / 10 + 1; i++) {
+    paginationArr.push(i);
+  }
   let teachers = [];
   let teacherDatas = await axios(
     'http://localhost:8000/api/v1/users?role=teacher'
@@ -121,11 +151,28 @@ const kitoblar = catchErrorAsync(async (req, res, next) => {
     subjects,
     user,
     role,
+    url,
+    paginationArr,
   });
 });
 
 const subject = catchErrorAsync(async (req, res, next) => {
   const user = req.user;
+  const path = req._parsedUrl.path;
+  console.log(path + '_____path');
+  const url = req._parsedOriginalUrl.pathname;
+  let data;
+  if (!req.query.search) {
+    data = await axios.get(`http://localhost:8000/api/v1${path}`);
+  } else {
+    let regex = new RegExp(req.query.search, 'i');
+    data = await Subject.find({ name: regex })
+      .populate({ path: 'teachers' })
+      .populate({ path: 'files' });
+    console.log(data);
+    data = { data: { data: data } };
+  }
+
   let role;
   if (req.user.role === 'admin') {
     role = true;
@@ -133,10 +180,20 @@ const subject = catchErrorAsync(async (req, res, next) => {
     role = false;
   }
   // console.log('mana');
-  const url = req._parsedUrl.path;
   console.log(url);
-  let subjects = await axios(`http://localhost:8000/api/v1${url}`);
+  let subjects = data;
   subjects = subjects.data.data;
+  let counts = await axios.get(
+    'http://localhost:8000/api/v1/subjects?limit=500'
+  );
+  counts = counts.data.data;
+  let count = Object.keys(counts).length;
+  console.log(count);
+  let paginationArr = [];
+  for (let i = 1; i <= count / 10 + 1; i++) {
+    paginationArr.push(i);
+  }
+  console.log(subjects);
   let teachers = [];
 
   subjects.map((val) => {
@@ -148,7 +205,14 @@ const subject = catchErrorAsync(async (req, res, next) => {
     teachers.push(variable);
   });
   // console.log('teachers', teachers);
-  res.render('admin/subject', { subjects, teachers, user, role });
+  res.render('admin/subject', {
+    subjects,
+    teachers,
+    user,
+    role,
+    url,
+    paginationArr,
+  });
 });
 const checkUser = async (req, res, next) => {
   try {

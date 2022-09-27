@@ -13,7 +13,7 @@ block content
                             label.form-label(for='' ) Rasmni Yuklash
                             input#photo.form-control(type='file',accept='image/*' ,required)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
-                            button#btn-add.btn.btn-primary(type="submit") O`qituvchi Qo`shish
+                            button#btn-add.btn.btn-primary(type="submit") Fan Qo`shish
         .row.g-4.edit.d-none.editTeacherForm
             .col-12
                 .h-100.bg-light.rounded.p-4
@@ -27,10 +27,10 @@ block content
                             input#formFile_edit.form-control(type='file' accept='image/*')
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3.d-flex.justify-content-end(style='height: 40px')
                             button.btn.btn-warning.text-white
-                                |  O`qituvchini Tahrirlash
+                                |  Fanni Tahrirlash
         .row.g-4
             .col-12
-                .h-100.bg-white.rounded.p-4
+                .bg-white.rounded.p-4
                     .table-responsive-xs.table-responsive-sm
                         table.table.align-middle.mb-0.bg-white
                             thead.bg-light
@@ -43,7 +43,7 @@ block content
                                     th
                                         button.btn.btn-primary.addSubjectBtn +Yaratish
                             tbody.table-column
-                                each subject,index in subjects
+                                each subject,index in subjects.slice(0,10)
                                     tr
                                         td=subject.name
                                         td=subject.files.length
@@ -59,4 +59,9 @@ block content
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button',  value=`${subject._id}`)
                                                 | O`chirish
+                .container.d-flex.justify-content-center.align-items-center
+                    ul.list-unstyled.d-flex.gap-2
+                        each page in paginationArr
+                            li 
+                                a.text-white.bg-primary.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page  
     script(src="/adminasset/js/addSubject.js")
