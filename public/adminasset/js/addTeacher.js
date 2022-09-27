@@ -20,7 +20,7 @@ const addTeacherFunc = async (
     console.log('form Data', formData);
 
     const res = await axios.post(
-      'http://localhost:8000/api/v1/users/',
+      'https://mironshox.ml/api/v1/users/',
       formData
     );
     console.log(res);
@@ -82,7 +82,7 @@ editTeacherTable.addEventListener('click', async (e) => {
     try {
       const teacher = await axios({
         method: 'GET',
-        url: `http://localhost:8000/api/v1/users/${value}`,
+        url: `https://mironshox.ml/api/v1/users/${value}`,
       });
       console.log(teacher);
       document.querySelector('#name_edit').value = teacher.data.data.name;
@@ -107,7 +107,7 @@ editTeacherTable.addEventListener('click', async (e) => {
     try {
       const teacher = await axios({
         method: 'DELETE',
-        url: `http://localhost:8000/api/v1/users/${value}`,
+        url: `https://mironshox.ml/api/v1/users/${value}`,
       });
       console.log(teacher.data);
       window.setTimeout(() => {
@@ -156,7 +156,7 @@ const editTeacherFunc = async (
   try {
     console.log(formData, 'Manabu Formda');
     const res = await axios.patch(
-      `http://localhost:8000/api/v1/users/${teacherId}`,
+      `https://mironshox.ml/api/v1/users/${teacherId}`,
       {
         name,
         username,
