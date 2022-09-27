@@ -39,10 +39,12 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Siz passwordni kiritishingiz shart'],
-      // validate: [
-      //   validator.isStrongPassword,
-      //   'Siz kuchliroq parolni kiritishingiz kerak',
-      // ],
+      validate: {
+        validator: function (val) {
+          return val.length > 7;
+        },
+        message: "Sizning parolingiz 7 tadan ko'proq bo'lishi kerak! ",
+      },
       select: false,
     },
     passwordConfirm: {
