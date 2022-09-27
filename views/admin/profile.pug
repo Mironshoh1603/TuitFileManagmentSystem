@@ -1,4 +1,4 @@
-extends base 
+extends base
 block content   
     .container-fluid.pt-4.px-4
         .row.g-4
@@ -8,29 +8,29 @@ block content
                         h3.text-secondary Sizning ma&apos;lumotlaringiz
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Ism
-                            input#name_user.form-control(type='text' value=`${admin.name}`)
+                            input#name_user.form-control(type='text' value=`${user.name}`)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
-                            label.form-label(for='') Familiya
-                            input#username_user.form-control(type='text' value=`${admin.username}`)
+                            label.form-label(for='') Username 
+                            input#username_user.form-control(type='text' value=`${user.username}`)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Email
-                            input#email_user.form-control(type='email' value=`${admin.email}`)
+                            input#email_user.form-control(type='email' value=`${user.email}`)
                         .form-group.col-sm-12.col-md-6.col-xl-6.mb-3
                             label.form-label(for='') Rasmingiz
-                            input#photo_user.form-control(type='file',value=`${admin.photo}`)
+                            input#photo_user.form-control(type='file' required)
                         .col-12.d-flex.justify-content-end
-                            button.btn.btn-primary(type="submit") Saqlash
-                    form.row#userPassword(action='')
+                            button#save_data.btn.btn-primary(type="submit") Saqlash
+                    form.row(action='')
                         h3.text-secondary Sizning Parolingiz
                         .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
                             label.form-label(for='') Eski parol
-                            input#password_user.form-control(type='password' value='Ism')
+                            input#password_user.form-control(type='text')
                         .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
                             label.form-label(for='') Yangi parol
-                            input#newPassword_user.form-control(type='password' value='Ism')
+                            input#newPassword_user.form-control(type='text')
                         .form-group.col-sm-12.col-md-12.col-xl-12.mb-3
-                            label.form-label(for='') Yangi parol
-                            input#newPass_Confirm_user.form-control(type='password' value='Ism')
+                            label.form-label(for='') Yangi parolni Qayta kiriting
+                            input#newPass_Confirm_user.form-control(type='text' )
                         .col-12.d-flex.justify-content-end
-                            button.btn.btn-primary(type="submit") Saqlash
+                            button#userPassword.btn.btn-primary(type="submit") Saqlash
     script(src="/adminasset/js/profil.js") 

@@ -10,7 +10,7 @@ router.route('/me').get(authController.protect, authController.isUser);
 
 router
   .route('/updatePassword')
-  .post(authController.protect, authController.updatePassword);
+  .patch(authController.protect, authController.updatePassword);
 
 router
   .route('/updateMe')
@@ -20,7 +20,7 @@ router
     userController.resizeImage,
     userController.updateMe
   );
-
+router.route('/search').post(userController.userSearch);
 router
   .route('/')
   .get(userController.getAllUsers)
@@ -45,7 +45,5 @@ router
     authController.role(['admin']),
     userController.deleteUser
   );
-
-router.route('/search').post(userController.userSearch);
 
 module.exports = router;

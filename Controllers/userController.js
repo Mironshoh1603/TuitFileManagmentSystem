@@ -7,8 +7,8 @@ const {
   updateOne,
   deleteOne,
 } = require('./handlerController');
+const { saveTokenCookie, createToken } = require('./authController');
 
-const { saveTokenCookie } = require('./authController');
 const multer = require('multer');
 const sharp = require('sharp');
 
@@ -44,7 +44,7 @@ const upload = multer({
 const uploadImageUser = upload.single('photo');
 
 const resizeImage = catchErrorAsync(async (req, res, next) => {
-  console.log(req.file, 'men');
+  console.log(!req.file, 'men');
   if (!req.file) {
     return next();
   }
@@ -95,7 +95,7 @@ const deleteUser = deleteOne(User);
 
 const updateMe = catchErrorAsync(async (req, res, next) => {
   //1) user password not changed
-
+  console.log(req.body, 'body');
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -105,28 +105,33 @@ const updateMe = catchErrorAsync(async (req, res, next) => {
     );
   }
 
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user._id);
 
   // 2) update user info
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
-  user.photo = req.file.filename || user.photo;
+  user.username = req.body.username || user.username;
+  user.photo = req.file ? req.file.filename : user.photo;
   // 3) save info into database
   const userUpdateInfo = await User.findByIdAndUpdate(req.user.id, user, {
     new: true,
-    runValidators: true,
   });
+
+  const token = createToken(user._id);
+  saveTokenCookie(res, token);
 
   res.status(201).json({
     status: 'success',
     message: 'Your data has been updated',
     data: userUpdateInfo,
+    token: token,
   });
 });
 
 const userSearch = catchErrorAsync(async (req, res, next) => {
+  let regex = new RegExp(req.query.search, 'i');
   let data = await User.find({
-    name: { $regex: `${req.query.search}`, $options: 'i' },
+    name: regex,
   }).limit(5);
   if (!data[0]) {
     res.status(200).json({
@@ -153,5 +158,5 @@ module.exports = {
   updateMe,
   userSearch,
   middleware,
-  exampleAddUser
+  exampleAddUser,
 };

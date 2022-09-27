@@ -17,7 +17,7 @@ class FeatureAPI {
       const sortQuery = this.clientQuery.sort.split(',').join(' ');
       this.databaseQuery = this.databaseQuery.sort(sortQuery);
     } else {
-      this.databaseQuery = this.databaseQuery.sort('-createdAt');
+      this.databaseQuery = this.databaseQuery.sort('createdAt');
     }
     return this;
   }

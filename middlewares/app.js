@@ -21,7 +21,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const multer = require('multer');
-// const upload = multer();
+const upload = multer();
 const app = express();
 
 app.use(
@@ -77,11 +77,12 @@ app.use(morgan('tiny'));
 // app.get('/api/v1/tours/:id', getTourById);
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
-
+app.use(bodyParser.json()); // <--- Here
+app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(app.router);
 app.use('/', viewRoute);
 app.use('/api/v1/subjects', subjectRouter);
-app.use('/api/v1/files', fileRouter);
+app.use('/api/v1/books', fileRouter);
 app.use('/api/v1/buckets', bucketRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);

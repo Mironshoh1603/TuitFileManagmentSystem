@@ -5,7 +5,10 @@ block content
     .breadcrumbs
       .container
         h2 Kitoblar
-        //- p Bu yerda kitoblar ro&apos;yxati bo&apos;ladi
+        form.d-flex.justify-content-center#searchForm(action="", value=`${url}`)
+          input#urlPath.d-none(type="text", value=`${url}`)
+          input.w-25.form-control#searchInput(type="text", placeholder="Izlash...")
+          button.btn.btn-primary.btn-sm(type="submit") Izlang
     // End Breadcrumbs
     // ======= Courses Section =======
     section#courses.courses
@@ -15,11 +18,11 @@ block content
             thead
               tr
                 th(scope='col') #
-                th(scope='col') filename
-                th(scope='col') size
+                th(scope='col') Kitob nomi
+                th(scope='col') Hajmi
                 th(scope='col') Yuklash
             tbody
-            each f,index in file
+            each f,index in file.slice(0,10)
               tr
                 th(scope='row')=index+1
                 td=f.name
@@ -29,27 +32,11 @@ block content
                       svg.bi.bi-download(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewbox='0 0 16 16')
                         path(d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z')
                         path(d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z')
-
-            table.table.table-light
-              thead
-                tr
-                  th(scope='col') #
-                  th(scope='col') fayl nomi
-                  th(scope='col') hajmi
-                  th(scope='col') Yuklash
-              tbody
-              each f,index in file
-                tr
-                  th(scope='row')=index+1
-                  td=f.name
-                  td=size[index].name
-                   td
-                      a.btn.btn-primary(href= `${och[index].name}`)
-                        svg.bi.bi-download(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewbox='0 0 16 16')
-                          path(d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z')
-                          path(d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z')
-
-                tr
-                
+        .container.d-flex.justify-content-center.align-items-center
+          ul.list-unstyled.d-flex.gap-2
+            each page in paginationArr
+              li 
+                a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page 
+  script(src="assets/js/search.js")               
             
 

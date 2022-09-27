@@ -6,7 +6,7 @@ const app = require('./middlewares/app');
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTION 💥');
   console.log(err.name, err.message);
-  process.exit(1);
+  // process.exit(1);
 });
 
 // Unhandled Excpections

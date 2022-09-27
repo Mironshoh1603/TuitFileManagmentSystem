@@ -12,7 +12,7 @@ const enterSystem = async (name, file, subject) => {
   formData.append('name', name);
 
   axios
-    .post('http://localhost:8000/api/v1/files/', formData, {
+    .post('http://localhost:8000/api/v1/books', formData, {
       onUploadProgress: function (progressEvent) {
         spinner.style.visibility = 'visible';
         spinner.style.opacity = '1';
@@ -34,7 +34,6 @@ const enterSystem = async (name, file, subject) => {
     })
     .catch((err) => {
       console.log(err);
-      alert(`Error: ${err.response.data.message}`);
     });
   // console.log(res);
 };
@@ -69,7 +68,7 @@ editTable.addEventListener('click', async (e) => {
     try {
       const subject = await axios({
         method: 'GET',
-        url: `http://localhost:8000/api/v1/files/${value}`,
+        url: `http://localhost:8000/api/v1/books/${value}`,
       });
       console.log(subject);
       document.querySelector('#name_edit').value = subject.data.data.name;
@@ -84,7 +83,7 @@ editTable.addEventListener('click', async (e) => {
     try {
       const subject = await axios({
         method: 'DELETE',
-        url: `http://localhost:8000/api/v1/files/${value}`,
+        url: `http://localhost:8000/api/v1/books/${value}`,
       });
       console.log(subject.data);
       if (subject.status === 204) {
@@ -122,7 +121,7 @@ const editTeacherFunc = async (name, file, subjectId, fileId) => {
     formData.append('file', file);
     formData.append('subjectId', subjectId);
     const res = await axios.patch(
-      `http://localhost:8000/api/v1/files/${fileId}`,
+      `http://localhost:8000/api/v1/books/${fileId}`,
       formData
     );
     console.log(res.data.data, 'RESPONE');

@@ -1,39 +1,35 @@
 extends base
 block content
-    main#main(data-aos='fade-in')
-      .breadcrumbs
-        .container
-          h2 Mavzular
-          //- p Bu yerda Mavzular ro&apos;yxati bo&apos;ladi
-          h2 Fanlar
-          p Bu yerda Mavzular ro&apos;yxati bo&apos;ladi
-      section#courses.courses
-        .container(data-aos='fade-up')  
-            .table-responsive-xs.table-responsive-sm
-             table.table.table-light
-                thead
-                  tr
-                    th(scope='col') #
-                    th(scope='col') Fan nomi
-                    th(scope='col') O`qituvchilar soni
-                    th(scope='col') Kitoblar soni
-                    
-                tbody
-                each dat,index in  kalla
-                  tr
-                    th(scope='row')=index+1
-                    td=dat.name
-                    td=arra[index].num
-                    td=files[index].num
-                   
+  main#main(data-aos='fade-in')
+    .breadcrumbs
+      .container
+        h2 Fanlar
+        form.d-flex.justify-content-center#searchForm(action="", value=`${url}`)
+          input#urlPath.d-none(type="text", value=`${url}`)
+          input.w-25.form-control#searchInput(type="text", placeholder="Izlash...")
+          button.btn.btn-primary.btn-sm(type="submit") Izlang 
+    section#courses.courses
+      .container(data-aos='fade-up')  
+          .table-responsive-xs.table-responsive-sm
+            table.table.table-light
+              thead
+                tr
+                  th(scope='col') #
+                  th(scope='col') Fan nomi
+                  th(scope='col') O`qituvchilar soni
+                  th(scope='col') Kitoblar soni
                   
-                 
-
-               
-               
-                   
-                   
-                  
-                  
-                    
-    script(src="assets/js/getTopiks.js")
+              tbody
+              each dat,index in  kalla.slice(0,10)
+                tr
+                  th(scope='row')=index+1
+                  td=dat.name
+                  td=arra[index].num
+                  td=files[index].num  
+          .container.d-flex.justify-content-center.align-items-center
+            ul.list-unstyled.d-flex.gap-2
+              each page in paginationArr
+                li 
+                  a.text-white.bg-success.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page 
+  script(src="assets/js/getTopiks.js")
+  script(src="assets/js/search.js") 

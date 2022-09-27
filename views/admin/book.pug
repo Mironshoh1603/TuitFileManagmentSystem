@@ -43,7 +43,7 @@ block content
                                 | O`qituvchini Tahrirlash
         .row.g-4
             .col-12
-                .h-100.bg-white.rounded.p-4
+                .bg-white.rounded.p-4
                     .table-responsive.table-responsive-xs.table-responsive-sm
                         table.table.table-sm.align-middle.mb-0.bg-white
                             thead.bg-light
@@ -56,7 +56,7 @@ block content
                                     th
                                         button.btn.btn-primary.addTeacher +Qo`shish
                             tbody.table-column
-                                each book,index in books
+                                each book,index in books.slice(0,10)
                                     tr
                                         td=book.name
                                         td=book.size
@@ -72,5 +72,10 @@ block content
                                         td
                                             button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${book._id}`)
                                                 | O`chirish
+                .container.d-flex.justify-content-center.align-items-center
+                    ul.list-unstyled.d-flex.gap-2
+                        each page in paginationArr
+                            li 
+                                a.text-white.bg-primary.rounded-pill.px-3.py-2(href=`${url}?page=${page}&&limit=10`, style="font-size:20px")= page  
     script(src='/adminasset/js/kitob.js')
 
