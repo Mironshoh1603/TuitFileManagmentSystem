@@ -25,7 +25,7 @@ module.exports = (err, req, res, next) => {
         message: err.message,
       });
     } else {
-      res.status(err.statusCode).render('error', {
+      res.status(err.statusCode).render('client/error', {
         message: 'Please try again !',
       });
     }
