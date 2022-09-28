@@ -62,14 +62,14 @@ block content
                             table.table.align-middle.mb-0.bg-white
                                 thead.bg-light
                                     tr
-                                        th Name
-                                        th Subject
-                                        th Files
+                                        th Ism
+                                        th Mavzu
+                                        th Fayl
                                         th Position
-                                        th Edit
-                                        th Delete
+                                        th Tahrirlash
+                                        th O`chirish
                                         th
-                                            button.btn.btn-primary.addTeacher +Create
+                                            button.btn.btn-primary.addTeacher +Qo`shish
                                 tbody.table-column
                                   each teacher,index in teachers.slice(0,10)
                                       tr
@@ -85,10 +85,10 @@ block content
                                           td Senior
                                           td
                                               button.btn.btn-link.btn-sm.btn-rounded.text-warning.editTeacher(type='button',value=`${teacher._id}` )
-                                                  | Edit
+                                                  | Tahrirlash
                                           td
                                               button.btn.btn-link.btn-sm.btn-rounded.text-danger.deleteTeacher(type='button', value=`${teacher._id}`)
-                                                  | Delete
+                                                  | O`chirish
                     .container.d-flex.justify-content-center.align-items-center
                         ul.list-unstyled.d-flex.gap-2
                             each page in paginationArr
