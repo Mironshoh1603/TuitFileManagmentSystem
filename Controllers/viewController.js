@@ -106,7 +106,7 @@ const books = async (req, res, next) => {
       paginationArr.push(i);
     }
     const file = book.data.data.map((val) => {
-      return { name: val.key };
+      return { name: val.name };
     });
     const size = book.data.data.map((val) => {
       return { name: val.size };
