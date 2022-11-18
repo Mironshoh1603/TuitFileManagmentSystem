@@ -1,4 +1,4 @@
-# TuitFileSystem
+# Tashkent Information Technology Univbersity File System
 
 
 You must add config.env in the main directory
